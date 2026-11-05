@@ -159,6 +159,11 @@ describe("weighted round-robin, account stickiness and booking links", () => {
     const s2 = getSubmission(ws, second.json.id as string)!;
     expect(s2.owner).toBe(owner1);
     expect(JSON.stringify(s2.routing)).toMatch(/sticky: sticky-co\.example is owned by/);
+    // owners outside this rule's pool (e.g. a support rep) don't capture the account
+    getDb().prepare("UPDATE submissions SET owner = 'helpdesk@acme.example' WHERE id IN (?, ?)").run(first.json.id, second.json.id);
+    const third = await submit(f.id, { email: "three@sticky-co.example" });
+    await drainAll();
+    expect(["x@acme.example", "y@acme.example"]).toContain(getSubmission(ws, third.json.id as string)!.owner);
   });
   it("does not promise an owner or booking link to spam", async () => {
     const f = form(ws);

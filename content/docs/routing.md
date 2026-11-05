@@ -22,7 +22,7 @@ The available operators are:
 
 - `assignTo`: one or more owners. When there are several, leads are assigned **round-robin**.
 - `weights`: **weighted round-robin**, for example `{"ava@acme.com": 2}` gives Ava two leads for every one the others get. Weight `0` pauses an owner. FormForge uses a smooth weighted sequence, so a heavy owner never gets a long run of leads in a row. In the rule editor, write `ava@acme.com*2`.
-- `sticky`: **account-owner stickiness**. If an earlier non-spam lead from the same company domain already has an owner, the new lead goes to that owner. The domain is the enriched `company.domain`, or else the email domain (free providers such as gmail.com are ignored).
+- `sticky`: **account-owner stickiness**. If an earlier non-spam lead from the same company domain already has an owner from this rule's `assignTo` pool, the new lead goes to that owner. With an empty pool, any owner counts. The domain is the enriched `company.domain`, or else the email domain (free providers such as gmail.com are ignored).
 - `bookingUrl`: a booking link shown to the lead **right after submit**. Placeholders: `{{owner}}`, `{{owner_name}}` (the part before @), `{{email}}`, `{{name}}` and `{{company}}`, all URL-encoded.
 - `ownerBookingUrls`: per-owner links (`owner → URL`), which take priority over `bookingUrl`.
 - `tags`: added to the lead

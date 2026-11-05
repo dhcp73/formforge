@@ -142,13 +142,14 @@ export function accountDomain(ctx: Record<string, unknown>): string | null {
   return !free && typeof d === "string" && d ? d.toLowerCase() : null;
 }
 
-/** Owner of the most recent earlier lead from the same account (same workspace). */
-export function findAccountOwner(ws: string, domain: string, excludeId?: string): string | null {
+/** Owner of the most recent earlier lead from the same account (same workspace), limited to the rule's owner pool when it has one. */
+export function findAccountOwner(ws: string, domain: string, excludeId?: string, pool: string[] = []): string | null {
+  const inPool = pool.length ? ` AND owner IN (${pool.map(() => "?").join(", ")})` : "";
   const r = getDb().prepare(
     `SELECT owner FROM submissions WHERE workspace_id = ? AND owner IS NOT NULL AND owner != '' AND id != ? AND is_spam = 0
-       AND (lower(json_extract(enrichment, '$.company.domain')) = ? OR (lower(json_extract(enrichment, '$.email.domain')) = ? AND COALESCE(json_extract(enrichment, '$.email.freeProvider'), 0) = 0))
+       AND (lower(json_extract(enrichment, '$.company.domain')) = ? OR (lower(json_extract(enrichment, '$.email.domain')) = ? AND COALESCE(json_extract(enrichment, '$.email.freeProvider'), 0) = 0))${inPool}
      ORDER BY created_at DESC LIMIT 1`,
-  ).get(ws, excludeId ?? "", domain, domain) as { owner: string } | undefined;
+  ).get(ws, excludeId ?? "", domain, domain, ...pool) as { owner: string } | undefined;
   return r?.owner ?? null;
 }
 
@@ -195,7 +196,7 @@ function ownerPicker(ws: string, s: Pick<SubmissionRecord, "id" | "owner">, ctx:
   return (rule: RoutingRule): string | null => {
     if (rule.actions.sticky) {
       const domain = accountDomain(ctx);
-      const acct = domain ? findAccountOwner(ws, domain, s.id) : null;
+      const acct = domain ? findAccountOwner(ws, domain, s.id, rule.actions.assignTo) : null;
       if (acct) { notes.set(rule.id, `sticky: ${domain} is owned by ${acct}`); return acct; }
     }
     if (!rule.actions.assignTo.length) return null;
