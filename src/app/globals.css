@@ -1,0 +1,80 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: ui-monospace, SFMono-Regular, "JetBrains Mono", Menlo, monospace;
+  --color-accent: #4f46e5;
+  --color-accent-hover: #4338ca;
+  --color-accent-soft: #eef2ff;
+  --color-bg: var(--bg);
+  --color-panel: var(--panel);
+  --color-subtle: var(--subtle);
+  --color-muted: var(--muted);
+  --color-fg: var(--fg);
+  --color-fg-muted: var(--fg-muted);
+  --color-fg-subtle: var(--fg-subtle);
+  --color-line: var(--line);
+  --color-line-strong: var(--line-strong);
+  --shadow-pop: 0 10px 38px -10px rgb(22 23 24 / 0.25), 0 10px 20px -15px rgb(22 23 24 / 0.2);
+}
+
+:root {
+  --bg: #fbfbfc;
+  --panel: #ffffff;
+  --subtle: #f6f6f8;
+  --muted: #eeeef1;
+  --fg: #18181b;
+  --fg-muted: #52525b;
+  --fg-subtle: #6b6b75;
+  --line: #e7e7ea;
+  --line-strong: #d4d4d8;
+  color-scheme: light;
+}
+.dark {
+  --bg: #0b0b0e;
+  --panel: #121216;
+  --subtle: #18181d;
+  --muted: #222228;
+  --fg: #f4f4f5;
+  --fg-muted: #b4b4bc;
+  --fg-subtle: #9a9aa5;
+  --line: #26262d;
+  --line-strong: #34343c;
+  --color-accent-soft: #1e1b4b;
+  color-scheme: dark;
+}
+
+html, body { background: var(--bg); color: var(--fg); }
+body { font-feature-settings: "cv11", "ss01"; -webkit-font-smoothing: antialiased; }
+* { border-color: var(--line); }
+:focus-visible { outline: 2px solid var(--color-accent); outline-offset: 2px; border-radius: 4px; }
+::selection { background: #c7d2fe; color: #1e1b4b; }
+
+.scrollbar-thin { scrollbar-width: thin; }
+.text-balance { text-wrap: balance; }
+
+.prose-docs pre { background: #0f0f14 !important; border: 1px solid #26262d; border-radius: 8px; font-size: 12.5px; line-height: 1.6; }
+.prose-docs code:not(pre code) { background: var(--muted); padding: 0.1rem 0.35rem; border-radius: 4px; font-weight: 500; }
+.prose-docs code:not(pre code)::before, .prose-docs code:not(pre code)::after { content: none; }
+.prose-docs table { font-size: 13px; }
+
+@keyframes ff-shimmer { 100% { transform: translateX(100%); } }
+.skeleton { position: relative; overflow: hidden; background: var(--muted); border-radius: 6px; }
+.skeleton::after { content: ""; position: absolute; inset: 0; transform: translateX(-100%); background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.35), transparent); animation: ff-shimmer 1.4s infinite; }
+.dark .skeleton::after { background: linear-gradient(90deg, transparent, rgb(255 255 255 / 0.06), transparent); }
+
+@keyframes ff-slide-in { from { transform: translateX(100%); } to { transform: translateX(0); } }
+@keyframes ff-fade-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes ff-pop { from { opacity: 0; transform: translate(-50%, -48%) scale(0.97); } to { opacity: 1; transform: translate(-50%, -50%) scale(1); } }
+.animate-slide-in { animation: ff-slide-in 180ms cubic-bezier(0.16, 1, 0.3, 1); }
+.animate-fade-in { animation: ff-fade-in 150ms ease-out; }
+.animate-pop { animation: ff-pop 160ms cubic-bezier(0.16, 1, 0.3, 1); }
+
+.bg-grid { background-image: linear-gradient(to right, var(--line) 1px, transparent 1px), linear-gradient(to bottom, var(--line) 1px, transparent 1px); background-size: 48px 48px; }
+.prose-docs .table-wrap { overflow-x: auto; margin: 1.25em 0; }
+.prose-docs .table-wrap table { margin: 0; }
+.prose-docs pre code { color: #e4e4e7; }
+.prose-docs h2, .prose-docs h3 { scroll-margin-top: 5rem; }

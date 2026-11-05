@@ -1,0 +1,15 @@
+node_modules
+.next
+data/*
+!data/.gitkeep
+*.log
+test-results
+playwright-report
+.env
+.env.local
+next-env.d.ts
+tsconfig.tsbuildinfo
+public/vendor/
+e2e/.auth
+reports/ui-test
+blob-report
