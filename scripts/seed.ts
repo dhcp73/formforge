@@ -119,6 +119,6 @@ ids.forEach((id, i) => {
   db.prepare("UPDATE submissions SET created_at = ?, status = ? WHERE id = ?").run(t, rnd() < 0.55 ? "read" : "new", id);
 });
 fs.writeFileSync(`${process.cwd()}/data/demo-api-key.txt`, key + "\n", { mode: 0o600 });
-console.log(`Seeded workspace "Acme Growth" with 4 forms, ${N} submissions, 4 routing rules, 1 webhook, 2 schedules — at ${now()}`);
+console.log(`Seeded workspace "Acme Growth" with 4 forms, ${N} submissions, 5 routing rules, 1 webhook, 2 schedules — at ${now()}`);
 console.log("Login: demo@formforge.dev / demo1234");
 console.log(`Demo API key written to data/demo-api-key.txt (${key.slice(0, 14)}…)`);

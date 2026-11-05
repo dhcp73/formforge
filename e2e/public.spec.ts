@@ -58,3 +58,14 @@ test("dashboard requires auth", async ({ page }) => {
   await page.goto("/dashboard");
   await expect(page).toHaveURL(/\/login/);
 });
+
+test("instant routing returns a booking link and the thank-you page offers it", async ({ page, request }) => {
+  const r = await request.post(`/api/f/${ids().formId}`, { headers: { Accept: "application/json", "User-Agent": "Mozilla/5.0 (X11; Linux x86_64) Chrome/130 Safari/537.36" }, data: { name: "E2E Booker", email: `e2e-booker-${Date.now()}@stripe.com`, message: "We want a demo for our team." } });
+  expect(r.status()).toBe(200);
+  const j = await r.json();
+  expect(j.booking_url).toBe("https://cal.com/ava-acme/enterprise-demo");
+  await page.goto(`/thanks?form=${ids().formId}&book=${encodeURIComponent(j.booking_url)}`);
+  await expect(page.getByTestId("booking-link")).toHaveAttribute("href", j.booking_url);
+  await page.goto(`/thanks?form=x&book=${encodeURIComponent("javascript:alert(1)")}`);
+  await expect(page.getByTestId("booking-link")).toHaveCount(0);
+});
