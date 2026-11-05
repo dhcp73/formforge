@@ -13,3 +13,4 @@ public/vendor/
 e2e/.auth
 reports/ui-test
 blob-report
+reports/ui-agent/shots/
