@@ -80,6 +80,6 @@ test("login cookie sticks across hard reloads, form pages, and new contexts", as
   await expect(page2.getByText(formName).first()).toBeVisible({ timeout: 45_000 });
   await page2.goto(`${base}/dashboard/forms/${formId}/settings`);
   await expect(page2).not.toHaveURL(/\/login/);
-  await expect(page2.getByRole("heading", { name: formName }).or(page2.getByText(formName).first())).toBeVisible({ timeout: 30_000 });
+  await expect(page2.getByRole("heading", { name: formName })).toBeVisible({ timeout: 30_000 });
   await ctx2.close();
 });
