@@ -3,11 +3,14 @@ import { requireSession } from "@/lib/session";
 import { listForms } from "@/lib/forms";
 import { AppShell } from "@/components/app/shell";
 import { DemoBanner, DemoPersistence } from "@/components/app/demo-persistence";
-import { demoModeLabel, isEphemeralMode } from "@/lib/db";
+import { demoModeLabel, isEphemeralMode, getDb } from "@/lib/db";
+import { ensureDemoSeed } from "@/lib/storage/demo-seed";
 export const metadata: Metadata = { title: { default: "Dashboard", template: "%s · FormForge" }, robots: { index: false } };
 export const dynamic = "force-dynamic";
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
+  getDb();
+  if (isEphemeralMode()) ensureDemoSeed();
   const s = await requireSession();
   const forms = listForms(s.workspace.id).map((f) => ({ id: f.id, name: f.name }));
   const label = demoModeLabel();

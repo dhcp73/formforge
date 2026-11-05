@@ -25,7 +25,10 @@ export function openNodeSqlite(path: string): DbLike {
     prepare(sql: string): Stmt {
       const stmt = db.prepare(sql);
       return {
-        run: (...params: unknown[]) => stmt.run(...(params as never[])),
+        run: (...params: unknown[]) => {
+          const r = stmt.run(...(params as never[]));
+          return { changes: Number(r.changes), lastInsertRowid: r.lastInsertRowid };
+        },
         get: (...params: unknown[]) => stmt.get(...(params as never[])),
         all: (...params: unknown[]) => stmt.all(...(params as never[])) as unknown[],
       };

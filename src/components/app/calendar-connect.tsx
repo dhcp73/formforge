@@ -25,21 +25,21 @@ export function CalendarConnectCard({
   const [busy, start] = React.useTransition();
   const [msg, setMsg] = React.useState<string | null>(null);
   return (
-    <div className="rounded-xl border border-line bg-panel p-4 shadow-sm" data-testid={`calendar-${provider}`}>
-      <div className="flex items-start justify-between gap-3">
-        <div className="flex items-start gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-subtle text-fg"><CalendarDays size={18} /></div>
-          <div>
+    <div className="rounded-xl border border-line bg-panel p-4 shadow-sm overflow-hidden" data-testid={`calendar-${provider}`}>
+      <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+        <div className="flex min-w-0 items-start gap-3">
+          <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-subtle text-fg"><CalendarDays size={18} /></div>
+          <div className="min-w-0">
             <div className="flex flex-wrap items-center gap-2">
               <h3 className="text-[14px] font-semibold text-fg">{label}</h3>
-              {app.configured ? <Badge tone="emerald">App configured</Badge> : <Badge tone="amber">Not configured</Badge>}
+              {app.configured ? <Badge tone="green">App configured</Badge> : <Badge tone="amber">Not configured</Badge>}
               {connection?.connected && <Badge tone="indigo">Connected · {connection.accountEmail}</Badge>}
             </div>
             <p className="mt-1 text-[12.5px] text-fg-muted">{description}</p>
-            <p className="mt-1 text-[11.5px] text-fg-subtle">Redirect URI to register: <code className="rounded bg-subtle px-1 py-0.5 font-mono text-[11px]">{redirectUri}</code></p>
+            <p className="mt-1 break-all text-[11.5px] text-fg-subtle">Redirect URI to register: <code className="rounded bg-subtle px-1 py-0.5 font-mono text-[11px] break-all">{redirectUri}</code></p>
           </div>
         </div>
-        <a href={docs} className="text-[12px] text-accent hover:underline inline-flex items-center gap-1">Docs <ExternalLink size={11} /></a>
+        <a href={docs} className="shrink-0 self-start text-[12px] text-accent hover:underline inline-flex items-center gap-1">Docs <ExternalLink size={11} /></a>
       </div>
 
       <ActionForm action={save} className="mt-4 space-y-3 border-t border-line pt-4">
@@ -63,7 +63,7 @@ export function CalendarConnectCard({
             <Button size="sm" disabled title="Save client ID and secret first">Connect {label}</Button>
           )}
           {connection?.connected && (
-            <Button size="sm" variant="ghost" disabled={busy} onClick={() => start(async () => { const r = await disconnect(); setMsg(r.error ?? r.message ?? null); })}>
+            <Button size="sm" variant="ghost" disabled={busy} onClick={() => start(async () => { const r = await disconnect(); setMsg(r?.error ?? r?.message ?? null); })}>
               <Unplug size={13} />Disconnect
             </Button>
           )}

@@ -6,6 +6,6 @@ export async function POST(req: Request) {
   ensureDemoSeed();
   const body = await req.json().catch(() => null);
   if (!body || typeof body !== "object") return Response.json({ error: "Invalid snapshot" }, { status: 400 });
-  importDemoSnapshot(body as { tables?: Record<string, Record<string, unknown>[]> });
+  importDemoSnapshot(body as { tables?: Record<string, Array<Record<string, unknown>>> });
   return Response.json({ ok: true });
 }

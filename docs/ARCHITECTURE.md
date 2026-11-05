@@ -59,3 +59,16 @@
 - The dashboard makes no third-party requests.
 
 **Scaling path:** SQLite + one worker suits a single node handling roughly 100s of submissions per second. To scale out, swap `db.ts` to Postgres (all SQL is in `lib/`) and the job table for a queue (for example Vercel Queues or SQS); the `registerJob` handler contract stays the same.
+
+
+## Storage modes
+
+| `STORAGE_MODE` | DB | Worker | Notes |
+| --- | --- | --- | --- |
+| `sqlite` (default) | better-sqlite3 file | long-lived `scripts/worker.ts` | Local / single-node |
+| `memory` | `node:sqlite` `:memory:` | optional | Ephemeral; resets on restart |
+| `browser` | `node:sqlite` `:memory:` | `/api/cron/drain` | Vercel demo: no native addon; demo seed; client `localStorage` snapshot via `/api/demo/*` |
+
+## Calendar booking
+
+After routing, `/api/v1/booking/slots` returns free/busy for the assigned owner (Google freeBusy or Graph getSchedule). `POST /api/v1/booking` creates the event (Meet/Teams) and emails via Gmail/Graph, with outbox fallback.

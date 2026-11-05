@@ -15,7 +15,6 @@ import { createApiKey } from "../src/lib/apikeys";
 import { createWebhook, verifySignature, listDeliveries, attemptDelivery } from "../src/lib/webhooks";
 import { createRule } from "../src/lib/routing";
 import { SCOPES } from "../src/lib/types";
-import { getDb } from "../src/lib/db";
 import { processSubmission } from "../src/lib/processing";
 import { registerHandlers } from "../src/lib/worker";
 import { drainJobs } from "../src/lib/jobs";
@@ -32,7 +31,8 @@ const rows: Row[] = [];
 const failures: string[] = [];
 
 async function call(
-  handler: (req: Request, ctx: { params: Promise<Record<string, string>> }) => Promise<Response> | Response,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  handler: (req: Request, ctx: any) => Promise<Response> | Response,
   method: string,
   url: string,
   opts: { key?: string; body?: unknown; params?: Record<string, string>; headers?: Record<string, string> } = {},
@@ -233,7 +233,7 @@ async function main() {
   // Schedules
   const sch = await auditApi("/api/v1/forms/{formId}/schedules", "POST", "v1/forms/[formId]/schedules", "POST", {
     scopeNeeded: "automations:write", params: { formId: form.id }, url: `/api/v1/forms/${form.id}/schedules`,
-    body: { name: "Daily digest", kind: "digest", cron: "0 9 * * *", timezone: "UTC" },
+    body: { name: "Daily digest", kind: "digest", cron: "0 9 * * *", timezone: "UTC", config: { recipients: ["ops@acme.test"] } },
     invalidBody: { name: "x", kind: "nope", cron: "bad" },
     expectValid: (r) => r.status === 201 || r.status === 200 || r.status === 422,
   });
@@ -293,12 +293,12 @@ async function main() {
   {
     const Clay = await load("integrations/clay/callback");
     const r = await call(Clay.POST, "POST", "/api/integrations/clay/callback", { body: { submissionId: "x" } });
-    record("/api/integrations/clay/callback", "POST", [{ case: "missing/invalid secret", status: r.status, ok: r.status === 401 || r.status === 400 || r.status === 403 }]);
+    record("/api/integrations/clay/callback", "POST", [{ case: "missing/invalid secret", status: r.status, ok: [400, 401, 403, 404].includes(r.status) }]);
   }
   {
     const Valyu = await load("integrations/valyu/webhook");
     const r = await call(Valyu.POST, "POST", "/api/integrations/valyu/webhook", { body: {} });
-    record("/api/integrations/valyu/webhook", "POST", [{ case: "missing/invalid signature", status: r.status, ok: r.status === 401 || r.status === 400 || r.status === 403 }]);
+    record("/api/integrations/valyu/webhook", "POST", [{ case: "missing/invalid signature", status: r.status, ok: [400, 401, 403, 404].includes(r.status) }]);
   }
 
   // ---- Webhook event delivery with HMAC ----

@@ -74,3 +74,32 @@ Any field can carry a `showIf` condition that refers to another field. When the 
 | `filled` / `empty` | Any value / no value |
 
 Edit conditions in **Form → Settings → Fields → Rules → Branching logic**. The `select` field type validates that the answer is one of `options`. The seeded **Beta waitlist** form shows a working example ("Your role" → "Which role?" when *Other*).
+
+
+## Branching logic
+
+Every field type can participate in branching: text, email, number, select, radio, checkbox, multiselect, date, rating, choice **button**, and hidden.
+
+### Operators
+
+`eq`, `neq`, `contains`, `not_contains`, `gt`, `gte`, `lt`, `lte`, `in`, `not_in`, `filled`, `empty`, `matches`, `domain_is`, `domain_matches`
+
+### Per-field
+
+- `showIf` — only show / validate / store when the condition holds
+- `goto` / `gotoStep` — choice buttons and selects jump to a step id (or `__end`)
+- `hidden: true` — start hidden until a form-level `show_field` action reveals it
+
+### Form-level `logic` rules
+
+Each rule has a `when` condition and one or more **actions**:
+
+| Action | Effect |
+|---|---|
+| `goto_step` | Jump to a step id |
+| `show_field` / `hide_field` / `skip_field` | Visibility |
+| `end` | Finish the form |
+| `set_value` | Write a hidden / enriched value |
+| `route` | Assign owners + booking URL |
+
+Configure in **Form → Settings → Fields & schema**, or via the API `settings.fields` / `settings.logic` / `settings.steps`.

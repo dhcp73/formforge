@@ -106,7 +106,7 @@ export async function bookSlot(opts: {
       fromEmail: fresh.accountEmail || owner,
     });
     emailed = true;
-  } catch (e) {
+  } catch {
     // Fallback to outbox
     await sendEmail({
       to: leadEmail, workspaceId: opts.workspaceId, kind: "booking",

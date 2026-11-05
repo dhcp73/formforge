@@ -26,8 +26,8 @@ export function IntegrationCard({ v, save, test, extra }: { v: IntegrationView; 
   const hasKey = v.fields.some((f) => f.required);
   const status = !hasKey ? <Badge tone="gray">Settings</Badge> : v.enabled ? <Badge tone="green" dot>Enabled</Badge> : v.configured ? <Badge tone="amber" dot>Configured · off</Badge> : <Badge dot>Disabled · no key</Badge>;
   return (
-    <Card id={v.id} className="scroll-mt-20 flex flex-col" data-testid={`integration-${v.id}`}>
-      <div className="flex items-start gap-3 border-b border-line p-4">
+    <Card id={v.id} className="scroll-mt-20 flex flex-col overflow-hidden" data-testid={`integration-${v.id}`}>
+      <div className="flex min-w-0 items-start gap-3 overflow-hidden border-b border-line p-4">
         <div className={cn("flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-[13px] font-bold", COLOR[v.id])} aria-hidden>{MONO[v.id]}</div>
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2"><h2 className="text-[14px] font-semibold text-fg">{v.label}</h2>{status}<Badge>{v.category}</Badge>{v.source === "env" && <Badge tone="blue">from env</Badge>}</div>
@@ -64,5 +64,5 @@ export function IntegrationCard({ v, save, test, extra }: { v: IntegrationView; 
 }
 
 export function UrlRow({ label, url }: { label: string; url: string }) {
-  return <div><Label>{label}</Label><div className="mt-1 flex items-center gap-1"><code className="min-w-0 flex-1 truncate rounded bg-muted px-2 py-1 font-mono text-[11.5px] text-fg-muted">{url}</code><CopyButton value={url} label={`Copy ${label}`} /></div></div>;
+  return <div className="min-w-0"><Label>{label}</Label><div className="mt-1 flex min-w-0 items-center gap-1"><code className="min-w-0 flex-1 break-all rounded bg-muted px-2 py-1 font-mono text-[11.5px] text-fg-muted">{url}</code><CopyButton value={url} label={`Copy ${label}`} /></div></div>;
 }

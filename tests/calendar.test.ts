@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
+import { describe, it, expect, afterEach } from "vitest";
 import { workspace } from "./helpers";
 import {
   createGoogleClient, createMicrosoftClient, slotsFromBusy,

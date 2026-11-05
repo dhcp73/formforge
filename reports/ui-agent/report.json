@@ -1,9 +1,9 @@
 {
-  "runId": "qa_RngQ6jSyZT0tnNRq",
+  "runId": "qa_aOuBJpC7XL576rAK",
   "base": "http://127.0.0.1:3100",
   "mode": "full",
-  "pages": 520,
-  "routes": 65,
+  "pages": 536,
+  "routes": 67,
   "viewports": [
     "mobile 375×812",
     "tablet 768×1024",
@@ -15,22 +15,22 @@
     "dark"
   ],
   "issues": 1,
-  "errors": 0,
-  "warnings": 1,
-  "passed": true,
-  "durationMs": 852004,
+  "errors": 1,
+  "warnings": 0,
+  "passed": false,
+  "durationMs": 659500,
   "aiReview": "off",
   "checks": {
-    "slow": 1
+    "pageerror": 1
   },
-  "finishedAt": "2026-11-05T02:05:35.860Z",
+  "finishedAt": "2026-11-05T10:58:00.049Z",
   "results": [
     {
       "path": "/",
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 635,
+      "ms": 626,
       "issues": [],
       "shot": "shots/mobile-light-home.png"
     },
@@ -39,7 +39,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 670,
+      "ms": 557,
       "issues": [],
       "shot": "shots/mobile-light-docs.png"
     },
@@ -48,7 +48,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 613,
+      "ms": 580,
       "issues": [],
       "shot": "shots/mobile-light-status.png"
     },
@@ -57,7 +57,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 651,
+      "ms": 652,
       "issues": [],
       "shot": "shots/mobile-light-dashboard.png"
     },
@@ -66,7 +66,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 560,
+      "ms": 559,
       "issues": [],
       "shot": "shots/mobile-light-dashboard_forms.png"
     },
@@ -75,7 +75,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 536,
+      "ms": 537,
       "issues": [],
       "shot": "shots/mobile-light-features.png"
     },
@@ -84,7 +84,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 560,
+      "ms": 539,
       "issues": [],
       "shot": "shots/mobile-light-pricing.png"
     },
@@ -93,7 +93,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 1075,
+      "ms": 1024,
       "issues": [],
       "shot": "shots/mobile-light-docs_api.png"
     },
@@ -102,7 +102,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 562,
+      "ms": 545,
       "issues": [],
       "shot": "shots/mobile-light-changelog.png"
     },
@@ -111,7 +111,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 607,
+      "ms": 614,
       "issues": [],
       "shot": "shots/mobile-light-signup.png"
     },
@@ -120,7 +120,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 561,
+      "ms": 548,
       "issues": [],
       "shot": "shots/mobile-light-docs_quickstart.png"
     },
@@ -129,7 +129,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 559,
+      "ms": 553,
       "issues": [],
       "shot": "shots/mobile-light-docs_mcp.png"
     },
@@ -138,7 +138,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 546,
+      "ms": 549,
       "issues": [],
       "shot": "shots/mobile-light-docs_integrations_apollo.png"
     },
@@ -147,7 +147,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 552,
+      "ms": 544,
       "issues": [],
       "shot": "shots/mobile-light-docs_integrations_clay.png"
     },
@@ -156,7 +156,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 550,
+      "ms": 553,
       "issues": [],
       "shot": "shots/mobile-light-docs_integrations_valyu.png"
     },
@@ -165,7 +165,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 550,
+      "ms": 543,
       "issues": [],
       "shot": "shots/mobile-light-docs_integrations_openai.png"
     },
@@ -174,7 +174,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 567,
+      "ms": 544,
       "issues": [],
       "shot": "shots/mobile-light-about.png"
     },
@@ -183,7 +183,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 618,
+      "ms": 623,
       "issues": [],
       "shot": "shots/mobile-light-login.png"
     },
@@ -192,7 +192,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 554,
+      "ms": 561,
       "issues": [],
       "shot": "shots/mobile-light-docs_dynamic_fields.png"
     },
@@ -201,7 +201,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 551,
+      "ms": 542,
       "issues": [],
       "shot": "shots/mobile-light-docs_spam.png"
     },
@@ -210,7 +210,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 554,
+      "ms": 563,
       "issues": [],
       "shot": "shots/mobile-light-docs_scheduling.png"
     },
@@ -219,7 +219,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 558,
+      "ms": 552,
       "issues": [],
       "shot": "shots/mobile-light-docs_enrichment.png"
     },
@@ -228,7 +228,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 577,
+      "ms": 548,
       "issues": [],
       "shot": "shots/mobile-light-docs_routing.png"
     },
@@ -237,7 +237,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 708,
+      "ms": 546,
       "issues": [],
       "shot": "shots/mobile-light-docs_integrations.png"
     },
@@ -246,7 +246,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 553,
+      "ms": 544,
       "issues": [],
       "shot": "shots/mobile-light-docs_integrations_openrouter.png"
     },
@@ -255,16 +255,34 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 552,
+      "ms": 549,
       "issues": [],
       "shot": "shots/mobile-light-docs_integrations_ai.png"
+    },
+    {
+      "path": "/docs/integrations/google",
+      "viewport": "mobile 375×812",
+      "theme": "light",
+      "status": 200,
+      "ms": 548,
+      "issues": [],
+      "shot": "shots/mobile-light-docs_integrations_google.png"
+    },
+    {
+      "path": "/docs/integrations/microsoft",
+      "viewport": "mobile 375×812",
+      "theme": "light",
+      "status": 200,
+      "ms": 551,
+      "issues": [],
+      "shot": "shots/mobile-light-docs_integrations_microsoft.png"
     },
     {
       "path": "/docs/api-keys",
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 552,
+      "ms": 548,
       "issues": [],
       "shot": "shots/mobile-light-docs_api_keys.png"
     },
@@ -273,7 +291,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 562,
+      "ms": 542,
       "issues": [],
       "shot": "shots/mobile-light-docs_rest_api.png"
     },
@@ -282,7 +300,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 549,
+      "ms": 556,
       "issues": [],
       "shot": "shots/mobile-light-docs_webhooks.png"
     },
@@ -291,7 +309,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 549,
+      "ms": 554,
       "issues": [],
       "shot": "shots/mobile-light-docs_status.png"
     },
@@ -300,7 +318,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 610,
+      "ms": 620,
       "issues": [],
       "shot": "shots/mobile-light-dashboard_leads.png"
     },
@@ -309,7 +327,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 569,
+      "ms": 584,
       "issues": [],
       "shot": "shots/mobile-light-dashboard_routing.png"
     },
@@ -318,7 +336,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 599,
+      "ms": 589,
       "issues": [],
       "shot": "shots/mobile-light-dashboard_enrichment.png"
     },
@@ -327,7 +345,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 576,
+      "ms": 585,
       "issues": [],
       "shot": "shots/mobile-light-dashboard_integrations.png"
     },
@@ -336,7 +354,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 642,
+      "ms": 638,
       "issues": [],
       "shot": "shots/mobile-light-dashboard_webhooks.png"
     },
@@ -345,7 +363,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 562,
+      "ms": 578,
       "issues": [],
       "shot": "shots/mobile-light-dashboard_schedules.png"
     },
@@ -354,7 +372,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 620,
+      "ms": 604,
       "issues": [],
       "shot": "shots/mobile-light-dashboard_api_keys.png"
     },
@@ -363,7 +381,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 603,
+      "ms": 596,
       "issues": [],
       "shot": "shots/mobile-light-dashboard_health.png"
     },
@@ -372,7 +390,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 555,
+      "ms": 568,
       "issues": [],
       "shot": "shots/mobile-light-dashboard_qa.png"
     },
@@ -381,7 +399,7 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 590,
+      "ms": 593,
       "issues": [],
       "shot": "shots/mobile-light-dashboard_outbox.png"
     },
@@ -390,232 +408,232 @@
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 587,
+      "ms": 558,
       "issues": [],
       "shot": "shots/mobile-light-dashboard_settings.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ?s=sub_84AwZUV9x5DoZzqZxw",
+      "path": "/dashboard/forms/7O96Au6Bbr?s=sub_d4xACDgGy02NBSuRdj",
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 640,
+      "ms": 645,
       "issues": [],
-      "shot": "shots/mobile-light-dashboard_forms_DzPnDsHTAZ_s_sub_84AwZUV9x5DoZzqZxw.png"
+      "shot": "shots/mobile-light-dashboard_forms_7O96Au6Bbr_s_sub_d4xACDgGy02NBSuRdj.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj",
+      "path": "/dashboard/forms/OlKjjpVjac?s=sub_w5oVgPmCAfpumlWgi7",
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 587,
+      "ms": 628,
       "issues": [],
-      "shot": "shots/mobile-light-dashboard_forms_hgbHMmQsNj.png"
+      "shot": "shots/mobile-light-dashboard_forms_OlKjjpVjac_s_sub_w5oVgPmCAfpumlWgi7.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp",
-      "viewport": "mobile 375×812",
-      "theme": "light",
-      "status": 200,
-      "ms": 612,
-      "issues": [],
-      "shot": "shots/mobile-light-dashboard_forms_ZtzkakqVJp.png"
-    },
-    {
-      "path": "/dashboard/forms/LVYBpkKWBT",
-      "viewport": "mobile 375×812",
-      "theme": "light",
-      "status": 200,
-      "ms": 631,
-      "issues": [],
-      "shot": "shots/mobile-light-dashboard_forms_LVYBpkKWBT.png"
-    },
-    {
-      "path": "/dashboard/forms/DzPnDsHTAZ",
-      "viewport": "mobile 375×812",
-      "theme": "light",
-      "status": 200,
-      "ms": 611,
-      "issues": [],
-      "shot": "shots/mobile-light-dashboard_forms_DzPnDsHTAZ.png"
-    },
-    {
-      "path": "/dashboard/forms/LVYBpkKWBT?s=sub_9Mp4qbpdcYpPqHoYzJ",
-      "viewport": "mobile 375×812",
-      "theme": "light",
-      "status": 200,
-      "ms": 644,
-      "issues": [],
-      "shot": "shots/mobile-light-dashboard_forms_LVYBpkKWBT_s_sub_9Mp4qbpdcYpPqHoYzJ.png"
-    },
-    {
-      "path": "/dashboard/forms/ZtzkakqVJp?s=sub_W6jUAp7BXuKm7APBne",
-      "viewport": "mobile 375×812",
-      "theme": "light",
-      "status": 200,
-      "ms": 652,
-      "issues": [],
-      "shot": "shots/mobile-light-dashboard_forms_ZtzkakqVJp_s_sub_W6jUAp7BXuKm7APBne.png"
-    },
-    {
-      "path": "/dashboard/forms/hgbHMmQsNj?s=sub_Ug2QbhleUSdT70qMKf",
-      "viewport": "mobile 375×812",
-      "theme": "light",
-      "status": 200,
-      "ms": 622,
-      "issues": [],
-      "shot": "shots/mobile-light-dashboard_forms_hgbHMmQsNj_s_sub_Ug2QbhleUSdT70qMKf.png"
-    },
-    {
-      "path": "/dashboard/forms/DzPnDsHTAZ/automations",
+      "path": "/dashboard/forms/OOpTwAjRKa",
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
       "ms": 581,
       "issues": [],
-      "shot": "shots/mobile-light-dashboard_forms_DzPnDsHTAZ_automations.png"
+      "shot": "shots/mobile-light-dashboard_forms_OOpTwAjRKa.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT/automations",
+      "path": "/dashboard/forms/OlKjjpVjac",
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 582,
+      "ms": 590,
       "issues": [],
-      "shot": "shots/mobile-light-dashboard_forms_LVYBpkKWBT_automations.png"
+      "shot": "shots/mobile-light-dashboard_forms_OlKjjpVjac.png"
     },
     {
-      "path": "/f/DzPnDsHTAZ",
+      "path": "/dashboard/forms/b3iYs9L1MJ",
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 583,
+      "ms": 603,
       "issues": [],
-      "shot": "shots/mobile-light-f_DzPnDsHTAZ.png"
+      "shot": "shots/mobile-light-dashboard_forms_b3iYs9L1MJ.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ/setup",
+      "path": "/dashboard/forms/7O96Au6Bbr",
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 569,
+      "ms": 605,
       "issues": [],
-      "shot": "shots/mobile-light-dashboard_forms_DzPnDsHTAZ_setup.png"
+      "shot": "shots/mobile-light-dashboard_forms_7O96Au6Bbr.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ/settings",
+      "path": "/dashboard/forms/b3iYs9L1MJ?s=sub_eWW1L0Fly1QKI61Iq9",
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 601,
+      "ms": 627,
       "issues": [],
-      "shot": "shots/mobile-light-dashboard_forms_DzPnDsHTAZ_settings.png"
+      "shot": "shots/mobile-light-dashboard_forms_b3iYs9L1MJ_s_sub_eWW1L0Fly1QKI61Iq9.png"
     },
     {
-      "path": "/f/hgbHMmQsNj",
+      "path": "/dashboard/forms/OOpTwAjRKa?s=sub_FR2nEAWcYe3W0RmwZS",
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 540,
+      "ms": 608,
       "issues": [],
-      "shot": "shots/mobile-light-f_hgbHMmQsNj.png"
+      "shot": "shots/mobile-light-dashboard_forms_OOpTwAjRKa_s_sub_FR2nEAWcYe3W0RmwZS.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj/setup",
+      "path": "/dashboard/forms/7O96Au6Bbr/automations",
+      "viewport": "mobile 375×812",
+      "theme": "light",
+      "status": 200,
+      "ms": 567,
+      "issues": [],
+      "shot": "shots/mobile-light-dashboard_forms_7O96Au6Bbr_automations.png"
+    },
+    {
+      "path": "/dashboard/forms/b3iYs9L1MJ/automations",
+      "viewport": "mobile 375×812",
+      "theme": "light",
+      "status": 200,
+      "ms": 576,
+      "issues": [],
+      "shot": "shots/mobile-light-dashboard_forms_b3iYs9L1MJ_automations.png"
+    },
+    {
+      "path": "/f/7O96Au6Bbr",
+      "viewport": "mobile 375×812",
+      "theme": "light",
+      "status": 200,
+      "ms": 542,
+      "issues": [],
+      "shot": "shots/mobile-light-f_7O96Au6Bbr.png"
+    },
+    {
+      "path": "/dashboard/forms/7O96Au6Bbr/setup",
+      "viewport": "mobile 375×812",
+      "theme": "light",
+      "status": 200,
+      "ms": 570,
+      "issues": [],
+      "shot": "shots/mobile-light-dashboard_forms_7O96Au6Bbr_setup.png"
+    },
+    {
+      "path": "/dashboard/forms/7O96Au6Bbr/settings",
+      "viewport": "mobile 375×812",
+      "theme": "light",
+      "status": 200,
+      "ms": 603,
+      "issues": [],
+      "shot": "shots/mobile-light-dashboard_forms_7O96Au6Bbr_settings.png"
+    },
+    {
+      "path": "/f/OlKjjpVjac",
+      "viewport": "mobile 375×812",
+      "theme": "light",
+      "status": 200,
+      "ms": 543,
+      "issues": [],
+      "shot": "shots/mobile-light-f_OlKjjpVjac.png"
+    },
+    {
+      "path": "/dashboard/forms/OlKjjpVjac/setup",
+      "viewport": "mobile 375×812",
+      "theme": "light",
+      "status": 200,
+      "ms": 567,
+      "issues": [],
+      "shot": "shots/mobile-light-dashboard_forms_OlKjjpVjac_setup.png"
+    },
+    {
+      "path": "/dashboard/forms/OlKjjpVjac/settings",
+      "viewport": "mobile 375×812",
+      "theme": "light",
+      "status": 200,
+      "ms": 608,
+      "issues": [],
+      "shot": "shots/mobile-light-dashboard_forms_OlKjjpVjac_settings.png"
+    },
+    {
+      "path": "/dashboard/forms/OlKjjpVjac/automations",
+      "viewport": "mobile 375×812",
+      "theme": "light",
+      "status": 200,
+      "ms": 576,
+      "issues": [],
+      "shot": "shots/mobile-light-dashboard_forms_OlKjjpVjac_automations.png"
+    },
+    {
+      "path": "/f/OOpTwAjRKa",
+      "viewport": "mobile 375×812",
+      "theme": "light",
+      "status": 200,
+      "ms": 543,
+      "issues": [],
+      "shot": "shots/mobile-light-f_OOpTwAjRKa.png"
+    },
+    {
+      "path": "/dashboard/forms/OOpTwAjRKa/setup",
+      "viewport": "mobile 375×812",
+      "theme": "light",
+      "status": 200,
+      "ms": 567,
+      "issues": [],
+      "shot": "shots/mobile-light-dashboard_forms_OOpTwAjRKa_setup.png"
+    },
+    {
+      "path": "/dashboard/forms/OOpTwAjRKa/settings",
+      "viewport": "mobile 375×812",
+      "theme": "light",
+      "status": 200,
+      "ms": 594,
+      "issues": [],
+      "shot": "shots/mobile-light-dashboard_forms_OOpTwAjRKa_settings.png"
+    },
+    {
+      "path": "/dashboard/forms/OOpTwAjRKa/automations",
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
       "ms": 565,
       "issues": [],
-      "shot": "shots/mobile-light-dashboard_forms_hgbHMmQsNj_setup.png"
+      "shot": "shots/mobile-light-dashboard_forms_OOpTwAjRKa_automations.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj/settings",
+      "path": "/f/b3iYs9L1MJ",
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 588,
+      "ms": 543,
       "issues": [],
-      "shot": "shots/mobile-light-dashboard_forms_hgbHMmQsNj_settings.png"
+      "shot": "shots/mobile-light-f_b3iYs9L1MJ.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj/automations",
+      "path": "/dashboard/forms/b3iYs9L1MJ/setup",
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 566,
+      "ms": 567,
       "issues": [],
-      "shot": "shots/mobile-light-dashboard_forms_hgbHMmQsNj_automations.png"
+      "shot": "shots/mobile-light-dashboard_forms_b3iYs9L1MJ_setup.png"
     },
     {
-      "path": "/f/ZtzkakqVJp",
+      "path": "/dashboard/forms/b3iYs9L1MJ/settings",
       "viewport": "mobile 375×812",
       "theme": "light",
       "status": 200,
-      "ms": 551,
+      "ms": 581,
       "issues": [],
-      "shot": "shots/mobile-light-f_ZtzkakqVJp.png"
-    },
-    {
-      "path": "/dashboard/forms/ZtzkakqVJp/setup",
-      "viewport": "mobile 375×812",
-      "theme": "light",
-      "status": 200,
-      "ms": 566,
-      "issues": [],
-      "shot": "shots/mobile-light-dashboard_forms_ZtzkakqVJp_setup.png"
-    },
-    {
-      "path": "/dashboard/forms/ZtzkakqVJp/settings",
-      "viewport": "mobile 375×812",
-      "theme": "light",
-      "status": 200,
-      "ms": 602,
-      "issues": [],
-      "shot": "shots/mobile-light-dashboard_forms_ZtzkakqVJp_settings.png"
-    },
-    {
-      "path": "/dashboard/forms/ZtzkakqVJp/automations",
-      "viewport": "mobile 375×812",
-      "theme": "light",
-      "status": 200,
-      "ms": 563,
-      "issues": [],
-      "shot": "shots/mobile-light-dashboard_forms_ZtzkakqVJp_automations.png"
-    },
-    {
-      "path": "/f/LVYBpkKWBT",
-      "viewport": "mobile 375×812",
-      "theme": "light",
-      "status": 200,
-      "ms": 544,
-      "issues": [],
-      "shot": "shots/mobile-light-f_LVYBpkKWBT.png"
-    },
-    {
-      "path": "/dashboard/forms/LVYBpkKWBT/setup",
-      "viewport": "mobile 375×812",
-      "theme": "light",
-      "status": 200,
-      "ms": 569,
-      "issues": [],
-      "shot": "shots/mobile-light-dashboard_forms_LVYBpkKWBT_setup.png"
-    },
-    {
-      "path": "/dashboard/forms/LVYBpkKWBT/settings",
-      "viewport": "mobile 375×812",
-      "theme": "light",
-      "status": 200,
-      "ms": 589,
-      "issues": [],
-      "shot": "shots/mobile-light-dashboard_forms_LVYBpkKWBT_settings.png"
+      "shot": "shots/mobile-light-dashboard_forms_b3iYs9L1MJ_settings.png"
     },
     {
       "path": "/",
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 639,
+      "ms": 632,
       "issues": [],
       "shot": "shots/mobile-dark-home.png"
     },
@@ -624,7 +642,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 575,
+      "ms": 557,
       "issues": [],
       "shot": "shots/mobile-dark-docs.png"
     },
@@ -633,7 +651,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 592,
+      "ms": 579,
       "issues": [],
       "shot": "shots/mobile-dark-status.png"
     },
@@ -642,7 +660,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 671,
+      "ms": 658,
       "issues": [],
       "shot": "shots/mobile-dark-dashboard.png"
     },
@@ -651,7 +669,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 571,
+      "ms": 576,
       "issues": [],
       "shot": "shots/mobile-dark-dashboard_forms.png"
     },
@@ -660,7 +678,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 545,
+      "ms": 544,
       "issues": [],
       "shot": "shots/mobile-dark-features.png"
     },
@@ -669,7 +687,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 543,
+      "ms": 539,
       "issues": [],
       "shot": "shots/mobile-dark-pricing.png"
     },
@@ -678,7 +696,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 1093,
+      "ms": 1060,
       "issues": [],
       "shot": "shots/mobile-dark-docs_api.png"
     },
@@ -696,7 +714,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 627,
+      "ms": 613,
       "issues": [],
       "shot": "shots/mobile-dark-signup.png"
     },
@@ -705,7 +723,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 556,
+      "ms": 560,
       "issues": [],
       "shot": "shots/mobile-dark-docs_quickstart.png"
     },
@@ -714,7 +732,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 558,
+      "ms": 560,
       "issues": [],
       "shot": "shots/mobile-dark-docs_mcp.png"
     },
@@ -723,7 +741,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 568,
+      "ms": 553,
       "issues": [],
       "shot": "shots/mobile-dark-docs_integrations_apollo.png"
     },
@@ -732,7 +750,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 561,
+      "ms": 545,
       "issues": [],
       "shot": "shots/mobile-dark-docs_integrations_clay.png"
     },
@@ -741,7 +759,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 565,
+      "ms": 559,
       "issues": [],
       "shot": "shots/mobile-dark-docs_integrations_valyu.png"
     },
@@ -750,7 +768,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 556,
+      "ms": 548,
       "issues": [],
       "shot": "shots/mobile-dark-docs_integrations_openai.png"
     },
@@ -759,7 +777,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 551,
+      "ms": 548,
       "issues": [],
       "shot": "shots/mobile-dark-about.png"
     },
@@ -768,7 +786,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 638,
+      "ms": 603,
       "issues": [],
       "shot": "shots/mobile-dark-login.png"
     },
@@ -777,7 +795,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 564,
+      "ms": 567,
       "issues": [],
       "shot": "shots/mobile-dark-docs_dynamic_fields.png"
     },
@@ -786,7 +804,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 560,
+      "ms": 556,
       "issues": [],
       "shot": "shots/mobile-dark-docs_spam.png"
     },
@@ -795,7 +813,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 556,
+      "ms": 554,
       "issues": [],
       "shot": "shots/mobile-dark-docs_scheduling.png"
     },
@@ -804,7 +822,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 555,
+      "ms": 561,
       "issues": [],
       "shot": "shots/mobile-dark-docs_enrichment.png"
     },
@@ -813,7 +831,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 561,
+      "ms": 547,
       "issues": [],
       "shot": "shots/mobile-dark-docs_routing.png"
     },
@@ -822,7 +840,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 558,
+      "ms": 564,
       "issues": [],
       "shot": "shots/mobile-dark-docs_integrations.png"
     },
@@ -831,7 +849,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 548,
+      "ms": 549,
       "issues": [],
       "shot": "shots/mobile-dark-docs_integrations_openrouter.png"
     },
@@ -840,16 +858,34 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 561,
+      "ms": 552,
       "issues": [],
       "shot": "shots/mobile-dark-docs_integrations_ai.png"
+    },
+    {
+      "path": "/docs/integrations/google",
+      "viewport": "mobile 375×812",
+      "theme": "dark",
+      "status": 200,
+      "ms": 559,
+      "issues": [],
+      "shot": "shots/mobile-dark-docs_integrations_google.png"
+    },
+    {
+      "path": "/docs/integrations/microsoft",
+      "viewport": "mobile 375×812",
+      "theme": "dark",
+      "status": 200,
+      "ms": 549,
+      "issues": [],
+      "shot": "shots/mobile-dark-docs_integrations_microsoft.png"
     },
     {
       "path": "/docs/api-keys",
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 561,
+      "ms": 551,
       "issues": [],
       "shot": "shots/mobile-dark-docs_api_keys.png"
     },
@@ -858,7 +894,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 548,
+      "ms": 563,
       "issues": [],
       "shot": "shots/mobile-dark-docs_rest_api.png"
     },
@@ -867,7 +903,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 555,
+      "ms": 566,
       "issues": [],
       "shot": "shots/mobile-dark-docs_webhooks.png"
     },
@@ -876,7 +912,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 559,
+      "ms": 546,
       "issues": [],
       "shot": "shots/mobile-dark-docs_status.png"
     },
@@ -885,7 +921,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 612,
+      "ms": 611,
       "issues": [],
       "shot": "shots/mobile-dark-dashboard_leads.png"
     },
@@ -894,7 +930,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 583,
+      "ms": 592,
       "issues": [],
       "shot": "shots/mobile-dark-dashboard_routing.png"
     },
@@ -903,7 +939,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 602,
+      "ms": 592,
       "issues": [],
       "shot": "shots/mobile-dark-dashboard_enrichment.png"
     },
@@ -912,7 +948,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 579,
+      "ms": 592,
       "issues": [],
       "shot": "shots/mobile-dark-dashboard_integrations.png"
     },
@@ -921,7 +957,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 692,
+      "ms": 693,
       "issues": [],
       "shot": "shots/mobile-dark-dashboard_webhooks.png"
     },
@@ -930,7 +966,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 575,
+      "ms": 587,
       "issues": [],
       "shot": "shots/mobile-dark-dashboard_schedules.png"
     },
@@ -948,7 +984,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 612,
+      "ms": 598,
       "issues": [],
       "shot": "shots/mobile-dark-dashboard_health.png"
     },
@@ -957,7 +993,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 558,
+      "ms": 559,
       "issues": [],
       "shot": "shots/mobile-dark-dashboard_qa.png"
     },
@@ -966,7 +1002,7 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 622,
+      "ms": 593,
       "issues": [],
       "shot": "shots/mobile-dark-dashboard_outbox.png"
     },
@@ -975,232 +1011,232 @@
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 558,
+      "ms": 576,
       "issues": [],
       "shot": "shots/mobile-dark-dashboard_settings.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ?s=sub_84AwZUV9x5DoZzqZxw",
+      "path": "/dashboard/forms/7O96Au6Bbr?s=sub_d4xACDgGy02NBSuRdj",
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 657,
+      "ms": 650,
       "issues": [],
-      "shot": "shots/mobile-dark-dashboard_forms_DzPnDsHTAZ_s_sub_84AwZUV9x5DoZzqZxw.png"
+      "shot": "shots/mobile-dark-dashboard_forms_7O96Au6Bbr_s_sub_d4xACDgGy02NBSuRdj.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj",
+      "path": "/dashboard/forms/OlKjjpVjac?s=sub_w5oVgPmCAfpumlWgi7",
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 610,
+      "ms": 655,
       "issues": [],
-      "shot": "shots/mobile-dark-dashboard_forms_hgbHMmQsNj.png"
+      "shot": "shots/mobile-dark-dashboard_forms_OlKjjpVjac_s_sub_w5oVgPmCAfpumlWgi7.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp",
+      "path": "/dashboard/forms/OOpTwAjRKa",
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 669,
+      "ms": 584,
       "issues": [],
-      "shot": "shots/mobile-dark-dashboard_forms_ZtzkakqVJp.png"
+      "shot": "shots/mobile-dark-dashboard_forms_OOpTwAjRKa.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT",
+      "path": "/dashboard/forms/OlKjjpVjac",
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 606,
+      "ms": 607,
       "issues": [],
-      "shot": "shots/mobile-dark-dashboard_forms_LVYBpkKWBT.png"
+      "shot": "shots/mobile-dark-dashboard_forms_OlKjjpVjac.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ",
+      "path": "/dashboard/forms/b3iYs9L1MJ",
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 632,
+      "ms": 612,
       "issues": [],
-      "shot": "shots/mobile-dark-dashboard_forms_DzPnDsHTAZ.png"
+      "shot": "shots/mobile-dark-dashboard_forms_b3iYs9L1MJ.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT?s=sub_9Mp4qbpdcYpPqHoYzJ",
+      "path": "/dashboard/forms/7O96Au6Bbr",
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 632,
+      "ms": 613,
       "issues": [],
-      "shot": "shots/mobile-dark-dashboard_forms_LVYBpkKWBT_s_sub_9Mp4qbpdcYpPqHoYzJ.png"
+      "shot": "shots/mobile-dark-dashboard_forms_7O96Au6Bbr.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp?s=sub_W6jUAp7BXuKm7APBne",
+      "path": "/dashboard/forms/b3iYs9L1MJ?s=sub_eWW1L0Fly1QKI61Iq9",
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
       "ms": 640,
       "issues": [],
-      "shot": "shots/mobile-dark-dashboard_forms_ZtzkakqVJp_s_sub_W6jUAp7BXuKm7APBne.png"
+      "shot": "shots/mobile-dark-dashboard_forms_b3iYs9L1MJ_s_sub_eWW1L0Fly1QKI61Iq9.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj?s=sub_Ug2QbhleUSdT70qMKf",
+      "path": "/dashboard/forms/OOpTwAjRKa?s=sub_FR2nEAWcYe3W0RmwZS",
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 660,
+      "ms": 613,
       "issues": [],
-      "shot": "shots/mobile-dark-dashboard_forms_hgbHMmQsNj_s_sub_Ug2QbhleUSdT70qMKf.png"
+      "shot": "shots/mobile-dark-dashboard_forms_OOpTwAjRKa_s_sub_FR2nEAWcYe3W0RmwZS.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ/automations",
-      "viewport": "mobile 375×812",
-      "theme": "dark",
-      "status": 200,
-      "ms": 591,
-      "issues": [],
-      "shot": "shots/mobile-dark-dashboard_forms_DzPnDsHTAZ_automations.png"
-    },
-    {
-      "path": "/dashboard/forms/LVYBpkKWBT/automations",
-      "viewport": "mobile 375×812",
-      "theme": "dark",
-      "status": 200,
-      "ms": 582,
-      "issues": [],
-      "shot": "shots/mobile-dark-dashboard_forms_LVYBpkKWBT_automations.png"
-    },
-    {
-      "path": "/f/DzPnDsHTAZ",
-      "viewport": "mobile 375×812",
-      "theme": "dark",
-      "status": 200,
-      "ms": 542,
-      "issues": [],
-      "shot": "shots/mobile-dark-f_DzPnDsHTAZ.png"
-    },
-    {
-      "path": "/dashboard/forms/DzPnDsHTAZ/setup",
+      "path": "/dashboard/forms/7O96Au6Bbr/automations",
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
       "ms": 566,
       "issues": [],
-      "shot": "shots/mobile-dark-dashboard_forms_DzPnDsHTAZ_setup.png"
+      "shot": "shots/mobile-dark-dashboard_forms_7O96Au6Bbr_automations.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ/settings",
+      "path": "/dashboard/forms/b3iYs9L1MJ/automations",
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 605,
+      "ms": 584,
       "issues": [],
-      "shot": "shots/mobile-dark-dashboard_forms_DzPnDsHTAZ_settings.png"
+      "shot": "shots/mobile-dark-dashboard_forms_b3iYs9L1MJ_automations.png"
     },
     {
-      "path": "/f/hgbHMmQsNj",
+      "path": "/f/7O96Au6Bbr",
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 540,
+      "ms": 539,
       "issues": [],
-      "shot": "shots/mobile-dark-f_hgbHMmQsNj.png"
+      "shot": "shots/mobile-dark-f_7O96Au6Bbr.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj/setup",
-      "viewport": "mobile 375×812",
-      "theme": "dark",
-      "status": 200,
-      "ms": 565,
-      "issues": [],
-      "shot": "shots/mobile-dark-dashboard_forms_hgbHMmQsNj_setup.png"
-    },
-    {
-      "path": "/dashboard/forms/hgbHMmQsNj/settings",
-      "viewport": "mobile 375×812",
-      "theme": "dark",
-      "status": 200,
-      "ms": 632,
-      "issues": [],
-      "shot": "shots/mobile-dark-dashboard_forms_hgbHMmQsNj_settings.png"
-    },
-    {
-      "path": "/dashboard/forms/hgbHMmQsNj/automations",
-      "viewport": "mobile 375×812",
-      "theme": "dark",
-      "status": 200,
-      "ms": 580,
-      "issues": [],
-      "shot": "shots/mobile-dark-dashboard_forms_hgbHMmQsNj_automations.png"
-    },
-    {
-      "path": "/f/ZtzkakqVJp",
-      "viewport": "mobile 375×812",
-      "theme": "dark",
-      "status": 200,
-      "ms": 543,
-      "issues": [],
-      "shot": "shots/mobile-dark-f_ZtzkakqVJp.png"
-    },
-    {
-      "path": "/dashboard/forms/ZtzkakqVJp/setup",
+      "path": "/dashboard/forms/7O96Au6Bbr/setup",
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
       "ms": 568,
       "issues": [],
-      "shot": "shots/mobile-dark-dashboard_forms_ZtzkakqVJp_setup.png"
+      "shot": "shots/mobile-dark-dashboard_forms_7O96Au6Bbr_setup.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp/settings",
+      "path": "/dashboard/forms/7O96Au6Bbr/settings",
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 664,
+      "ms": 595,
       "issues": [],
-      "shot": "shots/mobile-dark-dashboard_forms_ZtzkakqVJp_settings.png"
+      "shot": "shots/mobile-dark-dashboard_forms_7O96Au6Bbr_settings.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp/automations",
+      "path": "/f/OlKjjpVjac",
+      "viewport": "mobile 375×812",
+      "theme": "dark",
+      "status": 200,
+      "ms": 542,
+      "issues": [],
+      "shot": "shots/mobile-dark-f_OlKjjpVjac.png"
+    },
+    {
+      "path": "/dashboard/forms/OlKjjpVjac/setup",
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
       "ms": 569,
       "issues": [],
-      "shot": "shots/mobile-dark-dashboard_forms_ZtzkakqVJp_automations.png"
+      "shot": "shots/mobile-dark-dashboard_forms_OlKjjpVjac_setup.png"
     },
     {
-      "path": "/f/LVYBpkKWBT",
+      "path": "/dashboard/forms/OlKjjpVjac/settings",
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 544,
+      "ms": 595,
       "issues": [],
-      "shot": "shots/mobile-dark-f_LVYBpkKWBT.png"
+      "shot": "shots/mobile-dark-dashboard_forms_OlKjjpVjac_settings.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT/setup",
+      "path": "/dashboard/forms/OlKjjpVjac/automations",
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 568,
+      "ms": 567,
       "issues": [],
-      "shot": "shots/mobile-dark-dashboard_forms_LVYBpkKWBT_setup.png"
+      "shot": "shots/mobile-dark-dashboard_forms_OlKjjpVjac_automations.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT/settings",
+      "path": "/f/OOpTwAjRKa",
       "viewport": "mobile 375×812",
       "theme": "dark",
       "status": 200,
-      "ms": 587,
+      "ms": 536,
       "issues": [],
-      "shot": "shots/mobile-dark-dashboard_forms_LVYBpkKWBT_settings.png"
+      "shot": "shots/mobile-dark-f_OOpTwAjRKa.png"
+    },
+    {
+      "path": "/dashboard/forms/OOpTwAjRKa/setup",
+      "viewport": "mobile 375×812",
+      "theme": "dark",
+      "status": 200,
+      "ms": 570,
+      "issues": [],
+      "shot": "shots/mobile-dark-dashboard_forms_OOpTwAjRKa_setup.png"
+    },
+    {
+      "path": "/dashboard/forms/OOpTwAjRKa/settings",
+      "viewport": "mobile 375×812",
+      "theme": "dark",
+      "status": 200,
+      "ms": 579,
+      "issues": [],
+      "shot": "shots/mobile-dark-dashboard_forms_OOpTwAjRKa_settings.png"
+    },
+    {
+      "path": "/dashboard/forms/OOpTwAjRKa/automations",
+      "viewport": "mobile 375×812",
+      "theme": "dark",
+      "status": 200,
+      "ms": 567,
+      "issues": [],
+      "shot": "shots/mobile-dark-dashboard_forms_OOpTwAjRKa_automations.png"
+    },
+    {
+      "path": "/f/b3iYs9L1MJ",
+      "viewport": "mobile 375×812",
+      "theme": "dark",
+      "status": 200,
+      "ms": 541,
+      "issues": [],
+      "shot": "shots/mobile-dark-f_b3iYs9L1MJ.png"
+    },
+    {
+      "path": "/dashboard/forms/b3iYs9L1MJ/setup",
+      "viewport": "mobile 375×812",
+      "theme": "dark",
+      "status": 200,
+      "ms": 578,
+      "issues": [],
+      "shot": "shots/mobile-dark-dashboard_forms_b3iYs9L1MJ_setup.png"
+    },
+    {
+      "path": "/dashboard/forms/b3iYs9L1MJ/settings",
+      "viewport": "mobile 375×812",
+      "theme": "dark",
+      "status": 200,
+      "ms": 585,
+      "issues": [],
+      "shot": "shots/mobile-dark-dashboard_forms_b3iYs9L1MJ_settings.png"
     },
     {
       "path": "/",
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 643,
+      "ms": 638,
       "issues": [],
       "shot": "shots/tablet-light-home.png"
     },
@@ -1209,7 +1245,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 567,
+      "ms": 562,
       "issues": [],
       "shot": "shots/tablet-light-docs.png"
     },
@@ -1227,7 +1263,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 674,
+      "ms": 666,
       "issues": [],
       "shot": "shots/tablet-light-dashboard.png"
     },
@@ -1236,7 +1272,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 568,
+      "ms": 569,
       "issues": [],
       "shot": "shots/tablet-light-dashboard_forms.png"
     },
@@ -1245,7 +1281,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 549,
+      "ms": 551,
       "issues": [],
       "shot": "shots/tablet-light-features.png"
     },
@@ -1254,7 +1290,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 551,
+      "ms": 549,
       "issues": [],
       "shot": "shots/tablet-light-pricing.png"
     },
@@ -1263,7 +1299,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 1059,
+      "ms": 1024,
       "issues": [],
       "shot": "shots/tablet-light-docs_api.png"
     },
@@ -1272,7 +1308,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 607,
+      "ms": 614,
       "issues": [],
       "shot": "shots/tablet-light-changelog.png"
     },
@@ -1281,7 +1317,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 630,
+      "ms": 624,
       "issues": [],
       "shot": "shots/tablet-light-signup.png"
     },
@@ -1290,7 +1326,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 563,
+      "ms": 561,
       "issues": [],
       "shot": "shots/tablet-light-docs_quickstart.png"
     },
@@ -1299,7 +1335,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 563,
+      "ms": 557,
       "issues": [],
       "shot": "shots/tablet-light-docs_mcp.png"
     },
@@ -1308,7 +1344,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 552,
+      "ms": 560,
       "issues": [],
       "shot": "shots/tablet-light-docs_integrations_apollo.png"
     },
@@ -1317,7 +1353,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 564,
+      "ms": 561,
       "issues": [],
       "shot": "shots/tablet-light-docs_integrations_clay.png"
     },
@@ -1326,7 +1362,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 561,
+      "ms": 544,
       "issues": [],
       "shot": "shots/tablet-light-docs_integrations_valyu.png"
     },
@@ -1335,7 +1371,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 627,
+      "ms": 611,
       "issues": [],
       "shot": "shots/tablet-light-docs_integrations_openai.png"
     },
@@ -1344,7 +1380,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 617,
+      "ms": 604,
       "issues": [],
       "shot": "shots/tablet-light-about.png"
     },
@@ -1353,7 +1389,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 621,
+      "ms": 624,
       "issues": [],
       "shot": "shots/tablet-light-login.png"
     },
@@ -1362,7 +1398,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 564,
+      "ms": 559,
       "issues": [],
       "shot": "shots/tablet-light-docs_dynamic_fields.png"
     },
@@ -1371,7 +1407,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 619,
+      "ms": 622,
       "issues": [],
       "shot": "shots/tablet-light-docs_spam.png"
     },
@@ -1380,7 +1416,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 574,
+      "ms": 566,
       "issues": [],
       "shot": "shots/tablet-light-docs_scheduling.png"
     },
@@ -1389,7 +1425,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 557,
+      "ms": 561,
       "issues": [],
       "shot": "shots/tablet-light-docs_enrichment.png"
     },
@@ -1398,7 +1434,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 554,
+      "ms": 551,
       "issues": [],
       "shot": "shots/tablet-light-docs_routing.png"
     },
@@ -1407,7 +1443,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 565,
+      "ms": 560,
       "issues": [],
       "shot": "shots/tablet-light-docs_integrations.png"
     },
@@ -1416,7 +1452,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 611,
+      "ms": 618,
       "issues": [],
       "shot": "shots/tablet-light-docs_integrations_openrouter.png"
     },
@@ -1425,16 +1461,34 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 623,
+      "ms": 612,
       "issues": [],
       "shot": "shots/tablet-light-docs_integrations_ai.png"
+    },
+    {
+      "path": "/docs/integrations/google",
+      "viewport": "tablet 768×1024",
+      "theme": "light",
+      "status": 200,
+      "ms": 561,
+      "issues": [],
+      "shot": "shots/tablet-light-docs_integrations_google.png"
+    },
+    {
+      "path": "/docs/integrations/microsoft",
+      "viewport": "tablet 768×1024",
+      "theme": "light",
+      "status": 200,
+      "ms": 553,
+      "issues": [],
+      "shot": "shots/tablet-light-docs_integrations_microsoft.png"
     },
     {
       "path": "/docs/api-keys",
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 559,
+      "ms": 548,
       "issues": [],
       "shot": "shots/tablet-light-docs_api_keys.png"
     },
@@ -1443,7 +1497,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 548,
+      "ms": 550,
       "issues": [],
       "shot": "shots/tablet-light-docs_rest_api.png"
     },
@@ -1461,7 +1515,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 560,
+      "ms": 553,
       "issues": [],
       "shot": "shots/tablet-light-docs_status.png"
     },
@@ -1470,7 +1524,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 606,
+      "ms": 603,
       "issues": [],
       "shot": "shots/tablet-light-dashboard_leads.png"
     },
@@ -1479,7 +1533,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 604,
+      "ms": 584,
       "issues": [],
       "shot": "shots/tablet-light-dashboard_routing.png"
     },
@@ -1488,7 +1542,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 604,
+      "ms": 601,
       "issues": [],
       "shot": "shots/tablet-light-dashboard_enrichment.png"
     },
@@ -1497,7 +1551,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 602,
+      "ms": 575,
       "issues": [],
       "shot": "shots/tablet-light-dashboard_integrations.png"
     },
@@ -1506,7 +1560,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 800,
+      "ms": 664,
       "issues": [],
       "shot": "shots/tablet-light-dashboard_webhooks.png"
     },
@@ -1515,7 +1569,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 574,
+      "ms": 576,
       "issues": [],
       "shot": "shots/tablet-light-dashboard_schedules.png"
     },
@@ -1524,7 +1578,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 615,
+      "ms": 618,
       "issues": [],
       "shot": "shots/tablet-light-dashboard_api_keys.png"
     },
@@ -1533,7 +1587,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 644,
+      "ms": 600,
       "issues": [],
       "shot": "shots/tablet-light-dashboard_health.png"
     },
@@ -1542,7 +1596,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 560,
+      "ms": 557,
       "issues": [],
       "shot": "shots/tablet-light-dashboard_qa.png"
     },
@@ -1551,7 +1605,7 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 627,
+      "ms": 588,
       "issues": [],
       "shot": "shots/tablet-light-dashboard_outbox.png"
     },
@@ -1560,232 +1614,232 @@
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 570,
+      "ms": 566,
       "issues": [],
       "shot": "shots/tablet-light-dashboard_settings.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ?s=sub_84AwZUV9x5DoZzqZxw",
+      "path": "/dashboard/forms/7O96Au6Bbr?s=sub_d4xACDgGy02NBSuRdj",
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 665,
+      "ms": 664,
       "issues": [],
-      "shot": "shots/tablet-light-dashboard_forms_DzPnDsHTAZ_s_sub_84AwZUV9x5DoZzqZxw.png"
+      "shot": "shots/tablet-light-dashboard_forms_7O96Au6Bbr_s_sub_d4xACDgGy02NBSuRdj.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj",
+      "path": "/dashboard/forms/OlKjjpVjac?s=sub_w5oVgPmCAfpumlWgi7",
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 592,
+      "ms": 666,
       "issues": [],
-      "shot": "shots/tablet-light-dashboard_forms_hgbHMmQsNj.png"
+      "shot": "shots/tablet-light-dashboard_forms_OlKjjpVjac_s_sub_w5oVgPmCAfpumlWgi7.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp",
+      "path": "/dashboard/forms/OOpTwAjRKa",
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 634,
+      "ms": 588,
       "issues": [],
-      "shot": "shots/tablet-light-dashboard_forms_ZtzkakqVJp.png"
+      "shot": "shots/tablet-light-dashboard_forms_OOpTwAjRKa.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT",
+      "path": "/dashboard/forms/OlKjjpVjac",
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 612,
+      "ms": 593,
       "issues": [],
-      "shot": "shots/tablet-light-dashboard_forms_LVYBpkKWBT.png"
+      "shot": "shots/tablet-light-dashboard_forms_OlKjjpVjac.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ",
+      "path": "/dashboard/forms/b3iYs9L1MJ",
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 609,
+      "ms": 604,
       "issues": [],
-      "shot": "shots/tablet-light-dashboard_forms_DzPnDsHTAZ.png"
+      "shot": "shots/tablet-light-dashboard_forms_b3iYs9L1MJ.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT?s=sub_9Mp4qbpdcYpPqHoYzJ",
+      "path": "/dashboard/forms/7O96Au6Bbr",
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 773,
+      "ms": 623,
       "issues": [],
-      "shot": "shots/tablet-light-dashboard_forms_LVYBpkKWBT_s_sub_9Mp4qbpdcYpPqHoYzJ.png"
+      "shot": "shots/tablet-light-dashboard_forms_7O96Au6Bbr.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp?s=sub_W6jUAp7BXuKm7APBne",
+      "path": "/dashboard/forms/b3iYs9L1MJ?s=sub_eWW1L0Fly1QKI61Iq9",
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 709,
+      "ms": 650,
       "issues": [],
-      "shot": "shots/tablet-light-dashboard_forms_ZtzkakqVJp_s_sub_W6jUAp7BXuKm7APBne.png"
+      "shot": "shots/tablet-light-dashboard_forms_b3iYs9L1MJ_s_sub_eWW1L0Fly1QKI61Iq9.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj?s=sub_Ug2QbhleUSdT70qMKf",
+      "path": "/dashboard/forms/OOpTwAjRKa?s=sub_FR2nEAWcYe3W0RmwZS",
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 626,
+      "ms": 663,
       "issues": [],
-      "shot": "shots/tablet-light-dashboard_forms_hgbHMmQsNj_s_sub_Ug2QbhleUSdT70qMKf.png"
+      "shot": "shots/tablet-light-dashboard_forms_OOpTwAjRKa_s_sub_FR2nEAWcYe3W0RmwZS.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ/automations",
+      "path": "/dashboard/forms/7O96Au6Bbr/automations",
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 579,
+      "ms": 581,
       "issues": [],
-      "shot": "shots/tablet-light-dashboard_forms_DzPnDsHTAZ_automations.png"
+      "shot": "shots/tablet-light-dashboard_forms_7O96Au6Bbr_automations.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT/automations",
-      "viewport": "tablet 768×1024",
-      "theme": "light",
-      "status": 200,
-      "ms": 577,
-      "issues": [],
-      "shot": "shots/tablet-light-dashboard_forms_LVYBpkKWBT_automations.png"
-    },
-    {
-      "path": "/f/DzPnDsHTAZ",
-      "viewport": "tablet 768×1024",
-      "theme": "light",
-      "status": 200,
-      "ms": 545,
-      "issues": [],
-      "shot": "shots/tablet-light-f_DzPnDsHTAZ.png"
-    },
-    {
-      "path": "/dashboard/forms/DzPnDsHTAZ/setup",
-      "viewport": "tablet 768×1024",
-      "theme": "light",
-      "status": 200,
-      "ms": 576,
-      "issues": [],
-      "shot": "shots/tablet-light-dashboard_forms_DzPnDsHTAZ_setup.png"
-    },
-    {
-      "path": "/dashboard/forms/DzPnDsHTAZ/settings",
-      "viewport": "tablet 768×1024",
-      "theme": "light",
-      "status": 200,
-      "ms": 603,
-      "issues": [],
-      "shot": "shots/tablet-light-dashboard_forms_DzPnDsHTAZ_settings.png"
-    },
-    {
-      "path": "/f/hgbHMmQsNj",
-      "viewport": "tablet 768×1024",
-      "theme": "light",
-      "status": 200,
-      "ms": 563,
-      "issues": [],
-      "shot": "shots/tablet-light-f_hgbHMmQsNj.png"
-    },
-    {
-      "path": "/dashboard/forms/hgbHMmQsNj/setup",
+      "path": "/dashboard/forms/b3iYs9L1MJ/automations",
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
       "ms": 575,
       "issues": [],
-      "shot": "shots/tablet-light-dashboard_forms_hgbHMmQsNj_setup.png"
+      "shot": "shots/tablet-light-dashboard_forms_b3iYs9L1MJ_automations.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj/settings",
+      "path": "/f/7O96Au6Bbr",
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 609,
+      "ms": 541,
       "issues": [],
-      "shot": "shots/tablet-light-dashboard_forms_hgbHMmQsNj_settings.png"
+      "shot": "shots/tablet-light-f_7O96Au6Bbr.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj/automations",
+      "path": "/dashboard/forms/7O96Au6Bbr/setup",
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 571,
+      "ms": 561,
       "issues": [],
-      "shot": "shots/tablet-light-dashboard_forms_hgbHMmQsNj_automations.png"
+      "shot": "shots/tablet-light-dashboard_forms_7O96Au6Bbr_setup.png"
     },
     {
-      "path": "/f/ZtzkakqVJp",
+      "path": "/dashboard/forms/7O96Au6Bbr/settings",
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 559,
+      "ms": 599,
       "issues": [],
-      "shot": "shots/tablet-light-f_ZtzkakqVJp.png"
+      "shot": "shots/tablet-light-dashboard_forms_7O96Au6Bbr_settings.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp/setup",
+      "path": "/f/OlKjjpVjac",
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 573,
+      "ms": 550,
       "issues": [],
-      "shot": "shots/tablet-light-dashboard_forms_ZtzkakqVJp_setup.png"
+      "shot": "shots/tablet-light-f_OlKjjpVjac.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp/settings",
+      "path": "/dashboard/forms/OlKjjpVjac/setup",
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 609,
+      "ms": 566,
       "issues": [],
-      "shot": "shots/tablet-light-dashboard_forms_ZtzkakqVJp_settings.png"
+      "shot": "shots/tablet-light-dashboard_forms_OlKjjpVjac_setup.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp/automations",
+      "path": "/dashboard/forms/OlKjjpVjac/settings",
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 572,
+      "ms": 603,
       "issues": [],
-      "shot": "shots/tablet-light-dashboard_forms_ZtzkakqVJp_automations.png"
+      "shot": "shots/tablet-light-dashboard_forms_OlKjjpVjac_settings.png"
     },
     {
-      "path": "/f/LVYBpkKWBT",
+      "path": "/dashboard/forms/OlKjjpVjac/automations",
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 548,
+      "ms": 569,
       "issues": [],
-      "shot": "shots/tablet-light-f_LVYBpkKWBT.png"
+      "shot": "shots/tablet-light-dashboard_forms_OlKjjpVjac_automations.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT/setup",
+      "path": "/f/OOpTwAjRKa",
+      "viewport": "tablet 768×1024",
+      "theme": "light",
+      "status": 200,
+      "ms": 540,
+      "issues": [],
+      "shot": "shots/tablet-light-f_OOpTwAjRKa.png"
+    },
+    {
+      "path": "/dashboard/forms/OOpTwAjRKa/setup",
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
       "ms": 564,
       "issues": [],
-      "shot": "shots/tablet-light-dashboard_forms_LVYBpkKWBT_setup.png"
+      "shot": "shots/tablet-light-dashboard_forms_OOpTwAjRKa_setup.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT/settings",
+      "path": "/dashboard/forms/OOpTwAjRKa/settings",
       "viewport": "tablet 768×1024",
       "theme": "light",
       "status": 200,
-      "ms": 586,
+      "ms": 598,
       "issues": [],
-      "shot": "shots/tablet-light-dashboard_forms_LVYBpkKWBT_settings.png"
+      "shot": "shots/tablet-light-dashboard_forms_OOpTwAjRKa_settings.png"
+    },
+    {
+      "path": "/dashboard/forms/OOpTwAjRKa/automations",
+      "viewport": "tablet 768×1024",
+      "theme": "light",
+      "status": 200,
+      "ms": 575,
+      "issues": [],
+      "shot": "shots/tablet-light-dashboard_forms_OOpTwAjRKa_automations.png"
+    },
+    {
+      "path": "/f/b3iYs9L1MJ",
+      "viewport": "tablet 768×1024",
+      "theme": "light",
+      "status": 200,
+      "ms": 550,
+      "issues": [],
+      "shot": "shots/tablet-light-f_b3iYs9L1MJ.png"
+    },
+    {
+      "path": "/dashboard/forms/b3iYs9L1MJ/setup",
+      "viewport": "tablet 768×1024",
+      "theme": "light",
+      "status": 200,
+      "ms": 561,
+      "issues": [],
+      "shot": "shots/tablet-light-dashboard_forms_b3iYs9L1MJ_setup.png"
+    },
+    {
+      "path": "/dashboard/forms/b3iYs9L1MJ/settings",
+      "viewport": "tablet 768×1024",
+      "theme": "light",
+      "status": 200,
+      "ms": 580,
+      "issues": [],
+      "shot": "shots/tablet-light-dashboard_forms_b3iYs9L1MJ_settings.png"
     },
     {
       "path": "/",
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 636,
+      "ms": 622,
       "issues": [],
       "shot": "shots/tablet-dark-home.png"
     },
@@ -1794,7 +1848,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 574,
+      "ms": 564,
       "issues": [],
       "shot": "shots/tablet-dark-docs.png"
     },
@@ -1803,7 +1857,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 596,
+      "ms": 578,
       "issues": [],
       "shot": "shots/tablet-dark-status.png"
     },
@@ -1812,7 +1866,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 730,
+      "ms": 663,
       "issues": [],
       "shot": "shots/tablet-dark-dashboard.png"
     },
@@ -1821,7 +1875,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 585,
+      "ms": 570,
       "issues": [],
       "shot": "shots/tablet-dark-dashboard_forms.png"
     },
@@ -1830,7 +1884,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 552,
+      "ms": 539,
       "issues": [],
       "shot": "shots/tablet-dark-features.png"
     },
@@ -1839,7 +1893,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 561,
+      "ms": 549,
       "issues": [],
       "shot": "shots/tablet-dark-pricing.png"
     },
@@ -1848,7 +1902,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 1063,
+      "ms": 1009,
       "issues": [],
       "shot": "shots/tablet-dark-docs_api.png"
     },
@@ -1857,7 +1911,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 610,
+      "ms": 613,
       "issues": [],
       "shot": "shots/tablet-dark-changelog.png"
     },
@@ -1866,7 +1920,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 636,
+      "ms": 627,
       "issues": [],
       "shot": "shots/tablet-dark-signup.png"
     },
@@ -1875,7 +1929,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 565,
+      "ms": 557,
       "issues": [],
       "shot": "shots/tablet-dark-docs_quickstart.png"
     },
@@ -1884,7 +1938,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 559,
+      "ms": 551,
       "issues": [],
       "shot": "shots/tablet-dark-docs_mcp.png"
     },
@@ -1893,7 +1947,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 563,
+      "ms": 556,
       "issues": [],
       "shot": "shots/tablet-dark-docs_integrations_apollo.png"
     },
@@ -1902,7 +1956,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 549,
+      "ms": 561,
       "issues": [],
       "shot": "shots/tablet-dark-docs_integrations_clay.png"
     },
@@ -1911,7 +1965,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 559,
+      "ms": 545,
       "issues": [],
       "shot": "shots/tablet-dark-docs_integrations_valyu.png"
     },
@@ -1920,7 +1974,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 617,
+      "ms": 612,
       "issues": [],
       "shot": "shots/tablet-dark-docs_integrations_openai.png"
     },
@@ -1929,7 +1983,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 616,
+      "ms": 598,
       "issues": [],
       "shot": "shots/tablet-dark-about.png"
     },
@@ -1938,7 +1992,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 613,
+      "ms": 611,
       "issues": [],
       "shot": "shots/tablet-dark-login.png"
     },
@@ -1947,7 +2001,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 565,
+      "ms": 566,
       "issues": [],
       "shot": "shots/tablet-dark-docs_dynamic_fields.png"
     },
@@ -1956,7 +2010,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 646,
+      "ms": 628,
       "issues": [],
       "shot": "shots/tablet-dark-docs_spam.png"
     },
@@ -1965,7 +2019,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 569,
+      "ms": 571,
       "issues": [],
       "shot": "shots/tablet-dark-docs_scheduling.png"
     },
@@ -1974,7 +2028,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 547,
+      "ms": 548,
       "issues": [],
       "shot": "shots/tablet-dark-docs_enrichment.png"
     },
@@ -1983,7 +2037,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 556,
+      "ms": 557,
       "issues": [],
       "shot": "shots/tablet-dark-docs_routing.png"
     },
@@ -1992,7 +2046,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 565,
+      "ms": 549,
       "issues": [],
       "shot": "shots/tablet-dark-docs_integrations.png"
     },
@@ -2001,7 +2055,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 615,
+      "ms": 620,
       "issues": [],
       "shot": "shots/tablet-dark-docs_integrations_openrouter.png"
     },
@@ -2010,16 +2064,34 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 613,
+      "ms": 607,
       "issues": [],
       "shot": "shots/tablet-dark-docs_integrations_ai.png"
+    },
+    {
+      "path": "/docs/integrations/google",
+      "viewport": "tablet 768×1024",
+      "theme": "dark",
+      "status": 200,
+      "ms": 552,
+      "issues": [],
+      "shot": "shots/tablet-dark-docs_integrations_google.png"
+    },
+    {
+      "path": "/docs/integrations/microsoft",
+      "viewport": "tablet 768×1024",
+      "theme": "dark",
+      "status": 200,
+      "ms": 560,
+      "issues": [],
+      "shot": "shots/tablet-dark-docs_integrations_microsoft.png"
     },
     {
       "path": "/docs/api-keys",
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 552,
+      "ms": 558,
       "issues": [],
       "shot": "shots/tablet-dark-docs_api_keys.png"
     },
@@ -2028,7 +2100,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 552,
+      "ms": 551,
       "issues": [],
       "shot": "shots/tablet-dark-docs_rest_api.png"
     },
@@ -2037,7 +2109,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 557,
+      "ms": 542,
       "issues": [],
       "shot": "shots/tablet-dark-docs_webhooks.png"
     },
@@ -2046,7 +2118,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 564,
+      "ms": 551,
       "issues": [],
       "shot": "shots/tablet-dark-docs_status.png"
     },
@@ -2055,7 +2127,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 607,
+      "ms": 600,
       "issues": [],
       "shot": "shots/tablet-dark-dashboard_leads.png"
     },
@@ -2064,7 +2136,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 603,
+      "ms": 582,
       "issues": [],
       "shot": "shots/tablet-dark-dashboard_routing.png"
     },
@@ -2073,7 +2145,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 616,
+      "ms": 591,
       "issues": [],
       "shot": "shots/tablet-dark-dashboard_enrichment.png"
     },
@@ -2082,7 +2154,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 598,
+      "ms": 575,
       "issues": [],
       "shot": "shots/tablet-dark-dashboard_integrations.png"
     },
@@ -2091,7 +2163,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 668,
+      "ms": 652,
       "issues": [],
       "shot": "shots/tablet-dark-dashboard_webhooks.png"
     },
@@ -2100,7 +2172,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 592,
+      "ms": 577,
       "issues": [],
       "shot": "shots/tablet-dark-dashboard_schedules.png"
     },
@@ -2109,7 +2181,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 614,
+      "ms": 613,
       "issues": [],
       "shot": "shots/tablet-dark-dashboard_api_keys.png"
     },
@@ -2118,7 +2190,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 603,
+      "ms": 598,
       "issues": [],
       "shot": "shots/tablet-dark-dashboard_health.png"
     },
@@ -2127,7 +2199,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 550,
+      "ms": 557,
       "issues": [],
       "shot": "shots/tablet-dark-dashboard_qa.png"
     },
@@ -2136,7 +2208,7 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 596,
+      "ms": 603,
       "issues": [],
       "shot": "shots/tablet-dark-dashboard_outbox.png"
     },
@@ -2145,232 +2217,232 @@
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 567,
+      "ms": 565,
       "issues": [],
       "shot": "shots/tablet-dark-dashboard_settings.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ?s=sub_84AwZUV9x5DoZzqZxw",
+      "path": "/dashboard/forms/7O96Au6Bbr?s=sub_d4xACDgGy02NBSuRdj",
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 667,
+      "ms": 666,
       "issues": [],
-      "shot": "shots/tablet-dark-dashboard_forms_DzPnDsHTAZ_s_sub_84AwZUV9x5DoZzqZxw.png"
+      "shot": "shots/tablet-dark-dashboard_forms_7O96Au6Bbr_s_sub_d4xACDgGy02NBSuRdj.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj",
+      "path": "/dashboard/forms/OlKjjpVjac?s=sub_w5oVgPmCAfpumlWgi7",
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 599,
+      "ms": 647,
       "issues": [],
-      "shot": "shots/tablet-dark-dashboard_forms_hgbHMmQsNj.png"
+      "shot": "shots/tablet-dark-dashboard_forms_OlKjjpVjac_s_sub_w5oVgPmCAfpumlWgi7.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp",
+      "path": "/dashboard/forms/OOpTwAjRKa",
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 607,
+      "ms": 586,
       "issues": [],
-      "shot": "shots/tablet-dark-dashboard_forms_ZtzkakqVJp.png"
+      "shot": "shots/tablet-dark-dashboard_forms_OOpTwAjRKa.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT",
+      "path": "/dashboard/forms/OlKjjpVjac",
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 605,
+      "ms": 610,
       "issues": [],
-      "shot": "shots/tablet-dark-dashboard_forms_LVYBpkKWBT.png"
+      "shot": "shots/tablet-dark-dashboard_forms_OlKjjpVjac.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ",
+      "path": "/dashboard/forms/b3iYs9L1MJ",
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 620,
+      "ms": 616,
       "issues": [],
-      "shot": "shots/tablet-dark-dashboard_forms_DzPnDsHTAZ.png"
+      "shot": "shots/tablet-dark-dashboard_forms_b3iYs9L1MJ.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT?s=sub_9Mp4qbpdcYpPqHoYzJ",
+      "path": "/dashboard/forms/7O96Au6Bbr",
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 674,
+      "ms": 622,
       "issues": [],
-      "shot": "shots/tablet-dark-dashboard_forms_LVYBpkKWBT_s_sub_9Mp4qbpdcYpPqHoYzJ.png"
+      "shot": "shots/tablet-dark-dashboard_forms_7O96Au6Bbr.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp?s=sub_W6jUAp7BXuKm7APBne",
+      "path": "/dashboard/forms/b3iYs9L1MJ?s=sub_eWW1L0Fly1QKI61Iq9",
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 671,
+      "ms": 740,
       "issues": [],
-      "shot": "shots/tablet-dark-dashboard_forms_ZtzkakqVJp_s_sub_W6jUAp7BXuKm7APBne.png"
+      "shot": "shots/tablet-dark-dashboard_forms_b3iYs9L1MJ_s_sub_eWW1L0Fly1QKI61Iq9.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj?s=sub_Ug2QbhleUSdT70qMKf",
+      "path": "/dashboard/forms/OOpTwAjRKa?s=sub_FR2nEAWcYe3W0RmwZS",
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 629,
+      "ms": 614,
       "issues": [],
-      "shot": "shots/tablet-dark-dashboard_forms_hgbHMmQsNj_s_sub_Ug2QbhleUSdT70qMKf.png"
+      "shot": "shots/tablet-dark-dashboard_forms_OOpTwAjRKa_s_sub_FR2nEAWcYe3W0RmwZS.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ/automations",
-      "viewport": "tablet 768×1024",
-      "theme": "dark",
-      "status": 200,
-      "ms": 573,
-      "issues": [],
-      "shot": "shots/tablet-dark-dashboard_forms_DzPnDsHTAZ_automations.png"
-    },
-    {
-      "path": "/dashboard/forms/LVYBpkKWBT/automations",
-      "viewport": "tablet 768×1024",
-      "theme": "dark",
-      "status": 200,
-      "ms": 571,
-      "issues": [],
-      "shot": "shots/tablet-dark-dashboard_forms_LVYBpkKWBT_automations.png"
-    },
-    {
-      "path": "/f/DzPnDsHTAZ",
-      "viewport": "tablet 768×1024",
-      "theme": "dark",
-      "status": 200,
-      "ms": 546,
-      "issues": [],
-      "shot": "shots/tablet-dark-f_DzPnDsHTAZ.png"
-    },
-    {
-      "path": "/dashboard/forms/DzPnDsHTAZ/setup",
-      "viewport": "tablet 768×1024",
-      "theme": "dark",
-      "status": 200,
-      "ms": 573,
-      "issues": [],
-      "shot": "shots/tablet-dark-dashboard_forms_DzPnDsHTAZ_setup.png"
-    },
-    {
-      "path": "/dashboard/forms/DzPnDsHTAZ/settings",
-      "viewport": "tablet 768×1024",
-      "theme": "dark",
-      "status": 200,
-      "ms": 605,
-      "issues": [],
-      "shot": "shots/tablet-dark-dashboard_forms_DzPnDsHTAZ_settings.png"
-    },
-    {
-      "path": "/f/hgbHMmQsNj",
-      "viewport": "tablet 768×1024",
-      "theme": "dark",
-      "status": 200,
-      "ms": 546,
-      "issues": [],
-      "shot": "shots/tablet-dark-f_hgbHMmQsNj.png"
-    },
-    {
-      "path": "/dashboard/forms/hgbHMmQsNj/setup",
-      "viewport": "tablet 768×1024",
-      "theme": "dark",
-      "status": 200,
-      "ms": 565,
-      "issues": [],
-      "shot": "shots/tablet-dark-dashboard_forms_hgbHMmQsNj_setup.png"
-    },
-    {
-      "path": "/dashboard/forms/hgbHMmQsNj/settings",
-      "viewport": "tablet 768×1024",
-      "theme": "dark",
-      "status": 200,
-      "ms": 588,
-      "issues": [],
-      "shot": "shots/tablet-dark-dashboard_forms_hgbHMmQsNj_settings.png"
-    },
-    {
-      "path": "/dashboard/forms/hgbHMmQsNj/automations",
-      "viewport": "tablet 768×1024",
-      "theme": "dark",
-      "status": 200,
-      "ms": 582,
-      "issues": [],
-      "shot": "shots/tablet-dark-dashboard_forms_hgbHMmQsNj_automations.png"
-    },
-    {
-      "path": "/f/ZtzkakqVJp",
-      "viewport": "tablet 768×1024",
-      "theme": "dark",
-      "status": 200,
-      "ms": 548,
-      "issues": [],
-      "shot": "shots/tablet-dark-f_ZtzkakqVJp.png"
-    },
-    {
-      "path": "/dashboard/forms/ZtzkakqVJp/setup",
+      "path": "/dashboard/forms/7O96Au6Bbr/automations",
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
       "ms": 575,
       "issues": [],
-      "shot": "shots/tablet-dark-dashboard_forms_ZtzkakqVJp_setup.png"
+      "shot": "shots/tablet-dark-dashboard_forms_7O96Au6Bbr_automations.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp/settings",
+      "path": "/dashboard/forms/b3iYs9L1MJ/automations",
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 598,
+      "ms": 570,
       "issues": [],
-      "shot": "shots/tablet-dark-dashboard_forms_ZtzkakqVJp_settings.png"
+      "shot": "shots/tablet-dark-dashboard_forms_b3iYs9L1MJ_automations.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp/automations",
+      "path": "/f/7O96Au6Bbr",
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 649,
+      "ms": 547,
       "issues": [],
-      "shot": "shots/tablet-dark-dashboard_forms_ZtzkakqVJp_automations.png"
+      "shot": "shots/tablet-dark-f_7O96Au6Bbr.png"
     },
     {
-      "path": "/f/LVYBpkKWBT",
+      "path": "/dashboard/forms/7O96Au6Bbr/setup",
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 544,
+      "ms": 563,
       "issues": [],
-      "shot": "shots/tablet-dark-f_LVYBpkKWBT.png"
+      "shot": "shots/tablet-dark-dashboard_forms_7O96Au6Bbr_setup.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT/setup",
+      "path": "/dashboard/forms/7O96Au6Bbr/settings",
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 564,
+      "ms": 600,
       "issues": [],
-      "shot": "shots/tablet-dark-dashboard_forms_LVYBpkKWBT_setup.png"
+      "shot": "shots/tablet-dark-dashboard_forms_7O96Au6Bbr_settings.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT/settings",
+      "path": "/f/OlKjjpVjac",
       "viewport": "tablet 768×1024",
       "theme": "dark",
       "status": 200,
-      "ms": 588,
+      "ms": 558,
       "issues": [],
-      "shot": "shots/tablet-dark-dashboard_forms_LVYBpkKWBT_settings.png"
+      "shot": "shots/tablet-dark-f_OlKjjpVjac.png"
+    },
+    {
+      "path": "/dashboard/forms/OlKjjpVjac/setup",
+      "viewport": "tablet 768×1024",
+      "theme": "dark",
+      "status": 200,
+      "ms": 571,
+      "issues": [],
+      "shot": "shots/tablet-dark-dashboard_forms_OlKjjpVjac_setup.png"
+    },
+    {
+      "path": "/dashboard/forms/OlKjjpVjac/settings",
+      "viewport": "tablet 768×1024",
+      "theme": "dark",
+      "status": 200,
+      "ms": 607,
+      "issues": [],
+      "shot": "shots/tablet-dark-dashboard_forms_OlKjjpVjac_settings.png"
+    },
+    {
+      "path": "/dashboard/forms/OlKjjpVjac/automations",
+      "viewport": "tablet 768×1024",
+      "theme": "dark",
+      "status": 200,
+      "ms": 576,
+      "issues": [],
+      "shot": "shots/tablet-dark-dashboard_forms_OlKjjpVjac_automations.png"
+    },
+    {
+      "path": "/f/OOpTwAjRKa",
+      "viewport": "tablet 768×1024",
+      "theme": "dark",
+      "status": 200,
+      "ms": 550,
+      "issues": [],
+      "shot": "shots/tablet-dark-f_OOpTwAjRKa.png"
+    },
+    {
+      "path": "/dashboard/forms/OOpTwAjRKa/setup",
+      "viewport": "tablet 768×1024",
+      "theme": "dark",
+      "status": 200,
+      "ms": 563,
+      "issues": [],
+      "shot": "shots/tablet-dark-dashboard_forms_OOpTwAjRKa_setup.png"
+    },
+    {
+      "path": "/dashboard/forms/OOpTwAjRKa/settings",
+      "viewport": "tablet 768×1024",
+      "theme": "dark",
+      "status": 200,
+      "ms": 584,
+      "issues": [],
+      "shot": "shots/tablet-dark-dashboard_forms_OOpTwAjRKa_settings.png"
+    },
+    {
+      "path": "/dashboard/forms/OOpTwAjRKa/automations",
+      "viewport": "tablet 768×1024",
+      "theme": "dark",
+      "status": 200,
+      "ms": 568,
+      "issues": [],
+      "shot": "shots/tablet-dark-dashboard_forms_OOpTwAjRKa_automations.png"
+    },
+    {
+      "path": "/f/b3iYs9L1MJ",
+      "viewport": "tablet 768×1024",
+      "theme": "dark",
+      "status": 200,
+      "ms": 539,
+      "issues": [],
+      "shot": "shots/tablet-dark-f_b3iYs9L1MJ.png"
+    },
+    {
+      "path": "/dashboard/forms/b3iYs9L1MJ/setup",
+      "viewport": "tablet 768×1024",
+      "theme": "dark",
+      "status": 200,
+      "ms": 573,
+      "issues": [],
+      "shot": "shots/tablet-dark-dashboard_forms_b3iYs9L1MJ_setup.png"
+    },
+    {
+      "path": "/dashboard/forms/b3iYs9L1MJ/settings",
+      "viewport": "tablet 768×1024",
+      "theme": "dark",
+      "status": 200,
+      "ms": 599,
+      "issues": [],
+      "shot": "shots/tablet-dark-dashboard_forms_b3iYs9L1MJ_settings.png"
     },
     {
       "path": "/",
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 692,
+      "ms": 685,
       "issues": [],
       "shot": "shots/laptop-light-home.png"
     },
@@ -2379,7 +2451,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 620,
+      "ms": 632,
       "issues": [],
       "shot": "shots/laptop-light-docs.png"
     },
@@ -2388,7 +2460,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 666,
+      "ms": 630,
       "issues": [],
       "shot": "shots/laptop-light-status.png"
     },
@@ -2397,7 +2469,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 707,
+      "ms": 706,
       "issues": [],
       "shot": "shots/laptop-light-dashboard.png"
     },
@@ -2406,7 +2478,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 617,
+      "ms": 621,
       "issues": [],
       "shot": "shots/laptop-light-dashboard_forms.png"
     },
@@ -2415,7 +2487,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 609,
+      "ms": 598,
       "issues": [],
       "shot": "shots/laptop-light-features.png"
     },
@@ -2424,7 +2496,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 605,
+      "ms": 598,
       "issues": [],
       "shot": "shots/laptop-light-pricing.png"
     },
@@ -2433,7 +2505,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 1031,
+      "ms": 1042,
       "issues": [],
       "shot": "shots/laptop-light-docs_api.png"
     },
@@ -2442,7 +2514,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 616,
+      "ms": 596,
       "issues": [],
       "shot": "shots/laptop-light-changelog.png"
     },
@@ -2451,7 +2523,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 681,
+      "ms": 664,
       "issues": [],
       "shot": "shots/laptop-light-signup.png"
     },
@@ -2460,7 +2532,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 622,
+      "ms": 619,
       "issues": [],
       "shot": "shots/laptop-light-docs_quickstart.png"
     },
@@ -2469,7 +2541,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 612,
+      "ms": 606,
       "issues": [],
       "shot": "shots/laptop-light-docs_mcp.png"
     },
@@ -2478,7 +2550,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 615,
+      "ms": 606,
       "issues": [],
       "shot": "shots/laptop-light-docs_integrations_apollo.png"
     },
@@ -2487,7 +2559,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 621,
+      "ms": 607,
       "issues": [],
       "shot": "shots/laptop-light-docs_integrations_clay.png"
     },
@@ -2496,7 +2568,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 610,
+      "ms": 614,
       "issues": [],
       "shot": "shots/laptop-light-docs_integrations_valyu.png"
     },
@@ -2505,7 +2577,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 611,
+      "ms": 604,
       "issues": [],
       "shot": "shots/laptop-light-docs_integrations_openai.png"
     },
@@ -2514,7 +2586,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 608,
+      "ms": 596,
       "issues": [],
       "shot": "shots/laptop-light-about.png"
     },
@@ -2523,7 +2595,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 667,
+      "ms": 678,
       "issues": [],
       "shot": "shots/laptop-light-login.png"
     },
@@ -2532,7 +2604,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 610,
+      "ms": 629,
       "issues": [],
       "shot": "shots/laptop-light-docs_dynamic_fields.png"
     },
@@ -2541,7 +2613,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 604,
+      "ms": 611,
       "issues": [],
       "shot": "shots/laptop-light-docs_spam.png"
     },
@@ -2550,7 +2622,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 608,
+      "ms": 610,
       "issues": [],
       "shot": "shots/laptop-light-docs_scheduling.png"
     },
@@ -2559,7 +2631,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 628,
+      "ms": 607,
       "issues": [],
       "shot": "shots/laptop-light-docs_enrichment.png"
     },
@@ -2568,7 +2640,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 616,
+      "ms": 605,
       "issues": [],
       "shot": "shots/laptop-light-docs_routing.png"
     },
@@ -2577,7 +2649,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 611,
+      "ms": 612,
       "issues": [],
       "shot": "shots/laptop-light-docs_integrations.png"
     },
@@ -2586,7 +2658,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 622,
+      "ms": 606,
       "issues": [],
       "shot": "shots/laptop-light-docs_integrations_openrouter.png"
     },
@@ -2595,16 +2667,34 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 612,
+      "ms": 603,
       "issues": [],
       "shot": "shots/laptop-light-docs_integrations_ai.png"
+    },
+    {
+      "path": "/docs/integrations/google",
+      "viewport": "laptop 1280×800",
+      "theme": "light",
+      "status": 200,
+      "ms": 612,
+      "issues": [],
+      "shot": "shots/laptop-light-docs_integrations_google.png"
+    },
+    {
+      "path": "/docs/integrations/microsoft",
+      "viewport": "laptop 1280×800",
+      "theme": "light",
+      "status": 200,
+      "ms": 614,
+      "issues": [],
+      "shot": "shots/laptop-light-docs_integrations_microsoft.png"
     },
     {
       "path": "/docs/api-keys",
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 612,
+      "ms": 607,
       "issues": [],
       "shot": "shots/laptop-light-docs_api_keys.png"
     },
@@ -2613,7 +2703,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 616,
+      "ms": 605,
       "issues": [],
       "shot": "shots/laptop-light-docs_rest_api.png"
     },
@@ -2622,7 +2712,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 615,
+      "ms": 603,
       "issues": [],
       "shot": "shots/laptop-light-docs_webhooks.png"
     },
@@ -2640,7 +2730,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 671,
+      "ms": 674,
       "issues": [],
       "shot": "shots/laptop-light-dashboard_leads.png"
     },
@@ -2649,7 +2739,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 658,
+      "ms": 666,
       "issues": [],
       "shot": "shots/laptop-light-dashboard_routing.png"
     },
@@ -2658,7 +2748,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 651,
+      "ms": 653,
       "issues": [],
       "shot": "shots/laptop-light-dashboard_enrichment.png"
     },
@@ -2667,7 +2757,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 648,
+      "ms": 646,
       "issues": [],
       "shot": "shots/laptop-light-dashboard_integrations.png"
     },
@@ -2676,7 +2766,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 727,
+      "ms": 712,
       "issues": [],
       "shot": "shots/laptop-light-dashboard_webhooks.png"
     },
@@ -2685,7 +2775,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 620,
+      "ms": 634,
       "issues": [],
       "shot": "shots/laptop-light-dashboard_schedules.png"
     },
@@ -2694,7 +2784,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 635,
+      "ms": 634,
       "issues": [],
       "shot": "shots/laptop-light-dashboard_api_keys.png"
     },
@@ -2703,7 +2793,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 673,
+      "ms": 675,
       "issues": [],
       "shot": "shots/laptop-light-dashboard_health.png"
     },
@@ -2712,7 +2802,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 615,
+      "ms": 634,
       "issues": [],
       "shot": "shots/laptop-light-dashboard_qa.png"
     },
@@ -2721,7 +2811,7 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 684,
+      "ms": 693,
       "issues": [],
       "shot": "shots/laptop-light-dashboard_outbox.png"
     },
@@ -2730,232 +2820,238 @@
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 640,
+      "ms": 632,
       "issues": [],
       "shot": "shots/laptop-light-dashboard_settings.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ?s=sub_84AwZUV9x5DoZzqZxw",
+      "path": "/dashboard/forms/7O96Au6Bbr?s=sub_d4xACDgGy02NBSuRdj",
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 704,
-      "issues": [],
-      "shot": "shots/laptop-light-dashboard_forms_DzPnDsHTAZ_s_sub_84AwZUV9x5DoZzqZxw.png"
+      "ms": 758,
+      "issues": [
+        {
+          "kind": "pageerror",
+          "severity": "error",
+          "message": "Minified React error #418; visit https://react.dev/errors/418?args[]=text&args[]= for the full message or use the non-minified dev environment for full errors and additional helpful warnings."
+        }
+      ],
+      "shot": "shots/laptop-light-dashboard_forms_7O96Au6Bbr_s_sub_d4xACDgGy02NBSuRdj.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj",
+      "path": "/dashboard/forms/OlKjjpVjac?s=sub_w5oVgPmCAfpumlWgi7",
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 644,
+      "ms": 710,
       "issues": [],
-      "shot": "shots/laptop-light-dashboard_forms_hgbHMmQsNj.png"
+      "shot": "shots/laptop-light-dashboard_forms_OlKjjpVjac_s_sub_w5oVgPmCAfpumlWgi7.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp",
-      "viewport": "laptop 1280×800",
-      "theme": "light",
-      "status": 200,
-      "ms": 675,
-      "issues": [],
-      "shot": "shots/laptop-light-dashboard_forms_ZtzkakqVJp.png"
-    },
-    {
-      "path": "/dashboard/forms/LVYBpkKWBT",
-      "viewport": "laptop 1280×800",
-      "theme": "light",
-      "status": 200,
-      "ms": 669,
-      "issues": [],
-      "shot": "shots/laptop-light-dashboard_forms_LVYBpkKWBT.png"
-    },
-    {
-      "path": "/dashboard/forms/DzPnDsHTAZ",
-      "viewport": "laptop 1280×800",
-      "theme": "light",
-      "status": 200,
-      "ms": 657,
-      "issues": [],
-      "shot": "shots/laptop-light-dashboard_forms_DzPnDsHTAZ.png"
-    },
-    {
-      "path": "/dashboard/forms/LVYBpkKWBT?s=sub_9Mp4qbpdcYpPqHoYzJ",
-      "viewport": "laptop 1280×800",
-      "theme": "light",
-      "status": 200,
-      "ms": 684,
-      "issues": [],
-      "shot": "shots/laptop-light-dashboard_forms_LVYBpkKWBT_s_sub_9Mp4qbpdcYpPqHoYzJ.png"
-    },
-    {
-      "path": "/dashboard/forms/ZtzkakqVJp?s=sub_W6jUAp7BXuKm7APBne",
-      "viewport": "laptop 1280×800",
-      "theme": "light",
-      "status": 200,
-      "ms": 695,
-      "issues": [],
-      "shot": "shots/laptop-light-dashboard_forms_ZtzkakqVJp_s_sub_W6jUAp7BXuKm7APBne.png"
-    },
-    {
-      "path": "/dashboard/forms/hgbHMmQsNj?s=sub_Ug2QbhleUSdT70qMKf",
-      "viewport": "laptop 1280×800",
-      "theme": "light",
-      "status": 200,
-      "ms": 671,
-      "issues": [],
-      "shot": "shots/laptop-light-dashboard_forms_hgbHMmQsNj_s_sub_Ug2QbhleUSdT70qMKf.png"
-    },
-    {
-      "path": "/dashboard/forms/DzPnDsHTAZ/automations",
-      "viewport": "laptop 1280×800",
-      "theme": "light",
-      "status": 200,
-      "ms": 636,
-      "issues": [],
-      "shot": "shots/laptop-light-dashboard_forms_DzPnDsHTAZ_automations.png"
-    },
-    {
-      "path": "/dashboard/forms/LVYBpkKWBT/automations",
-      "viewport": "laptop 1280×800",
-      "theme": "light",
-      "status": 200,
-      "ms": 630,
-      "issues": [],
-      "shot": "shots/laptop-light-dashboard_forms_LVYBpkKWBT_automations.png"
-    },
-    {
-      "path": "/f/DzPnDsHTAZ",
-      "viewport": "laptop 1280×800",
-      "theme": "light",
-      "status": 200,
-      "ms": 541,
-      "issues": [],
-      "shot": "shots/laptop-light-f_DzPnDsHTAZ.png"
-    },
-    {
-      "path": "/dashboard/forms/DzPnDsHTAZ/setup",
-      "viewport": "laptop 1280×800",
-      "theme": "light",
-      "status": 200,
-      "ms": 630,
-      "issues": [],
-      "shot": "shots/laptop-light-dashboard_forms_DzPnDsHTAZ_setup.png"
-    },
-    {
-      "path": "/dashboard/forms/DzPnDsHTAZ/settings",
+      "path": "/dashboard/forms/OOpTwAjRKa",
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
       "ms": 656,
       "issues": [],
-      "shot": "shots/laptop-light-dashboard_forms_DzPnDsHTAZ_settings.png"
+      "shot": "shots/laptop-light-dashboard_forms_OOpTwAjRKa.png"
     },
     {
-      "path": "/f/hgbHMmQsNj",
+      "path": "/dashboard/forms/OlKjjpVjac",
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 566,
+      "ms": 674,
       "issues": [],
-      "shot": "shots/laptop-light-f_hgbHMmQsNj.png"
+      "shot": "shots/laptop-light-dashboard_forms_OlKjjpVjac.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj/setup",
+      "path": "/dashboard/forms/b3iYs9L1MJ",
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 630,
+      "ms": 673,
       "issues": [],
-      "shot": "shots/laptop-light-dashboard_forms_hgbHMmQsNj_setup.png"
+      "shot": "shots/laptop-light-dashboard_forms_b3iYs9L1MJ.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj/settings",
+      "path": "/dashboard/forms/7O96Au6Bbr",
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 657,
+      "ms": 669,
       "issues": [],
-      "shot": "shots/laptop-light-dashboard_forms_hgbHMmQsNj_settings.png"
+      "shot": "shots/laptop-light-dashboard_forms_7O96Au6Bbr.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj/automations",
+      "path": "/dashboard/forms/b3iYs9L1MJ?s=sub_eWW1L0Fly1QKI61Iq9",
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 625,
+      "ms": 705,
       "issues": [],
-      "shot": "shots/laptop-light-dashboard_forms_hgbHMmQsNj_automations.png"
+      "shot": "shots/laptop-light-dashboard_forms_b3iYs9L1MJ_s_sub_eWW1L0Fly1QKI61Iq9.png"
     },
     {
-      "path": "/f/ZtzkakqVJp",
+      "path": "/dashboard/forms/OOpTwAjRKa?s=sub_FR2nEAWcYe3W0RmwZS",
+      "viewport": "laptop 1280×800",
+      "theme": "light",
+      "status": 200,
+      "ms": 674,
+      "issues": [],
+      "shot": "shots/laptop-light-dashboard_forms_OOpTwAjRKa_s_sub_FR2nEAWcYe3W0RmwZS.png"
+    },
+    {
+      "path": "/dashboard/forms/7O96Au6Bbr/automations",
+      "viewport": "laptop 1280×800",
+      "theme": "light",
+      "status": 200,
+      "ms": 636,
+      "issues": [],
+      "shot": "shots/laptop-light-dashboard_forms_7O96Au6Bbr_automations.png"
+    },
+    {
+      "path": "/dashboard/forms/b3iYs9L1MJ/automations",
+      "viewport": "laptop 1280×800",
+      "theme": "light",
+      "status": 200,
+      "ms": 622,
+      "issues": [],
+      "shot": "shots/laptop-light-dashboard_forms_b3iYs9L1MJ_automations.png"
+    },
+    {
+      "path": "/f/7O96Au6Bbr",
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
       "ms": 539,
       "issues": [],
-      "shot": "shots/laptop-light-f_ZtzkakqVJp.png"
+      "shot": "shots/laptop-light-f_7O96Au6Bbr.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp/setup",
+      "path": "/dashboard/forms/7O96Au6Bbr/setup",
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 630,
+      "ms": 631,
       "issues": [],
-      "shot": "shots/laptop-light-dashboard_forms_ZtzkakqVJp_setup.png"
+      "shot": "shots/laptop-light-dashboard_forms_7O96Au6Bbr_setup.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp/settings",
+      "path": "/dashboard/forms/7O96Au6Bbr/settings",
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 650,
+      "ms": 658,
       "issues": [],
-      "shot": "shots/laptop-light-dashboard_forms_ZtzkakqVJp_settings.png"
+      "shot": "shots/laptop-light-dashboard_forms_7O96Au6Bbr_settings.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp/automations",
+      "path": "/f/OlKjjpVjac",
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 625,
+      "ms": 542,
       "issues": [],
-      "shot": "shots/laptop-light-dashboard_forms_ZtzkakqVJp_automations.png"
+      "shot": "shots/laptop-light-f_OlKjjpVjac.png"
     },
     {
-      "path": "/f/LVYBpkKWBT",
+      "path": "/dashboard/forms/OlKjjpVjac/setup",
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 554,
+      "ms": 631,
       "issues": [],
-      "shot": "shots/laptop-light-f_LVYBpkKWBT.png"
+      "shot": "shots/laptop-light-dashboard_forms_OlKjjpVjac_setup.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT/setup",
+      "path": "/dashboard/forms/OlKjjpVjac/settings",
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 629,
+      "ms": 651,
       "issues": [],
-      "shot": "shots/laptop-light-dashboard_forms_LVYBpkKWBT_setup.png"
+      "shot": "shots/laptop-light-dashboard_forms_OlKjjpVjac_settings.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT/settings",
+      "path": "/dashboard/forms/OlKjjpVjac/automations",
       "viewport": "laptop 1280×800",
       "theme": "light",
       "status": 200,
-      "ms": 650,
+      "ms": 624,
       "issues": [],
-      "shot": "shots/laptop-light-dashboard_forms_LVYBpkKWBT_settings.png"
+      "shot": "shots/laptop-light-dashboard_forms_OlKjjpVjac_automations.png"
+    },
+    {
+      "path": "/f/OOpTwAjRKa",
+      "viewport": "laptop 1280×800",
+      "theme": "light",
+      "status": 200,
+      "ms": 542,
+      "issues": [],
+      "shot": "shots/laptop-light-f_OOpTwAjRKa.png"
+    },
+    {
+      "path": "/dashboard/forms/OOpTwAjRKa/setup",
+      "viewport": "laptop 1280×800",
+      "theme": "light",
+      "status": 200,
+      "ms": 614,
+      "issues": [],
+      "shot": "shots/laptop-light-dashboard_forms_OOpTwAjRKa_setup.png"
+    },
+    {
+      "path": "/dashboard/forms/OOpTwAjRKa/settings",
+      "viewport": "laptop 1280×800",
+      "theme": "light",
+      "status": 200,
+      "ms": 654,
+      "issues": [],
+      "shot": "shots/laptop-light-dashboard_forms_OOpTwAjRKa_settings.png"
+    },
+    {
+      "path": "/dashboard/forms/OOpTwAjRKa/automations",
+      "viewport": "laptop 1280×800",
+      "theme": "light",
+      "status": 200,
+      "ms": 624,
+      "issues": [],
+      "shot": "shots/laptop-light-dashboard_forms_OOpTwAjRKa_automations.png"
+    },
+    {
+      "path": "/f/b3iYs9L1MJ",
+      "viewport": "laptop 1280×800",
+      "theme": "light",
+      "status": 200,
+      "ms": 551,
+      "issues": [],
+      "shot": "shots/laptop-light-f_b3iYs9L1MJ.png"
+    },
+    {
+      "path": "/dashboard/forms/b3iYs9L1MJ/setup",
+      "viewport": "laptop 1280×800",
+      "theme": "light",
+      "status": 200,
+      "ms": 616,
+      "issues": [],
+      "shot": "shots/laptop-light-dashboard_forms_b3iYs9L1MJ_setup.png"
+    },
+    {
+      "path": "/dashboard/forms/b3iYs9L1MJ/settings",
+      "viewport": "laptop 1280×800",
+      "theme": "light",
+      "status": 200,
+      "ms": 649,
+      "issues": [],
+      "shot": "shots/laptop-light-dashboard_forms_b3iYs9L1MJ_settings.png"
     },
     {
       "path": "/",
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 714,
+      "ms": 682,
       "issues": [],
       "shot": "shots/laptop-dark-home.png"
     },
@@ -2964,7 +3060,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 633,
+      "ms": 631,
       "issues": [],
       "shot": "shots/laptop-dark-docs.png"
     },
@@ -2973,7 +3069,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 645,
+      "ms": 635,
       "issues": [],
       "shot": "shots/laptop-dark-status.png"
     },
@@ -2982,7 +3078,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 752,
+      "ms": 710,
       "issues": [],
       "shot": "shots/laptop-dark-dashboard.png"
     },
@@ -2991,7 +3087,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 627,
+      "ms": 616,
       "issues": [],
       "shot": "shots/laptop-dark-dashboard_forms.png"
     },
@@ -3000,7 +3096,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 608,
+      "ms": 599,
       "issues": [],
       "shot": "shots/laptop-dark-features.png"
     },
@@ -3009,7 +3105,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 614,
+      "ms": 609,
       "issues": [],
       "shot": "shots/laptop-dark-pricing.png"
     },
@@ -3018,7 +3114,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 1135,
+      "ms": 1082,
       "issues": [],
       "shot": "shots/laptop-dark-docs_api.png"
     },
@@ -3027,7 +3123,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 610,
+      "ms": 613,
       "issues": [],
       "shot": "shots/laptop-dark-changelog.png"
     },
@@ -3036,7 +3132,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 678,
+      "ms": 676,
       "issues": [],
       "shot": "shots/laptop-dark-signup.png"
     },
@@ -3045,7 +3141,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 621,
+      "ms": 613,
       "issues": [],
       "shot": "shots/laptop-dark-docs_quickstart.png"
     },
@@ -3054,7 +3150,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 613,
+      "ms": 607,
       "issues": [],
       "shot": "shots/laptop-dark-docs_mcp.png"
     },
@@ -3063,7 +3159,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 616,
+      "ms": 615,
       "issues": [],
       "shot": "shots/laptop-dark-docs_integrations_apollo.png"
     },
@@ -3072,7 +3168,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 612,
+      "ms": 614,
       "issues": [],
       "shot": "shots/laptop-dark-docs_integrations_clay.png"
     },
@@ -3081,14 +3177,8 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 15716,
-      "issues": [
-        {
-          "kind": "slow",
-          "severity": "warning",
-          "message": "Load took 15716 ms"
-        }
-      ],
+      "ms": 615,
+      "issues": [],
       "shot": "shots/laptop-dark-docs_integrations_valyu.png"
     },
     {
@@ -3096,7 +3186,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 612,
+      "ms": 607,
       "issues": [],
       "shot": "shots/laptop-dark-docs_integrations_openai.png"
     },
@@ -3105,7 +3195,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 598,
+      "ms": 596,
       "issues": [],
       "shot": "shots/laptop-dark-about.png"
     },
@@ -3123,7 +3213,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 615,
+      "ms": 618,
       "issues": [],
       "shot": "shots/laptop-dark-docs_dynamic_fields.png"
     },
@@ -3132,7 +3222,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 603,
+      "ms": 602,
       "issues": [],
       "shot": "shots/laptop-dark-docs_spam.png"
     },
@@ -3141,7 +3231,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 1149,
+      "ms": 607,
       "issues": [],
       "shot": "shots/laptop-dark-docs_scheduling.png"
     },
@@ -3150,7 +3240,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 621,
+      "ms": 610,
       "issues": [],
       "shot": "shots/laptop-dark-docs_enrichment.png"
     },
@@ -3159,7 +3249,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 639,
+      "ms": 605,
       "issues": [],
       "shot": "shots/laptop-dark-docs_routing.png"
     },
@@ -3168,7 +3258,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 625,
+      "ms": 613,
       "issues": [],
       "shot": "shots/laptop-dark-docs_integrations.png"
     },
@@ -3177,7 +3267,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 612,
+      "ms": 609,
       "issues": [],
       "shot": "shots/laptop-dark-docs_integrations_openrouter.png"
     },
@@ -3186,16 +3276,34 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 648,
+      "ms": 618,
       "issues": [],
       "shot": "shots/laptop-dark-docs_integrations_ai.png"
+    },
+    {
+      "path": "/docs/integrations/google",
+      "viewport": "laptop 1280×800",
+      "theme": "dark",
+      "status": 200,
+      "ms": 608,
+      "issues": [],
+      "shot": "shots/laptop-dark-docs_integrations_google.png"
+    },
+    {
+      "path": "/docs/integrations/microsoft",
+      "viewport": "laptop 1280×800",
+      "theme": "dark",
+      "status": 200,
+      "ms": 610,
+      "issues": [],
+      "shot": "shots/laptop-dark-docs_integrations_microsoft.png"
     },
     {
       "path": "/docs/api-keys",
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 614,
+      "ms": 616,
       "issues": [],
       "shot": "shots/laptop-dark-docs_api_keys.png"
     },
@@ -3204,7 +3312,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 619,
+      "ms": 616,
       "issues": [],
       "shot": "shots/laptop-dark-docs_rest_api.png"
     },
@@ -3213,7 +3321,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 647,
+      "ms": 629,
       "issues": [],
       "shot": "shots/laptop-dark-docs_webhooks.png"
     },
@@ -3222,7 +3330,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 632,
+      "ms": 612,
       "issues": [],
       "shot": "shots/laptop-dark-docs_status.png"
     },
@@ -3231,7 +3339,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 691,
+      "ms": 668,
       "issues": [],
       "shot": "shots/laptop-dark-dashboard_leads.png"
     },
@@ -3240,7 +3348,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 700,
+      "ms": 658,
       "issues": [],
       "shot": "shots/laptop-dark-dashboard_routing.png"
     },
@@ -3249,7 +3357,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 677,
+      "ms": 650,
       "issues": [],
       "shot": "shots/laptop-dark-dashboard_enrichment.png"
     },
@@ -3258,7 +3366,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 661,
+      "ms": 636,
       "issues": [],
       "shot": "shots/laptop-dark-dashboard_integrations.png"
     },
@@ -3267,7 +3375,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 762,
+      "ms": 715,
       "issues": [],
       "shot": "shots/laptop-dark-dashboard_webhooks.png"
     },
@@ -3276,7 +3384,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 649,
+      "ms": 634,
       "issues": [],
       "shot": "shots/laptop-dark-dashboard_schedules.png"
     },
@@ -3285,7 +3393,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 627,
+      "ms": 615,
       "issues": [],
       "shot": "shots/laptop-dark-dashboard_api_keys.png"
     },
@@ -3294,7 +3402,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 695,
+      "ms": 671,
       "issues": [],
       "shot": "shots/laptop-dark-dashboard_health.png"
     },
@@ -3303,7 +3411,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 636,
+      "ms": 623,
       "issues": [],
       "shot": "shots/laptop-dark-dashboard_qa.png"
     },
@@ -3312,7 +3420,7 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 651,
+      "ms": 659,
       "issues": [],
       "shot": "shots/laptop-dark-dashboard_outbox.png"
     },
@@ -3321,232 +3429,232 @@
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 628,
+      "ms": 629,
       "issues": [],
       "shot": "shots/laptop-dark-dashboard_settings.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ?s=sub_84AwZUV9x5DoZzqZxw",
+      "path": "/dashboard/forms/7O96Au6Bbr?s=sub_d4xACDgGy02NBSuRdj",
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 708,
+      "ms": 693,
       "issues": [],
-      "shot": "shots/laptop-dark-dashboard_forms_DzPnDsHTAZ_s_sub_84AwZUV9x5DoZzqZxw.png"
+      "shot": "shots/laptop-dark-dashboard_forms_7O96Au6Bbr_s_sub_d4xACDgGy02NBSuRdj.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj",
+      "path": "/dashboard/forms/OlKjjpVjac?s=sub_w5oVgPmCAfpumlWgi7",
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 655,
+      "ms": 711,
       "issues": [],
-      "shot": "shots/laptop-dark-dashboard_forms_hgbHMmQsNj.png"
+      "shot": "shots/laptop-dark-dashboard_forms_OlKjjpVjac_s_sub_w5oVgPmCAfpumlWgi7.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp",
+      "path": "/dashboard/forms/OOpTwAjRKa",
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 695,
+      "ms": 662,
       "issues": [],
-      "shot": "shots/laptop-dark-dashboard_forms_ZtzkakqVJp.png"
+      "shot": "shots/laptop-dark-dashboard_forms_OOpTwAjRKa.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT",
+      "path": "/dashboard/forms/OlKjjpVjac",
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 691,
+      "ms": 663,
       "issues": [],
-      "shot": "shots/laptop-dark-dashboard_forms_LVYBpkKWBT.png"
+      "shot": "shots/laptop-dark-dashboard_forms_OlKjjpVjac.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ",
+      "path": "/dashboard/forms/b3iYs9L1MJ",
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 665,
+      "ms": 671,
       "issues": [],
-      "shot": "shots/laptop-dark-dashboard_forms_DzPnDsHTAZ.png"
+      "shot": "shots/laptop-dark-dashboard_forms_b3iYs9L1MJ.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT?s=sub_9Mp4qbpdcYpPqHoYzJ",
+      "path": "/dashboard/forms/7O96Au6Bbr",
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 704,
+      "ms": 661,
       "issues": [],
-      "shot": "shots/laptop-dark-dashboard_forms_LVYBpkKWBT_s_sub_9Mp4qbpdcYpPqHoYzJ.png"
+      "shot": "shots/laptop-dark-dashboard_forms_7O96Au6Bbr.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp?s=sub_W6jUAp7BXuKm7APBne",
+      "path": "/dashboard/forms/b3iYs9L1MJ?s=sub_eWW1L0Fly1QKI61Iq9",
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 714,
+      "ms": 681,
       "issues": [],
-      "shot": "shots/laptop-dark-dashboard_forms_ZtzkakqVJp_s_sub_W6jUAp7BXuKm7APBne.png"
+      "shot": "shots/laptop-dark-dashboard_forms_b3iYs9L1MJ_s_sub_eWW1L0Fly1QKI61Iq9.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj?s=sub_Ug2QbhleUSdT70qMKf",
-      "viewport": "laptop 1280×800",
-      "theme": "dark",
-      "status": 200,
-      "ms": 677,
-      "issues": [],
-      "shot": "shots/laptop-dark-dashboard_forms_hgbHMmQsNj_s_sub_Ug2QbhleUSdT70qMKf.png"
-    },
-    {
-      "path": "/dashboard/forms/DzPnDsHTAZ/automations",
-      "viewport": "laptop 1280×800",
-      "theme": "dark",
-      "status": 200,
-      "ms": 644,
-      "issues": [],
-      "shot": "shots/laptop-dark-dashboard_forms_DzPnDsHTAZ_automations.png"
-    },
-    {
-      "path": "/dashboard/forms/LVYBpkKWBT/automations",
-      "viewport": "laptop 1280×800",
-      "theme": "dark",
-      "status": 200,
-      "ms": 635,
-      "issues": [],
-      "shot": "shots/laptop-dark-dashboard_forms_LVYBpkKWBT_automations.png"
-    },
-    {
-      "path": "/f/DzPnDsHTAZ",
-      "viewport": "laptop 1280×800",
-      "theme": "dark",
-      "status": 200,
-      "ms": 549,
-      "issues": [],
-      "shot": "shots/laptop-dark-f_DzPnDsHTAZ.png"
-    },
-    {
-      "path": "/dashboard/forms/DzPnDsHTAZ/setup",
-      "viewport": "laptop 1280×800",
-      "theme": "dark",
-      "status": 200,
-      "ms": 632,
-      "issues": [],
-      "shot": "shots/laptop-dark-dashboard_forms_DzPnDsHTAZ_setup.png"
-    },
-    {
-      "path": "/dashboard/forms/DzPnDsHTAZ/settings",
+      "path": "/dashboard/forms/OOpTwAjRKa?s=sub_FR2nEAWcYe3W0RmwZS",
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
       "ms": 664,
       "issues": [],
-      "shot": "shots/laptop-dark-dashboard_forms_DzPnDsHTAZ_settings.png"
+      "shot": "shots/laptop-dark-dashboard_forms_OOpTwAjRKa_s_sub_FR2nEAWcYe3W0RmwZS.png"
     },
     {
-      "path": "/f/hgbHMmQsNj",
+      "path": "/dashboard/forms/7O96Au6Bbr/automations",
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 538,
+      "ms": 620,
       "issues": [],
-      "shot": "shots/laptop-dark-f_hgbHMmQsNj.png"
+      "shot": "shots/laptop-dark-dashboard_forms_7O96Au6Bbr_automations.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj/setup",
+      "path": "/dashboard/forms/b3iYs9L1MJ/automations",
+      "viewport": "laptop 1280×800",
+      "theme": "dark",
+      "status": 200,
+      "ms": 627,
+      "issues": [],
+      "shot": "shots/laptop-dark-dashboard_forms_b3iYs9L1MJ_automations.png"
+    },
+    {
+      "path": "/f/7O96Au6Bbr",
+      "viewport": "laptop 1280×800",
+      "theme": "dark",
+      "status": 200,
+      "ms": 545,
+      "issues": [],
+      "shot": "shots/laptop-dark-f_7O96Au6Bbr.png"
+    },
+    {
+      "path": "/dashboard/forms/7O96Au6Bbr/setup",
+      "viewport": "laptop 1280×800",
+      "theme": "dark",
+      "status": 200,
+      "ms": 618,
+      "issues": [],
+      "shot": "shots/laptop-dark-dashboard_forms_7O96Au6Bbr_setup.png"
+    },
+    {
+      "path": "/dashboard/forms/7O96Au6Bbr/settings",
+      "viewport": "laptop 1280×800",
+      "theme": "dark",
+      "status": 200,
+      "ms": 664,
+      "issues": [],
+      "shot": "shots/laptop-dark-dashboard_forms_7O96Au6Bbr_settings.png"
+    },
+    {
+      "path": "/f/OlKjjpVjac",
+      "viewport": "laptop 1280×800",
+      "theme": "dark",
+      "status": 200,
+      "ms": 541,
+      "issues": [],
+      "shot": "shots/laptop-dark-f_OlKjjpVjac.png"
+    },
+    {
+      "path": "/dashboard/forms/OlKjjpVjac/setup",
+      "viewport": "laptop 1280×800",
+      "theme": "dark",
+      "status": 200,
+      "ms": 620,
+      "issues": [],
+      "shot": "shots/laptop-dark-dashboard_forms_OlKjjpVjac_setup.png"
+    },
+    {
+      "path": "/dashboard/forms/OlKjjpVjac/settings",
+      "viewport": "laptop 1280×800",
+      "theme": "dark",
+      "status": 200,
+      "ms": 670,
+      "issues": [],
+      "shot": "shots/laptop-dark-dashboard_forms_OlKjjpVjac_settings.png"
+    },
+    {
+      "path": "/dashboard/forms/OlKjjpVjac/automations",
+      "viewport": "laptop 1280×800",
+      "theme": "dark",
+      "status": 200,
+      "ms": 630,
+      "issues": [],
+      "shot": "shots/laptop-dark-dashboard_forms_OlKjjpVjac_automations.png"
+    },
+    {
+      "path": "/f/OOpTwAjRKa",
+      "viewport": "laptop 1280×800",
+      "theme": "dark",
+      "status": 200,
+      "ms": 537,
+      "issues": [],
+      "shot": "shots/laptop-dark-f_OOpTwAjRKa.png"
+    },
+    {
+      "path": "/dashboard/forms/OOpTwAjRKa/setup",
+      "viewport": "laptop 1280×800",
+      "theme": "dark",
+      "status": 200,
+      "ms": 633,
+      "issues": [],
+      "shot": "shots/laptop-dark-dashboard_forms_OOpTwAjRKa_setup.png"
+    },
+    {
+      "path": "/dashboard/forms/OOpTwAjRKa/settings",
+      "viewport": "laptop 1280×800",
+      "theme": "dark",
+      "status": 200,
+      "ms": 642,
+      "issues": [],
+      "shot": "shots/laptop-dark-dashboard_forms_OOpTwAjRKa_settings.png"
+    },
+    {
+      "path": "/dashboard/forms/OOpTwAjRKa/automations",
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
       "ms": 635,
       "issues": [],
-      "shot": "shots/laptop-dark-dashboard_forms_hgbHMmQsNj_setup.png"
+      "shot": "shots/laptop-dark-dashboard_forms_OOpTwAjRKa_automations.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj/settings",
+      "path": "/f/b3iYs9L1MJ",
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 665,
+      "ms": 538,
       "issues": [],
-      "shot": "shots/laptop-dark-dashboard_forms_hgbHMmQsNj_settings.png"
+      "shot": "shots/laptop-dark-f_b3iYs9L1MJ.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj/automations",
+      "path": "/dashboard/forms/b3iYs9L1MJ/setup",
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 634,
+      "ms": 617,
       "issues": [],
-      "shot": "shots/laptop-dark-dashboard_forms_hgbHMmQsNj_automations.png"
+      "shot": "shots/laptop-dark-dashboard_forms_b3iYs9L1MJ_setup.png"
     },
     {
-      "path": "/f/ZtzkakqVJp",
+      "path": "/dashboard/forms/b3iYs9L1MJ/settings",
       "viewport": "laptop 1280×800",
       "theme": "dark",
       "status": 200,
-      "ms": 548,
+      "ms": 655,
       "issues": [],
-      "shot": "shots/laptop-dark-f_ZtzkakqVJp.png"
-    },
-    {
-      "path": "/dashboard/forms/ZtzkakqVJp/setup",
-      "viewport": "laptop 1280×800",
-      "theme": "dark",
-      "status": 200,
-      "ms": 631,
-      "issues": [],
-      "shot": "shots/laptop-dark-dashboard_forms_ZtzkakqVJp_setup.png"
-    },
-    {
-      "path": "/dashboard/forms/ZtzkakqVJp/settings",
-      "viewport": "laptop 1280×800",
-      "theme": "dark",
-      "status": 200,
-      "ms": 654,
-      "issues": [],
-      "shot": "shots/laptop-dark-dashboard_forms_ZtzkakqVJp_settings.png"
-    },
-    {
-      "path": "/dashboard/forms/ZtzkakqVJp/automations",
-      "viewport": "laptop 1280×800",
-      "theme": "dark",
-      "status": 200,
-      "ms": 642,
-      "issues": [],
-      "shot": "shots/laptop-dark-dashboard_forms_ZtzkakqVJp_automations.png"
-    },
-    {
-      "path": "/f/LVYBpkKWBT",
-      "viewport": "laptop 1280×800",
-      "theme": "dark",
-      "status": 200,
-      "ms": 540,
-      "issues": [],
-      "shot": "shots/laptop-dark-f_LVYBpkKWBT.png"
-    },
-    {
-      "path": "/dashboard/forms/LVYBpkKWBT/setup",
-      "viewport": "laptop 1280×800",
-      "theme": "dark",
-      "status": 200,
-      "ms": 619,
-      "issues": [],
-      "shot": "shots/laptop-dark-dashboard_forms_LVYBpkKWBT_setup.png"
-    },
-    {
-      "path": "/dashboard/forms/LVYBpkKWBT/settings",
-      "viewport": "laptop 1280×800",
-      "theme": "dark",
-      "status": 200,
-      "ms": 642,
-      "issues": [],
-      "shot": "shots/laptop-dark-dashboard_forms_LVYBpkKWBT_settings.png"
+      "shot": "shots/laptop-dark-dashboard_forms_b3iYs9L1MJ_settings.png"
     },
     {
       "path": "/",
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 699,
+      "ms": 697,
       "issues": [],
       "shot": "shots/desktop-light-home.png"
     },
@@ -3555,7 +3663,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 636,
+      "ms": 647,
       "issues": [],
       "shot": "shots/desktop-light-docs.png"
     },
@@ -3564,7 +3672,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 671,
+      "ms": 642,
       "issues": [],
       "shot": "shots/desktop-light-status.png"
     },
@@ -3573,7 +3681,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 734,
+      "ms": 732,
       "issues": [],
       "shot": "shots/desktop-light-dashboard.png"
     },
@@ -3582,7 +3690,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 621,
+      "ms": 630,
       "issues": [],
       "shot": "shots/desktop-light-dashboard_forms.png"
     },
@@ -3591,7 +3699,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 608,
+      "ms": 611,
       "issues": [],
       "shot": "shots/desktop-light-features.png"
     },
@@ -3600,7 +3708,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 601,
+      "ms": 621,
       "issues": [],
       "shot": "shots/desktop-light-pricing.png"
     },
@@ -3609,7 +3717,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 1045,
+      "ms": 1136,
       "issues": [],
       "shot": "shots/desktop-light-docs_api.png"
     },
@@ -3618,7 +3726,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 599,
+      "ms": 625,
       "issues": [],
       "shot": "shots/desktop-light-changelog.png"
     },
@@ -3627,7 +3735,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 678,
+      "ms": 697,
       "issues": [],
       "shot": "shots/desktop-light-signup.png"
     },
@@ -3636,7 +3744,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 629,
+      "ms": 623,
       "issues": [],
       "shot": "shots/desktop-light-docs_quickstart.png"
     },
@@ -3645,7 +3753,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 619,
+      "ms": 613,
       "issues": [],
       "shot": "shots/desktop-light-docs_mcp.png"
     },
@@ -3654,7 +3762,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 606,
+      "ms": 607,
       "issues": [],
       "shot": "shots/desktop-light-docs_integrations_apollo.png"
     },
@@ -3663,7 +3771,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 632,
+      "ms": 622,
       "issues": [],
       "shot": "shots/desktop-light-docs_integrations_clay.png"
     },
@@ -3672,7 +3780,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 620,
+      "ms": 616,
       "issues": [],
       "shot": "shots/desktop-light-docs_integrations_valyu.png"
     },
@@ -3681,7 +3789,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 616,
+      "ms": 618,
       "issues": [],
       "shot": "shots/desktop-light-docs_integrations_openai.png"
     },
@@ -3690,7 +3798,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 602,
+      "ms": 606,
       "issues": [],
       "shot": "shots/desktop-light-about.png"
     },
@@ -3699,7 +3807,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 661,
+      "ms": 690,
       "issues": [],
       "shot": "shots/desktop-light-login.png"
     },
@@ -3708,7 +3816,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 623,
+      "ms": 629,
       "issues": [],
       "shot": "shots/desktop-light-docs_dynamic_fields.png"
     },
@@ -3717,7 +3825,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 618,
+      "ms": 608,
       "issues": [],
       "shot": "shots/desktop-light-docs_spam.png"
     },
@@ -3726,7 +3834,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 617,
+      "ms": 610,
       "issues": [],
       "shot": "shots/desktop-light-docs_scheduling.png"
     },
@@ -3735,7 +3843,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 626,
+      "ms": 620,
       "issues": [],
       "shot": "shots/desktop-light-docs_enrichment.png"
     },
@@ -3744,7 +3852,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 628,
+      "ms": 618,
       "issues": [],
       "shot": "shots/desktop-light-docs_routing.png"
     },
@@ -3753,7 +3861,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 631,
+      "ms": 622,
       "issues": [],
       "shot": "shots/desktop-light-docs_integrations.png"
     },
@@ -3762,7 +3870,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 618,
+      "ms": 600,
       "issues": [],
       "shot": "shots/desktop-light-docs_integrations_openrouter.png"
     },
@@ -3771,16 +3879,34 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 602,
+      "ms": 612,
       "issues": [],
       "shot": "shots/desktop-light-docs_integrations_ai.png"
+    },
+    {
+      "path": "/docs/integrations/google",
+      "viewport": "desktop 1440×900",
+      "theme": "light",
+      "status": 200,
+      "ms": 607,
+      "issues": [],
+      "shot": "shots/desktop-light-docs_integrations_google.png"
+    },
+    {
+      "path": "/docs/integrations/microsoft",
+      "viewport": "desktop 1440×900",
+      "theme": "light",
+      "status": 200,
+      "ms": 620,
+      "issues": [],
+      "shot": "shots/desktop-light-docs_integrations_microsoft.png"
     },
     {
       "path": "/docs/api-keys",
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 608,
+      "ms": 615,
       "issues": [],
       "shot": "shots/desktop-light-docs_api_keys.png"
     },
@@ -3789,7 +3915,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 610,
+      "ms": 606,
       "issues": [],
       "shot": "shots/desktop-light-docs_rest_api.png"
     },
@@ -3798,7 +3924,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 606,
+      "ms": 610,
       "issues": [],
       "shot": "shots/desktop-light-docs_webhooks.png"
     },
@@ -3807,7 +3933,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 619,
+      "ms": 623,
       "issues": [],
       "shot": "shots/desktop-light-docs_status.png"
     },
@@ -3816,7 +3942,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 677,
+      "ms": 670,
       "issues": [],
       "shot": "shots/desktop-light-dashboard_leads.png"
     },
@@ -3825,7 +3951,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 675,
+      "ms": 659,
       "issues": [],
       "shot": "shots/desktop-light-dashboard_routing.png"
     },
@@ -3834,7 +3960,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 672,
+      "ms": 654,
       "issues": [],
       "shot": "shots/desktop-light-dashboard_enrichment.png"
     },
@@ -3843,7 +3969,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 661,
+      "ms": 655,
       "issues": [],
       "shot": "shots/desktop-light-dashboard_integrations.png"
     },
@@ -3852,7 +3978,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 720,
+      "ms": 726,
       "issues": [],
       "shot": "shots/desktop-light-dashboard_webhooks.png"
     },
@@ -3861,7 +3987,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 648,
+      "ms": 625,
       "issues": [],
       "shot": "shots/desktop-light-dashboard_schedules.png"
     },
@@ -3870,7 +3996,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 639,
+      "ms": 622,
       "issues": [],
       "shot": "shots/desktop-light-dashboard_api_keys.png"
     },
@@ -3879,7 +4005,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 673,
+      "ms": 654,
       "issues": [],
       "shot": "shots/desktop-light-dashboard_health.png"
     },
@@ -3888,7 +4014,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 628,
+      "ms": 631,
       "issues": [],
       "shot": "shots/desktop-light-dashboard_qa.png"
     },
@@ -3897,7 +4023,7 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 657,
+      "ms": 672,
       "issues": [],
       "shot": "shots/desktop-light-dashboard_outbox.png"
     },
@@ -3906,232 +4032,232 @@
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 630,
+      "ms": 624,
       "issues": [],
       "shot": "shots/desktop-light-dashboard_settings.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ?s=sub_84AwZUV9x5DoZzqZxw",
+      "path": "/dashboard/forms/7O96Au6Bbr?s=sub_d4xACDgGy02NBSuRdj",
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 700,
+      "ms": 697,
       "issues": [],
-      "shot": "shots/desktop-light-dashboard_forms_DzPnDsHTAZ_s_sub_84AwZUV9x5DoZzqZxw.png"
+      "shot": "shots/desktop-light-dashboard_forms_7O96Au6Bbr_s_sub_d4xACDgGy02NBSuRdj.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj",
+      "path": "/dashboard/forms/OlKjjpVjac?s=sub_w5oVgPmCAfpumlWgi7",
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 676,
+      "ms": 699,
       "issues": [],
-      "shot": "shots/desktop-light-dashboard_forms_hgbHMmQsNj.png"
+      "shot": "shots/desktop-light-dashboard_forms_OlKjjpVjac_s_sub_w5oVgPmCAfpumlWgi7.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp",
+      "path": "/dashboard/forms/OOpTwAjRKa",
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 668,
+      "ms": 643,
       "issues": [],
-      "shot": "shots/desktop-light-dashboard_forms_ZtzkakqVJp.png"
+      "shot": "shots/desktop-light-dashboard_forms_OOpTwAjRKa.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT",
+      "path": "/dashboard/forms/OlKjjpVjac",
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 654,
+      "ms": 675,
       "issues": [],
-      "shot": "shots/desktop-light-dashboard_forms_LVYBpkKWBT.png"
+      "shot": "shots/desktop-light-dashboard_forms_OlKjjpVjac.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ",
+      "path": "/dashboard/forms/b3iYs9L1MJ",
+      "viewport": "desktop 1440×900",
+      "theme": "light",
+      "status": 200,
+      "ms": 667,
+      "issues": [],
+      "shot": "shots/desktop-light-dashboard_forms_b3iYs9L1MJ.png"
+    },
+    {
+      "path": "/dashboard/forms/7O96Au6Bbr",
+      "viewport": "desktop 1440×900",
+      "theme": "light",
+      "status": 200,
+      "ms": 658,
+      "issues": [],
+      "shot": "shots/desktop-light-dashboard_forms_7O96Au6Bbr.png"
+    },
+    {
+      "path": "/dashboard/forms/b3iYs9L1MJ?s=sub_eWW1L0Fly1QKI61Iq9",
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
       "ms": 674,
       "issues": [],
-      "shot": "shots/desktop-light-dashboard_forms_DzPnDsHTAZ.png"
+      "shot": "shots/desktop-light-dashboard_forms_b3iYs9L1MJ_s_sub_eWW1L0Fly1QKI61Iq9.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT?s=sub_9Mp4qbpdcYpPqHoYzJ",
+      "path": "/dashboard/forms/OOpTwAjRKa?s=sub_FR2nEAWcYe3W0RmwZS",
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 688,
+      "ms": 667,
       "issues": [],
-      "shot": "shots/desktop-light-dashboard_forms_LVYBpkKWBT_s_sub_9Mp4qbpdcYpPqHoYzJ.png"
+      "shot": "shots/desktop-light-dashboard_forms_OOpTwAjRKa_s_sub_FR2nEAWcYe3W0RmwZS.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp?s=sub_W6jUAp7BXuKm7APBne",
+      "path": "/dashboard/forms/7O96Au6Bbr/automations",
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 698,
+      "ms": 643,
       "issues": [],
-      "shot": "shots/desktop-light-dashboard_forms_ZtzkakqVJp_s_sub_W6jUAp7BXuKm7APBne.png"
+      "shot": "shots/desktop-light-dashboard_forms_7O96Au6Bbr_automations.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj?s=sub_Ug2QbhleUSdT70qMKf",
+      "path": "/dashboard/forms/b3iYs9L1MJ/automations",
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 659,
+      "ms": 622,
       "issues": [],
-      "shot": "shots/desktop-light-dashboard_forms_hgbHMmQsNj_s_sub_Ug2QbhleUSdT70qMKf.png"
+      "shot": "shots/desktop-light-dashboard_forms_b3iYs9L1MJ_automations.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ/automations",
+      "path": "/f/7O96Au6Bbr",
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 641,
+      "ms": 554,
       "issues": [],
-      "shot": "shots/desktop-light-dashboard_forms_DzPnDsHTAZ_automations.png"
+      "shot": "shots/desktop-light-f_7O96Au6Bbr.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT/automations",
+      "path": "/dashboard/forms/7O96Au6Bbr/setup",
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 630,
+      "ms": 631,
       "issues": [],
-      "shot": "shots/desktop-light-dashboard_forms_LVYBpkKWBT_automations.png"
+      "shot": "shots/desktop-light-dashboard_forms_7O96Au6Bbr_setup.png"
     },
     {
-      "path": "/f/DzPnDsHTAZ",
+      "path": "/dashboard/forms/7O96Au6Bbr/settings",
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 551,
+      "ms": 670,
       "issues": [],
-      "shot": "shots/desktop-light-f_DzPnDsHTAZ.png"
+      "shot": "shots/desktop-light-dashboard_forms_7O96Au6Bbr_settings.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ/setup",
+      "path": "/f/OlKjjpVjac",
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 627,
+      "ms": 552,
       "issues": [],
-      "shot": "shots/desktop-light-dashboard_forms_DzPnDsHTAZ_setup.png"
+      "shot": "shots/desktop-light-f_OlKjjpVjac.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ/settings",
+      "path": "/dashboard/forms/OlKjjpVjac/setup",
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 651,
+      "ms": 625,
       "issues": [],
-      "shot": "shots/desktop-light-dashboard_forms_DzPnDsHTAZ_settings.png"
+      "shot": "shots/desktop-light-dashboard_forms_OlKjjpVjac_setup.png"
     },
     {
-      "path": "/f/hgbHMmQsNj",
+      "path": "/dashboard/forms/OlKjjpVjac/settings",
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 545,
+      "ms": 675,
       "issues": [],
-      "shot": "shots/desktop-light-f_hgbHMmQsNj.png"
+      "shot": "shots/desktop-light-dashboard_forms_OlKjjpVjac_settings.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj/setup",
+      "path": "/dashboard/forms/OlKjjpVjac/automations",
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
       "ms": 639,
       "issues": [],
-      "shot": "shots/desktop-light-dashboard_forms_hgbHMmQsNj_setup.png"
+      "shot": "shots/desktop-light-dashboard_forms_OlKjjpVjac_automations.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj/settings",
+      "path": "/f/OOpTwAjRKa",
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 654,
+      "ms": 535,
       "issues": [],
-      "shot": "shots/desktop-light-dashboard_forms_hgbHMmQsNj_settings.png"
+      "shot": "shots/desktop-light-f_OOpTwAjRKa.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj/automations",
+      "path": "/dashboard/forms/OOpTwAjRKa/setup",
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 617,
+      "ms": 626,
       "issues": [],
-      "shot": "shots/desktop-light-dashboard_forms_hgbHMmQsNj_automations.png"
+      "shot": "shots/desktop-light-dashboard_forms_OOpTwAjRKa_setup.png"
     },
     {
-      "path": "/f/ZtzkakqVJp",
+      "path": "/dashboard/forms/OOpTwAjRKa/settings",
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 543,
+      "ms": 651,
       "issues": [],
-      "shot": "shots/desktop-light-f_ZtzkakqVJp.png"
+      "shot": "shots/desktop-light-dashboard_forms_OOpTwAjRKa_settings.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp/setup",
+      "path": "/dashboard/forms/OOpTwAjRKa/automations",
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 628,
+      "ms": 635,
       "issues": [],
-      "shot": "shots/desktop-light-dashboard_forms_ZtzkakqVJp_setup.png"
+      "shot": "shots/desktop-light-dashboard_forms_OOpTwAjRKa_automations.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp/settings",
+      "path": "/f/b3iYs9L1MJ",
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 664,
+      "ms": 555,
       "issues": [],
-      "shot": "shots/desktop-light-dashboard_forms_ZtzkakqVJp_settings.png"
+      "shot": "shots/desktop-light-f_b3iYs9L1MJ.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp/automations",
+      "path": "/dashboard/forms/b3iYs9L1MJ/setup",
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
-      "ms": 645,
+      "ms": 629,
       "issues": [],
-      "shot": "shots/desktop-light-dashboard_forms_ZtzkakqVJp_automations.png"
+      "shot": "shots/desktop-light-dashboard_forms_b3iYs9L1MJ_setup.png"
     },
     {
-      "path": "/f/LVYBpkKWBT",
-      "viewport": "desktop 1440×900",
-      "theme": "light",
-      "status": 200,
-      "ms": 547,
-      "issues": [],
-      "shot": "shots/desktop-light-f_LVYBpkKWBT.png"
-    },
-    {
-      "path": "/dashboard/forms/LVYBpkKWBT/setup",
-      "viewport": "desktop 1440×900",
-      "theme": "light",
-      "status": 200,
-      "ms": 628,
-      "issues": [],
-      "shot": "shots/desktop-light-dashboard_forms_LVYBpkKWBT_setup.png"
-    },
-    {
-      "path": "/dashboard/forms/LVYBpkKWBT/settings",
+      "path": "/dashboard/forms/b3iYs9L1MJ/settings",
       "viewport": "desktop 1440×900",
       "theme": "light",
       "status": 200,
       "ms": 657,
       "issues": [],
-      "shot": "shots/desktop-light-dashboard_forms_LVYBpkKWBT_settings.png"
+      "shot": "shots/desktop-light-dashboard_forms_b3iYs9L1MJ_settings.png"
     },
     {
       "path": "/",
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 721,
+      "ms": 704,
       "issues": [],
       "shot": "shots/desktop-dark-home.png"
     },
@@ -4140,7 +4266,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 625,
+      "ms": 641,
       "issues": [],
       "shot": "shots/desktop-dark-docs.png"
     },
@@ -4149,7 +4275,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 646,
+      "ms": 653,
       "issues": [],
       "shot": "shots/desktop-dark-status.png"
     },
@@ -4158,7 +4284,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 727,
+      "ms": 747,
       "issues": [],
       "shot": "shots/desktop-dark-dashboard.png"
     },
@@ -4167,7 +4293,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 618,
+      "ms": 616,
       "issues": [],
       "shot": "shots/desktop-dark-dashboard_forms.png"
     },
@@ -4176,7 +4302,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 601,
+      "ms": 599,
       "issues": [],
       "shot": "shots/desktop-dark-features.png"
     },
@@ -4185,7 +4311,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 601,
+      "ms": 598,
       "issues": [],
       "shot": "shots/desktop-dark-pricing.png"
     },
@@ -4194,7 +4320,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 1059,
+      "ms": 1046,
       "issues": [],
       "shot": "shots/desktop-dark-docs_api.png"
     },
@@ -4203,7 +4329,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 595,
+      "ms": 608,
       "issues": [],
       "shot": "shots/desktop-dark-changelog.png"
     },
@@ -4212,7 +4338,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 694,
+      "ms": 683,
       "issues": [],
       "shot": "shots/desktop-dark-signup.png"
     },
@@ -4221,7 +4347,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 615,
+      "ms": 622,
       "issues": [],
       "shot": "shots/desktop-dark-docs_quickstart.png"
     },
@@ -4230,7 +4356,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 625,
+      "ms": 622,
       "issues": [],
       "shot": "shots/desktop-dark-docs_mcp.png"
     },
@@ -4266,7 +4392,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 603,
+      "ms": 618,
       "issues": [],
       "shot": "shots/desktop-dark-docs_integrations_openai.png"
     },
@@ -4275,7 +4401,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 603,
+      "ms": 601,
       "issues": [],
       "shot": "shots/desktop-dark-about.png"
     },
@@ -4284,7 +4410,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 667,
+      "ms": 659,
       "issues": [],
       "shot": "shots/desktop-dark-login.png"
     },
@@ -4302,7 +4428,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 606,
+      "ms": 604,
       "issues": [],
       "shot": "shots/desktop-dark-docs_spam.png"
     },
@@ -4311,7 +4437,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 606,
+      "ms": 610,
       "issues": [],
       "shot": "shots/desktop-dark-docs_scheduling.png"
     },
@@ -4320,7 +4446,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 606,
+      "ms": 616,
       "issues": [],
       "shot": "shots/desktop-dark-docs_enrichment.png"
     },
@@ -4329,7 +4455,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 612,
+      "ms": 625,
       "issues": [],
       "shot": "shots/desktop-dark-docs_routing.png"
     },
@@ -4338,7 +4464,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 607,
+      "ms": 623,
       "issues": [],
       "shot": "shots/desktop-dark-docs_integrations.png"
     },
@@ -4347,7 +4473,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 604,
+      "ms": 606,
       "issues": [],
       "shot": "shots/desktop-dark-docs_integrations_openrouter.png"
     },
@@ -4356,16 +4482,34 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 602,
+      "ms": 606,
       "issues": [],
       "shot": "shots/desktop-dark-docs_integrations_ai.png"
+    },
+    {
+      "path": "/docs/integrations/google",
+      "viewport": "desktop 1440×900",
+      "theme": "dark",
+      "status": 200,
+      "ms": 612,
+      "issues": [],
+      "shot": "shots/desktop-dark-docs_integrations_google.png"
+    },
+    {
+      "path": "/docs/integrations/microsoft",
+      "viewport": "desktop 1440×900",
+      "theme": "dark",
+      "status": 200,
+      "ms": 615,
+      "issues": [],
+      "shot": "shots/desktop-dark-docs_integrations_microsoft.png"
     },
     {
       "path": "/docs/api-keys",
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 612,
+      "ms": 607,
       "issues": [],
       "shot": "shots/desktop-dark-docs_api_keys.png"
     },
@@ -4374,7 +4518,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 609,
+      "ms": 614,
       "issues": [],
       "shot": "shots/desktop-dark-docs_rest_api.png"
     },
@@ -4383,7 +4527,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 601,
+      "ms": 616,
       "issues": [],
       "shot": "shots/desktop-dark-docs_webhooks.png"
     },
@@ -4392,7 +4536,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 623,
+      "ms": 615,
       "issues": [],
       "shot": "shots/desktop-dark-docs_status.png"
     },
@@ -4401,7 +4545,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 676,
+      "ms": 668,
       "issues": [],
       "shot": "shots/desktop-dark-dashboard_leads.png"
     },
@@ -4410,7 +4554,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 678,
+      "ms": 655,
       "issues": [],
       "shot": "shots/desktop-dark-dashboard_routing.png"
     },
@@ -4419,7 +4563,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 652,
+      "ms": 683,
       "issues": [],
       "shot": "shots/desktop-dark-dashboard_enrichment.png"
     },
@@ -4428,7 +4572,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 634,
+      "ms": 649,
       "issues": [],
       "shot": "shots/desktop-dark-dashboard_integrations.png"
     },
@@ -4437,7 +4581,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 726,
+      "ms": 722,
       "issues": [],
       "shot": "shots/desktop-dark-dashboard_webhooks.png"
     },
@@ -4446,7 +4590,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 619,
+      "ms": 641,
       "issues": [],
       "shot": "shots/desktop-dark-dashboard_schedules.png"
     },
@@ -4455,7 +4599,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 616,
+      "ms": 615,
       "issues": [],
       "shot": "shots/desktop-dark-dashboard_api_keys.png"
     },
@@ -4464,7 +4608,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 656,
+      "ms": 678,
       "issues": [],
       "shot": "shots/desktop-dark-dashboard_health.png"
     },
@@ -4473,7 +4617,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 622,
+      "ms": 615,
       "issues": [],
       "shot": "shots/desktop-dark-dashboard_qa.png"
     },
@@ -4482,7 +4626,7 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 650,
+      "ms": 654,
       "issues": [],
       "shot": "shots/desktop-dark-dashboard_outbox.png"
     },
@@ -4491,225 +4635,225 @@
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 632,
+      "ms": 636,
       "issues": [],
       "shot": "shots/desktop-dark-dashboard_settings.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ?s=sub_84AwZUV9x5DoZzqZxw",
+      "path": "/dashboard/forms/7O96Au6Bbr?s=sub_d4xACDgGy02NBSuRdj",
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 693,
+      "ms": 691,
       "issues": [],
-      "shot": "shots/desktop-dark-dashboard_forms_DzPnDsHTAZ_s_sub_84AwZUV9x5DoZzqZxw.png"
+      "shot": "shots/desktop-dark-dashboard_forms_7O96Au6Bbr_s_sub_d4xACDgGy02NBSuRdj.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj",
+      "path": "/dashboard/forms/OlKjjpVjac?s=sub_w5oVgPmCAfpumlWgi7",
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 648,
+      "ms": 694,
       "issues": [],
-      "shot": "shots/desktop-dark-dashboard_forms_hgbHMmQsNj.png"
+      "shot": "shots/desktop-dark-dashboard_forms_OlKjjpVjac_s_sub_w5oVgPmCAfpumlWgi7.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp",
+      "path": "/dashboard/forms/OOpTwAjRKa",
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 663,
+      "ms": 660,
       "issues": [],
-      "shot": "shots/desktop-dark-dashboard_forms_ZtzkakqVJp.png"
+      "shot": "shots/desktop-dark-dashboard_forms_OOpTwAjRKa.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT",
+      "path": "/dashboard/forms/OlKjjpVjac",
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 672,
+      "ms": 681,
       "issues": [],
-      "shot": "shots/desktop-dark-dashboard_forms_LVYBpkKWBT.png"
+      "shot": "shots/desktop-dark-dashboard_forms_OlKjjpVjac.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ",
-      "viewport": "desktop 1440×900",
-      "theme": "dark",
-      "status": 200,
-      "ms": 663,
-      "issues": [],
-      "shot": "shots/desktop-dark-dashboard_forms_DzPnDsHTAZ.png"
-    },
-    {
-      "path": "/dashboard/forms/LVYBpkKWBT?s=sub_9Mp4qbpdcYpPqHoYzJ",
-      "viewport": "desktop 1440×900",
-      "theme": "dark",
-      "status": 200,
-      "ms": 690,
-      "issues": [],
-      "shot": "shots/desktop-dark-dashboard_forms_LVYBpkKWBT_s_sub_9Mp4qbpdcYpPqHoYzJ.png"
-    },
-    {
-      "path": "/dashboard/forms/ZtzkakqVJp?s=sub_W6jUAp7BXuKm7APBne",
-      "viewport": "desktop 1440×900",
-      "theme": "dark",
-      "status": 200,
-      "ms": 688,
-      "issues": [],
-      "shot": "shots/desktop-dark-dashboard_forms_ZtzkakqVJp_s_sub_W6jUAp7BXuKm7APBne.png"
-    },
-    {
-      "path": "/dashboard/forms/hgbHMmQsNj?s=sub_Ug2QbhleUSdT70qMKf",
+      "path": "/dashboard/forms/b3iYs9L1MJ",
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
       "ms": 679,
       "issues": [],
-      "shot": "shots/desktop-dark-dashboard_forms_hgbHMmQsNj_s_sub_Ug2QbhleUSdT70qMKf.png"
+      "shot": "shots/desktop-dark-dashboard_forms_b3iYs9L1MJ.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ/automations",
+      "path": "/dashboard/forms/7O96Au6Bbr",
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 641,
+      "ms": 666,
       "issues": [],
-      "shot": "shots/desktop-dark-dashboard_forms_DzPnDsHTAZ_automations.png"
+      "shot": "shots/desktop-dark-dashboard_forms_7O96Au6Bbr.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT/automations",
+      "path": "/dashboard/forms/b3iYs9L1MJ?s=sub_eWW1L0Fly1QKI61Iq9",
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 625,
+      "ms": 706,
       "issues": [],
-      "shot": "shots/desktop-dark-dashboard_forms_LVYBpkKWBT_automations.png"
+      "shot": "shots/desktop-dark-dashboard_forms_b3iYs9L1MJ_s_sub_eWW1L0Fly1QKI61Iq9.png"
     },
     {
-      "path": "/f/DzPnDsHTAZ",
+      "path": "/dashboard/forms/OOpTwAjRKa?s=sub_FR2nEAWcYe3W0RmwZS",
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 545,
+      "ms": 670,
       "issues": [],
-      "shot": "shots/desktop-dark-f_DzPnDsHTAZ.png"
+      "shot": "shots/desktop-dark-dashboard_forms_OOpTwAjRKa_s_sub_FR2nEAWcYe3W0RmwZS.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ/setup",
+      "path": "/dashboard/forms/7O96Au6Bbr/automations",
+      "viewport": "desktop 1440×900",
+      "theme": "dark",
+      "status": 200,
+      "ms": 635,
+      "issues": [],
+      "shot": "shots/desktop-dark-dashboard_forms_7O96Au6Bbr_automations.png"
+    },
+    {
+      "path": "/dashboard/forms/b3iYs9L1MJ/automations",
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
       "ms": 623,
       "issues": [],
-      "shot": "shots/desktop-dark-dashboard_forms_DzPnDsHTAZ_setup.png"
+      "shot": "shots/desktop-dark-dashboard_forms_b3iYs9L1MJ_automations.png"
     },
     {
-      "path": "/dashboard/forms/DzPnDsHTAZ/settings",
+      "path": "/f/7O96Au6Bbr",
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 661,
+      "ms": 537,
       "issues": [],
-      "shot": "shots/desktop-dark-dashboard_forms_DzPnDsHTAZ_settings.png"
+      "shot": "shots/desktop-dark-f_7O96Au6Bbr.png"
     },
     {
-      "path": "/f/hgbHMmQsNj",
+      "path": "/dashboard/forms/7O96Au6Bbr/setup",
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 545,
+      "ms": 624,
       "issues": [],
-      "shot": "shots/desktop-dark-f_hgbHMmQsNj.png"
+      "shot": "shots/desktop-dark-dashboard_forms_7O96Au6Bbr_setup.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj/setup",
+      "path": "/dashboard/forms/7O96Au6Bbr/settings",
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 611,
+      "ms": 660,
       "issues": [],
-      "shot": "shots/desktop-dark-dashboard_forms_hgbHMmQsNj_setup.png"
+      "shot": "shots/desktop-dark-dashboard_forms_7O96Au6Bbr_settings.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj/settings",
+      "path": "/f/OlKjjpVjac",
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 648,
+      "ms": 536,
       "issues": [],
-      "shot": "shots/desktop-dark-dashboard_forms_hgbHMmQsNj_settings.png"
+      "shot": "shots/desktop-dark-f_OlKjjpVjac.png"
     },
     {
-      "path": "/dashboard/forms/hgbHMmQsNj/automations",
+      "path": "/dashboard/forms/OlKjjpVjac/setup",
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 628,
+      "ms": 624,
       "issues": [],
-      "shot": "shots/desktop-dark-dashboard_forms_hgbHMmQsNj_automations.png"
+      "shot": "shots/desktop-dark-dashboard_forms_OlKjjpVjac_setup.png"
     },
     {
-      "path": "/f/ZtzkakqVJp",
-      "viewport": "desktop 1440×900",
-      "theme": "dark",
-      "status": 200,
-      "ms": 551,
-      "issues": [],
-      "shot": "shots/desktop-dark-f_ZtzkakqVJp.png"
-    },
-    {
-      "path": "/dashboard/forms/ZtzkakqVJp/setup",
-      "viewport": "desktop 1440×900",
-      "theme": "dark",
-      "status": 200,
-      "ms": 627,
-      "issues": [],
-      "shot": "shots/desktop-dark-dashboard_forms_ZtzkakqVJp_setup.png"
-    },
-    {
-      "path": "/dashboard/forms/ZtzkakqVJp/settings",
+      "path": "/dashboard/forms/OlKjjpVjac/settings",
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
       "ms": 650,
       "issues": [],
-      "shot": "shots/desktop-dark-dashboard_forms_ZtzkakqVJp_settings.png"
+      "shot": "shots/desktop-dark-dashboard_forms_OlKjjpVjac_settings.png"
     },
     {
-      "path": "/dashboard/forms/ZtzkakqVJp/automations",
+      "path": "/dashboard/forms/OlKjjpVjac/automations",
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 617,
+      "ms": 635,
       "issues": [],
-      "shot": "shots/desktop-dark-dashboard_forms_ZtzkakqVJp_automations.png"
+      "shot": "shots/desktop-dark-dashboard_forms_OlKjjpVjac_automations.png"
     },
     {
-      "path": "/f/LVYBpkKWBT",
+      "path": "/f/OOpTwAjRKa",
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 542,
+      "ms": 536,
       "issues": [],
-      "shot": "shots/desktop-dark-f_LVYBpkKWBT.png"
+      "shot": "shots/desktop-dark-f_OOpTwAjRKa.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT/setup",
+      "path": "/dashboard/forms/OOpTwAjRKa/setup",
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
-      "ms": 628,
+      "ms": 627,
       "issues": [],
-      "shot": "shots/desktop-dark-dashboard_forms_LVYBpkKWBT_setup.png"
+      "shot": "shots/desktop-dark-dashboard_forms_OOpTwAjRKa_setup.png"
     },
     {
-      "path": "/dashboard/forms/LVYBpkKWBT/settings",
+      "path": "/dashboard/forms/OOpTwAjRKa/settings",
       "viewport": "desktop 1440×900",
       "theme": "dark",
       "status": 200,
       "ms": 644,
       "issues": [],
-      "shot": "shots/desktop-dark-dashboard_forms_LVYBpkKWBT_settings.png"
+      "shot": "shots/desktop-dark-dashboard_forms_OOpTwAjRKa_settings.png"
+    },
+    {
+      "path": "/dashboard/forms/OOpTwAjRKa/automations",
+      "viewport": "desktop 1440×900",
+      "theme": "dark",
+      "status": 200,
+      "ms": 630,
+      "issues": [],
+      "shot": "shots/desktop-dark-dashboard_forms_OOpTwAjRKa_automations.png"
+    },
+    {
+      "path": "/f/b3iYs9L1MJ",
+      "viewport": "desktop 1440×900",
+      "theme": "dark",
+      "status": 200,
+      "ms": 539,
+      "issues": [],
+      "shot": "shots/desktop-dark-f_b3iYs9L1MJ.png"
+    },
+    {
+      "path": "/dashboard/forms/b3iYs9L1MJ/setup",
+      "viewport": "desktop 1440×900",
+      "theme": "dark",
+      "status": 200,
+      "ms": 630,
+      "issues": [],
+      "shot": "shots/desktop-dark-dashboard_forms_b3iYs9L1MJ_setup.png"
+    },
+    {
+      "path": "/dashboard/forms/b3iYs9L1MJ/settings",
+      "viewport": "desktop 1440×900",
+      "theme": "dark",
+      "status": 200,
+      "ms": 641,
+      "issues": [],
+      "shot": "shots/desktop-dark-dashboard_forms_b3iYs9L1MJ_settings.png"
     }
   ]
 }

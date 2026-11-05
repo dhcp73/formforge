@@ -1,5 +1,7 @@
 import fs from "node:fs";
 import path from "node:path";
+import { createRequire } from "node:module";
+const require = createRequire(import.meta.url);
 import { isEphemeralMode, storageMode } from "./storage/mode";
 export { isEphemeralMode, storageMode, isBrowserMode } from "./storage/mode";
 import type { DbLike } from "./storage/node-sqlite";
@@ -67,14 +69,9 @@ export function getDb(): DB {
   migrate(db);
   g.__ffdb = db;
   g.__ffdbPath = p;
-  if (isEphemeralMode()) {
-    try {
-      const { ensureDemoSeed } = require("./storage/demo-seed") as typeof import("./storage/demo-seed");
-      ensureDemoSeed();
-    } catch (e) { console.error("[db] demo seed", e); }
-  }
   return db;
 }
+
 
 /** Close and forget the cached connection (used by tests). */
 export function resetDb() {

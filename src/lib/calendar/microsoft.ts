@@ -2,7 +2,7 @@
  * Microsoft Outlook Calendar + Mail via OAuth2 (MSAL) + Microsoft Graph.
  */
 import * as msal from "@azure/msal-node";
-import type { CalendarClient, CalendarSlot, CreateEventInput, CreatedEvent, FetchLike, OAuthAppConfig, OAuthTokens, SendMailInput } from "./types";
+import type { CalendarClient, CreateEventInput, CreatedEvent, FetchLike, OAuthAppConfig, OAuthTokens, SendMailInput } from "./types";
 import { slotsFromBusy } from "./slots";
 
 const SCOPES = ["Calendars.ReadWrite", "Mail.Send", "User.Read", "offline_access", "openid", "profile", "email"];

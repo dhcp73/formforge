@@ -41,7 +41,7 @@ export function exportDemoSnapshot(): Record<string, unknown> {
 }
 
 /** Restore a snapshot into the current (ephemeral) DB. Destructive for listed tables. */
-export function importDemoSnapshot(snap: { tables?: Record<string, Record<string, unknown>[] } }) {
+export function importDemoSnapshot(snap: { tables?: Record<string, Array<Record<string, unknown>>> }) {
   if (!isEphemeralMode()) throw new Error("Restore is only allowed in browser/memory mode");
   const db = getDb();
   const tables = snap.tables ?? {};

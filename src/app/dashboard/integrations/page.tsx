@@ -24,7 +24,7 @@ export default async function Integrations({ searchParams }: { searchParams: Pro
     valyu: <UrlRow label="DeepResearch webhook URL (sent automatically; needs a public https PUBLIC_URL)" url={`${base}/api/integrations/valyu/webhook`} />,
   };
   return (
-    <div className="mx-auto max-w-6xl">
+    <div className="mx-auto max-w-6xl overflow-x-hidden">
       <PageHeader title="Integrations" description="Bring your own keys. Keys are encrypted at rest (AES-256-GCM) and environment variables override workspace values. Providers without a key are skipped automatically." />
       {(sp.error || sp.connected) && (
         <Card className={`mb-4 p-3 text-[13px] ${sp.error ? "border-red-200 bg-red-50 text-red-800 dark:border-red-900 dark:bg-red-950/40 dark:text-red-200" : "border-emerald-200 bg-emerald-50 text-emerald-800"}`}>
@@ -36,7 +36,7 @@ export default async function Integrations({ searchParams }: { searchParams: Pro
       </Card>
 
       <h2 className="mb-3 text-[13px] font-semibold uppercase tracking-wide text-fg-subtle">Calendar &amp; email</h2>
-      <div className="mb-6 grid gap-4 lg:grid-cols-2">
+      <div className="mb-6 grid min-w-0 gap-4 lg:grid-cols-2">
         <CalendarConnectCard
           provider="google" label="Google" description="Connect Google Calendar free/busy + Meet links, and send confirmations with Gmail."
           docs="/docs/integrations/google" redirectUri={`${base}/api/oauth/google/callback`}
@@ -54,7 +54,7 @@ export default async function Integrations({ searchParams }: { searchParams: Pro
       </div>
 
       <h2 className="mb-3 text-[13px] font-semibold uppercase tracking-wide text-fg-subtle">Enrichment &amp; AI</h2>
-      <div className="grid gap-4 lg:grid-cols-2">
+      <div className="grid min-w-0 gap-4 lg:grid-cols-2">
         {list.map((v) => <IntegrationCard key={v.id} v={v} save={saveIntegrationAction.bind(null, v.id as IntegrationId)} test={testIntegrationAction.bind(null, v.id as IntegrationId)} extra={extras[v.id]} />)}
       </div>
     </div>
