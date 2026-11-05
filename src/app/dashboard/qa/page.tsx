@@ -18,7 +18,7 @@ export default async function Qa() {
   const last = runs.find((r) => r.status === "passed" || r.status === "failed");
   return (
     <div className="mx-auto max-w-6xl">
-      <PageHeader title="UI QA agent" description="An autonomous Playwright crawler that visits every route across viewports and themes, clicks every control and checks console errors, failed requests, overflow, overlap, accessibility (axe) and dead links. Results feed the status page."
+      <PageHeader title="UI QA agent" description="An autonomous Playwright crawler that visits every route across viewports and themes, follows every internal link and checks console errors, failed requests, overflow, overlap, accessibility (axe) and dead links. Results feed the status page."
         actions={<>{last?.report_path && <ButtonLink href="/api/app/qa/report/index.html" target="_blank"><FileText size={13} />Latest report</ButtonLink>}<ActionButton variant="primary" action={runQaAction}><Bot size={14} />Run quick audit</ActionButton></>} />
       {last && (
         <div className="mb-4 grid grid-cols-2 gap-3 lg:grid-cols-4">
@@ -36,12 +36,12 @@ export default async function Qa() {
               <Badge tone={r.status === "passed" ? "green" : r.status === "failed" ? "red" : "amber"} dot>{r.status}</Badge>
               <span className="text-fg">{fmtDate(r.started_at)}</span>
               <span className="text-fg-subtle">{r.s.mode ?? ""} · {r.s.pages ?? 0} renders · {r.s.errors ?? 0} errors · {r.s.warnings ?? 0} warnings</span>
-              {r.s.aiReview && <Badge tone="violet">AI review</Badge>}
+              {r.s.aiReview === "on" && <Badge tone="violet">AI review</Badge>}
             </li>
           ))}</ul>
         ) : <EmptyState icon={<Bot size={16} />} title="No QA runs yet" description="Run a quick audit, or `npm run agent:ui` for the full matrix." />}
       </Card>
-      <Card className="mt-4"><CardHeader title="Run from the command line" /><div className="p-3"><CodeBlock lang="bash" code={`npm run agent:ui            # full: every route × 4 viewports × light/dark\nnpm run agent:ui -- --quick # 2 viewports, light only\nopen reports/ui-agent/index.html`} /></div></Card>
+      <Card className="mt-4"><CardHeader title="Run from the command line" /><div className="p-3"><CodeBlock lang="bash" code={`npm run agent:ui            # full: every route × 4 viewports × light/dark\nnpm run agent:ui -- --quick # laptop light + mobile dark\nopen reports/ui-agent/index.html`} /></div></Card>
     </div>
   );
 }
