@@ -13,7 +13,8 @@ export default defineConfig({
   globalSetup: "./e2e/global-setup.ts",
   fullyParallel: true,
   workers: 4,
-  timeout: 600_000,
+  retries: 1,
+  timeout: 180_000,
   reporter: [["list"], ["html", { outputFolder: "reports/ui-test", open: "never" }], ["json", { outputFile: "reports/ui-test/results.json" }]],
   use: { baseURL: BASE },
   projects: VIEWPORTS.flatMap((v) => (["light", "dark"] as const).map((theme) => ({

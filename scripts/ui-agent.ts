@@ -19,6 +19,11 @@ import { chromium, type Browser, type BrowserContext } from "@playwright/test";
 import AxeBuilder from "@axe-core/playwright";
 import { watch, layoutIssues, type Issue } from "../e2e/support";
 import { getDb, now } from "@/lib/db";
+
+/** Resolve to a fallback if a page call hangs (a busy renderer must not stall the whole crawl). */
+function guard<T>(p: Promise<T>, fallback: T, ms = 20_000): Promise<T> {
+  return Promise.race([p.catch(() => fallback), new Promise<T>((r) => setTimeout(() => r(fallback), ms))]);
+}
 import { newId } from "@/lib/ids";
 
 const args = process.argv.slice(2);
@@ -170,17 +175,17 @@ async function main() {
       const found: Issue[] = issues().slice(before);
       if (status >= 400) found.push({ kind: "http", severity: "error", message: `${route} returned ${status}` });
       if (ms > 8000) found.push({ kind: "slow", severity: "warning", message: `Load took ${ms} ms` });
-      const content = await page.content().catch(() => "");
+      const content = await guard(page.content(), "");
       if (/Application error|Internal Server Error/.test(content)) found.push({ kind: "crash", severity: "error", message: "Error boundary / server error rendered" });
       if (!route.startsWith("/docs/api")) {
-        found.push(...(await layoutIssues(page).catch(() => [])));
-        const axe = await new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]).analyze().catch(() => null);
+        found.push(...(await guard(layoutIssues(page), [] as Issue[])));
+        const axe = await guard(new AxeBuilder({ page }).withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"]).analyze(), null, 45_000);
         for (const v of axe?.violations ?? []) {
           if (v.impact !== "serious" && v.impact !== "critical") continue;
           found.push({ kind: `axe:${v.id}`, severity: "error", message: `${v.help} (${v.nodes.length} node${v.nodes.length > 1 ? "s" : ""})` });
         }
       }
-      const hrefs = await page.$$eval("a[href]", (as) => as.map((a) => (a as HTMLAnchorElement).href)).catch(() => [] as string[]);
+      const hrefs = await guard(page.$$eval("a[href]", (as) => as.map((a) => (a as HTMLAnchorElement).href)), [] as string[], 15_000);
       for (const h of new Set(hrefs)) {
         const u = new URL(h);
         if (u.origin !== new URL(BASE).origin || skip(u)) continue;

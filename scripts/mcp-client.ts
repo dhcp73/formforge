@@ -21,9 +21,9 @@ async function exercise(name: string, client: Client) {
   console.log(`[${name}] get_stats → total=${stats.total} spamRate=${stats.spamRate}%`);
   if (forms.data[0]) {
     const subs = JSON.parse(text(await client.callTool({ name: "list_submissions", arguments: { form_id: forms.data[0].id, limit: 3 } })));
-    console.log(`[${name}] list_submissions → ${subs.data.length} of ${subs.total}`);
+    console.log(`[${name}] list_submissions → ${subs.data.length} of ${subs.pagination?.total ?? subs.total}`);
     const found = JSON.parse(text(await client.callTool({ name: "search_submissions", arguments: { query: "stripe", limit: 5 } })));
-    console.log(`[${name}] search_submissions("stripe") → ${found.total} matches`);
+    console.log(`[${name}] search_submissions("stripe") → ${found.pagination?.total ?? found.total} matches`);
   }
   const research = await client.callTool({ name: "research_company", arguments: { domain: "stripe.com" } });
   console.log(`[${name}] research_company → ${research.isError ? "error (expected without VALYU_API_KEY): " : ""}${text(research).slice(0, 120)}`);

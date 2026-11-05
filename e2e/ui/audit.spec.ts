@@ -9,6 +9,7 @@ const SHOT_DIR = path.join(process.cwd(), "screenshots", "qa");
 
 for (const route of allRoutes()) {
   test(`${route.name}`, async ({ browser }, info) => {
+    test.setTimeout(120_000);
     const theme = (info.project.metadata as { theme: "light" | "dark" }).theme;
     const ctx = await browser.newContext({ ...info.project.use, storageState: route.auth ? AUTH_FILE : undefined, baseURL: BASE });
     const page = await ctx.newPage();
@@ -18,8 +19,8 @@ for (const route of allRoutes()) {
     const res = await page.goto(url, { waitUntil: "load" });
     expect(res?.status(), `HTTP status for ${url}`).toBeLessThan(400);
     if (route.auth) expect(page.url(), "should stay signed in").not.toContain("/login");
-    await page.waitForLoadState("networkidle").catch(() => undefined);
-    await page.waitForTimeout(300);
+    await page.waitForLoadState("networkidle", { timeout: 15_000 }).catch(() => undefined);
+    await new Promise((r) => setTimeout(r, 300));
     const html = await page.content();
     expect(html).not.toMatch(/Application error|This page could not be found|Internal Server Error/);
     expect(await page.evaluate(() => document.documentElement.classList.contains("dark"))).toBe(theme === "dark");
