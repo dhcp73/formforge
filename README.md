@@ -48,7 +48,7 @@ curl -X POST http://localhost:3100/api/f/FORM_ID -H 'Accept: application/json' -
 
 - **Endpoints:** urlencoded, multipart (files up to 10 MB each, 25 MB total) and JSON, with CORS, a redirect or JSON response, and `_next` / `_subject` overrides.
 - **Spam:** honeypot (accepted but stored as spam), per-IP rate limit, explainable 0–100 spam score (links, keywords, disposable email, bot UA, too-fast submit, duplicates), allowed domains, flag or reject.
-- **Dynamic fields:** schema off / validate / strict, type detection and coercion, regex, length rules, renames, `select` options and **branching logic** (`showIf`, chained; hidden fields aren't required and their values are dropped).
+- **Dynamic fields:** schema off / validate / strict; field types include text, email, number, select, radio, checkbox, multiselect, rating, **choice buttons**, hidden. **Branching** with operators (eq/neq/contains/gt/lt/in/empty/matches/domain_is/…) and actions (goto step, show/hide/skip, end, set_value, route). Choice buttons jump directly to the next step.
 - **Enrichment waterfall:** offline (email syntax/MX/disposable/free/role, IP geo, UA, company dataset) → **Apollo** → **Valyu Search** → **AI** (OpenAI SDK or Vercel AI SDK; OpenRouter fallback) → **Clay** push with a signed callback → optional **Valyu DeepResearch** (async, structured output, webhook or polling, credit estimate shown). Includes per-field source attribution, timeouts, a per-workspace domain cache and cost/credit logs.
 - **Routing:** rules on merged data (size, location, domain, title, AI intent and more; 14 operators, all/any, priority, stop-on-match).
   - **Weighted round-robin**, **account-owner stickiness** (same company domain) and **instant routing**: the owner is promised at submit time, and a **booking link** is returned (`booking_url`) and shown on the thank-you step.
@@ -62,6 +62,9 @@ curl -X POST http://localhost:3100/api/f/FORM_ID -H 'Accept: application/json' -
 - **REST API:** `/api/v1` with an OpenAPI 3.1 spec.
 - **MCP:** 10 tools over stdio and HTTP, with scopes enforced.
 - **Integrations:** Settings → Integrations, with paste key / test / enable. Keys are encrypted at rest (AES-256-GCM), env vars override, and providers auto-disable without a key.
+- **Calendar & email:** Connect Google (Calendar + Gmail via `googleapis`) or Microsoft (Outlook + Teams via MSAL/Graph) per rep. After routing, leads pick a real free/busy slot; FormForge creates the event with a Meet/Teams link and emails the confirmation. Round-robin skips connected reps with no availability. Falls back to external booking links + outbox when not connected.
+- **Webhooks events:** `submission.created`, `submission.enriched`, `submission.routed`, plus aliases `enrichment.completed` and `routing.assigned`. HMAC-SHA256 signed.
+- **Vercel / browser mode:** `STORAGE_MODE=browser` uses Node's built-in SQLite in memory (no `better-sqlite3`), seeds a demo workspace, persists a snapshot to the browser's `localStorage`, and drains jobs via `/api/cron/drain`.
 - **Workspaces:** multi-tenant workspaces with members and a workspace switcher.
 - **Dashboard:** collapsible sidebar, ⌘K palette, breadcrumbs, dense tables (column picker, resize and reorder, filter chips, saved views, bulk actions, pagination, skeletons), a record drawer (Answers · Enrichment · Routing · Activity · Raw), company/contact cards, fit score, analytics, and dark mode.
 - **Monitoring:** worker probes 20 components every 60s; history, uptime %, auto-opening/resolving incidents, optional alerts (`ALERT_WEBHOOK_URL`, `ALERT_EMAIL`).
@@ -95,6 +98,10 @@ stdio (Claude Desktop / Cursor):
 | `FORMFORGE_MONITOR`, `FORMFORGE_MONITOR_INTERVAL_MS` | on, `60000` | Health monitor |
 | `ALERT_WEBHOOK_URL`, `ALERT_EMAIL` | — | Incident alerts |
 | `FORMFORGE_QA_CRON`, `FORMFORGE_QA_AI` | — | Schedule the UI agent; enable AI visual review |
+| `STORAGE_MODE` | `sqlite` | `sqlite` (default file DB), `memory`, or `browser` (Vercel demo: in-memory + localStorage snapshot; no better-sqlite3) |
+| `GOOGLE_CLIENT_ID` / `GOOGLE_CLIENT_SECRET` | — | Google Calendar + Gmail OAuth (or paste in Integrations) |
+| `MICROSOFT_CLIENT_ID` / `MICROSOFT_CLIENT_SECRET` / `MICROSOFT_TENANT` | — | Outlook + Teams OAuth (`common` tenant default) |
+| `CRON_SECRET` | — | Bearer token for `/api/cron/drain` on Vercel |
 
 ## Scripts and tests
 
@@ -107,6 +114,8 @@ stdio (Claude Desktop / Cursor):
 | `npm run screenshots` | Curated product screenshots → `screenshots/*.png` |
 | `npm run lint` / `npm run typecheck` / `npm run build` | Quality gates |
 | `npm run check` | lint + typecheck + test |
+| `npm run test:api-audit` | Hit every API route (auth / scope / invalid body) + verify webhook HMAC events → `reports/api-audit.md` |
+| `npm run build:browser` | Production build with `STORAGE_MODE=browser` (Vercel-ready) |
 
 ## License
 

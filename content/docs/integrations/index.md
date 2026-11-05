@@ -18,3 +18,9 @@ FormForge uses your own keys (BYOK) for external enrichment and AI. Each provide
 | [AI settings](/docs/integrations/ai) | Preferred LLM provider and your ICP | none |
 
 **Waterfall order:** Apollo → Clay → Valyu → offline dataset → IP geo → AI. See [Enrichment](/docs/enrichment) for how merging and attribution work.
+
+
+## Calendar & email
+
+- [Google Calendar & Gmail](/docs/integrations/google)
+- [Microsoft Outlook & Teams](/docs/integrations/microsoft)

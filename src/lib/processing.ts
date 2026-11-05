@@ -27,7 +27,17 @@ function saveEnrichment(id: string, e: Enrichment, status?: string) {
 
 /** Apply routing decision (owner/tags/spam) and fire rule actions. */
 export async function applyRouting(s: SubmissionRecord) {
-  const { decision, matched } = routeSubmission(s.workspaceId, s);
+  let availableOwners: Set<string> | undefined;
+  try {
+    const { listRules } = await import("./routing");
+    const { ownersWithAvailability } = await import("./calendar/booking");
+    const owners = Array.from(new Set(listRules(s.workspaceId, s.formId).flatMap((r) => r.actions.assignTo)));
+    if (owners.length) {
+      const { available } = await ownersWithAvailability(s.workspaceId, owners);
+      availableOwners = new Set(available);
+    }
+  } catch (e) { console.error("[routing] availability", e); }
+  const { decision, matched } = routeSubmission(s.workspaceId, s, availableOwners ? { availableOwners } : {});
   const tags = Array.from(new Set([...s.tags, ...decision.tags]));
   getDb().prepare("UPDATE submissions SET routing = ?, owner = COALESCE(?, owner), tags = ? WHERE id = ?").run(JSON.stringify(decision), decision.owner, JSON.stringify(tags), s.id);
   addActivity(s.id, { type: "routing", message: matched.length ? `Routed by "${matched.map((m) => m.name).join(", ")}"${decision.owner ? ` → ${decision.owner}` : ""}` : "No routing rule matched" });

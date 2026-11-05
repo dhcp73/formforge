@@ -390,3 +390,39 @@ export async function runQaAction(): Promise<ActionState> {
   revalidatePath("/dashboard/qa");
   return { ok: true, message: "QA run queued — results appear here when it finishes (1–3 min)." };
 }
+
+// ---------- calendar / email OAuth ----------
+export async function saveCalendarAppConfigAction(provider: "google" | "microsoft", _: ActionState, fd: FormData): Promise<ActionState> {
+  const { ws } = await ctx();
+  const { saveAppConfig } = await import("@/lib/calendar");
+  const clientId = str(fd, "clientId");
+  const clientSecret = str(fd, "clientSecret");
+  const tenant = str(fd, "tenant") || "common";
+  if (!clientId) return { error: "Client ID is required.", fieldErrors: { clientId: "Required" } };
+  if (!clientSecret || clientSecret.includes("••••")) {
+    // allow updating id only when secret already stored — require secret on first save
+    const { getAppConfig } = await import("@/lib/calendar");
+    if (!getAppConfig(ws, provider)?.clientSecret && !((provider === "google" ? process.env.GOOGLE_CLIENT_SECRET : process.env.MICROSOFT_CLIENT_SECRET))) {
+      return { error: "Client secret is required.", fieldErrors: { clientSecret: "Required" } };
+    }
+  }
+  const payload: { clientId: string; clientSecret?: string; tenant?: string } = { clientId };
+  if (clientSecret && !clientSecret.includes("••••")) payload.clientSecret = clientSecret;
+  else {
+    const { getAppConfig } = await import("@/lib/calendar");
+    const prev = getAppConfig(ws, provider);
+    if (prev?.clientSecret) payload.clientSecret = prev.clientSecret;
+  }
+  if (provider === "microsoft") payload.tenant = tenant;
+  saveAppConfig(ws, provider, payload as { clientId: string; clientSecret: string; tenant?: string });
+  revalidatePath("/dashboard/integrations");
+  return { ok: true, message: `${provider === "google" ? "Google" : "Microsoft"} OAuth app saved.` };
+}
+
+export async function disconnectCalendarAction(provider: "google" | "microsoft"): Promise<ActionState> {
+  const { s, ws } = await ctx();
+  const { deleteConnection } = await import("@/lib/calendar");
+  deleteConnection(ws, s.user.id, provider);
+  revalidatePath("/dashboard/integrations");
+  return { ok: true, message: "Disconnected." };
+}

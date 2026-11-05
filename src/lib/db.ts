@@ -1,32 +1,78 @@
-import Database from "better-sqlite3";
 import fs from "node:fs";
 import path from "node:path";
+import { isEphemeralMode, storageMode } from "./storage/mode";
+export { isEphemeralMode, storageMode, isBrowserMode } from "./storage/mode";
+import type { DbLike } from "./storage/node-sqlite";
 
-type DB = Database.Database;
+type DB = DbLike;
 
-const g = globalThis as unknown as { __ffdb?: DB; __ffdbPath?: string };
+const g = globalThis as unknown as { __ffdb?: DB; __ffdbPath?: string; __ffSeeded?: boolean };
 
 export function dataDir(): string {
+  if (isEphemeralMode()) {
+    const dir = process.env.FORMFORGE_DATA_DIR || path.join(process.cwd(), "data", "ephemeral");
+    try { fs.mkdirSync(dir, { recursive: true }); } catch { /* read-only fs on some hosts */ }
+    return dir;
+  }
   const dir = process.env.FORMFORGE_DATA_DIR || path.join(process.cwd(), "data");
   fs.mkdirSync(dir, { recursive: true });
   return dir;
 }
 
 export function dbPath(): string {
+  if (isEphemeralMode()) return ":memory:";
   return process.env.FORMFORGE_DB || path.join(dataDir(), "formforge.db");
+}
+
+async function openSqliteFile(p: string): Promise<DB> {
+  // Dynamic import so better-sqlite3 is never loaded in browser/memory mode (Vercel-safe).
+  const Database = (await import("better-sqlite3")).default;
+  const db = new Database(p) as unknown as DB & { pragma: (s: string) => unknown; transaction: <T>(fn: () => T) => () => T; close: () => void };
+  return db;
+}
+
+function openNow(p: string): DB {
+  if (isEphemeralMode()) {
+    // Synchronous path using node:sqlite — no native addon.
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
+    const { openNodeSqlite } = require("./storage/node-sqlite") as typeof import("./storage/node-sqlite");
+    return openNodeSqlite(p);
+  }
+  // Sync require for the default path (Next.js serverExternalPackages handles the native binding).
+  // eslint-disable-next-line @typescript-eslint/no-require-imports
+  const Database = require("better-sqlite3");
+  const db = new Database(p);
+  db.pragma("journal_mode = WAL");
+  db.pragma("foreign_keys = ON");
+  db.pragma("busy_timeout = 5000");
+  return db as DB;
 }
 
 export function getDb(): DB {
   const p = dbPath();
   if (g.__ffdb && g.__ffdbPath === p) return g.__ffdb;
-  if (p !== ":memory:") fs.mkdirSync(path.dirname(p), { recursive: true });
-  const db = new Database(p);
-  db.pragma("journal_mode = WAL");
-  db.pragma("foreign_keys = ON");
-  db.pragma("busy_timeout = 5000");
+  if (p !== ":memory:") {
+    try { fs.mkdirSync(path.dirname(p), { recursive: true }); } catch { /* ignore */ }
+  }
+  const db = openNow(p);
+  if (!isEphemeralMode()) {
+    try {
+      db.pragma("journal_mode = WAL");
+      db.pragma("foreign_keys = ON");
+      db.pragma("busy_timeout = 5000");
+    } catch { /* already set */ }
+  } else {
+    try { db.exec("PRAGMA foreign_keys = ON"); } catch { /* ignore */ }
+  }
   migrate(db);
   g.__ffdb = db;
   g.__ffdbPath = p;
+  if (isEphemeralMode()) {
+    try {
+      const { ensureDemoSeed } = require("./storage/demo-seed") as typeof import("./storage/demo-seed");
+      ensureDemoSeed();
+    } catch (e) { console.error("[db] demo seed", e); }
+  }
   return db;
 }
 
@@ -37,6 +83,7 @@ export function resetDb() {
   }
   g.__ffdb = undefined;
   g.__ffdbPath = undefined;
+  g.__ffSeeded = false;
 }
 
 export function now(): string {
@@ -46,6 +93,13 @@ export function now(): string {
 export function parseJson<T>(v: unknown, fallback: T): T {
   if (typeof v !== "string" || !v) return fallback;
   try { return JSON.parse(v) as T; } catch { return fallback; }
+}
+
+export function demoModeLabel(): string | null {
+  const m = storageMode();
+  if (m === "browser") return "Demo mode: data stored in your browser (server memory is ephemeral per instance).";
+  if (m === "memory") return "Demo mode: in-memory database (resets when the server restarts).";
+  return null;
 }
 
 const MIGRATIONS: string[] = [
@@ -305,6 +359,44 @@ const MIGRATIONS: string[] = [
     finished_at TEXT
   );
   `,
+  `
+  CREATE TABLE IF NOT EXISTS oauth_connections (
+    id TEXT PRIMARY KEY,
+    workspace_id TEXT NOT NULL,
+    user_id TEXT NOT NULL,
+    provider TEXT NOT NULL,
+    account_email TEXT NOT NULL DEFAULT '',
+    scopes TEXT NOT NULL DEFAULT '[]',
+    token_enc TEXT NOT NULL,
+    refresh_enc TEXT,
+    expires_at TEXT,
+    meta TEXT NOT NULL DEFAULT '{}',
+    created_at TEXT NOT NULL,
+    updated_at TEXT NOT NULL,
+    UNIQUE (workspace_id, user_id, provider)
+  );
+  CREATE INDEX IF NOT EXISTS idx_oauth_ws ON oauth_connections(workspace_id, provider);
+  CREATE TABLE IF NOT EXISTS oauth_app_config (
+    workspace_id TEXT NOT NULL,
+    provider TEXT NOT NULL,
+    config_enc TEXT NOT NULL,
+    updated_at TEXT NOT NULL,
+    PRIMARY KEY (workspace_id, provider)
+  );
+  CREATE TABLE IF NOT EXISTS bookings (
+    id TEXT PRIMARY KEY,
+    workspace_id TEXT NOT NULL,
+    submission_id TEXT,
+    owner_email TEXT NOT NULL,
+    provider TEXT NOT NULL,
+    start_at TEXT NOT NULL,
+    end_at TEXT NOT NULL,
+    meet_url TEXT,
+    event_id TEXT,
+    status TEXT NOT NULL DEFAULT 'confirmed',
+    created_at TEXT NOT NULL
+  );
+  `,
 ];
 
 function migrate(db: DB) {
@@ -312,9 +404,19 @@ function migrate(db: DB) {
   const row = db.prepare(`SELECT MAX(version) AS v FROM _migrations`).get() as { v: number | null };
   const current = row?.v ?? 0;
   for (let i = current; i < MIGRATIONS.length; i++) {
+    // ALTER TABLE … ADD COLUMN fails when the column already exists — run statements individually and ignore duplicates
+    const stmts = MIGRATIONS[i].split(";").map((x) => x.trim()).filter(Boolean);
     db.transaction(() => {
-      db.exec(MIGRATIONS[i]);
+      for (const sql of stmts) {
+        try { db.exec(sql); } catch (e) {
+          const msg = e instanceof Error ? e.message : String(e);
+          if (!/duplicate column|already exists/i.test(msg)) throw e;
+        }
+      }
       db.prepare(`INSERT INTO _migrations (version, applied_at) VALUES (?, ?)`).run(i + 1, now());
     })();
   }
 }
+
+// Keep openSqliteFile referenced for tree-shaking clarity in docs (async path unused in sync getDb).
+void openSqliteFile;

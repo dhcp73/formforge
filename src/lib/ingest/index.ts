@@ -12,6 +12,7 @@ import { contextFor, runInlineEnrichment } from "../enrich/pipeline";
 import { enqueueJob } from "../jobs";
 import { getSubmissionById } from "../submissions";
 import { previewRouting } from "../routing";
+import { isEphemeralMode } from "../storage/mode";
 
 export const MAX_FILE_BYTES = 10 * 1024 * 1024;
 export const MAX_TOTAL_BYTES = 25 * 1024 * 1024;
@@ -90,7 +91,7 @@ export class IngestError extends Error {
 export interface IngestResult { id: string; isSpam: boolean; spamScore: number; form: FormRecord }
 
 /** Core ingest pipeline (framework-agnostic). */
-export async function ingest(formId: string, req: Request): Promise<IngestResult & { redirect: string | null; bookingUrl: string | null }> {
+export async function ingest(formId: string, req: Request): Promise<IngestResult & { redirect: string | null; bookingUrl: string | null; owner: string | null; nativeBooking: boolean }> {
   const form = getFormPublic(formId);
   if (!form) throw new IngestError(404, "Form not found", undefined, "form_not_found");
   const s = form.settings;
@@ -173,21 +174,38 @@ export async function ingest(formId: string, req: Request): Promise<IngestResult
 
   // instant routing preview: promise an owner + booking link now (enrichment may refine routing in the worker)
   let bookingUrl: string | null = null;
+  let owner: string | null = null;
   if (!isSpam) {
     try {
       const rec = getSubmissionById(id);
       const pv = rec ? previewRouting(form.workspaceId, rec) : null;
-      if (pv?.owner) db.prepare("UPDATE submissions SET owner = ? WHERE id = ?").run(pv.owner, id);
+      if (pv?.owner) { db.prepare("UPDATE submissions SET owner = ? WHERE id = ?").run(pv.owner, id); owner = pv.owner; }
       bookingUrl = pv?.bookingUrl ?? null;
       if (!bookingUrl && logic.route?.bookingUrl && /^https?:\/\//i.test(logic.route.bookingUrl)) bookingUrl = logic.route.bookingUrl;
-      if (logic.route?.assignTo?.length && !pv?.owner) {
-        db.prepare("UPDATE submissions SET owner = ? WHERE id = ?").run(logic.route.assignTo[0], id);
+      if (logic.route?.assignTo?.length && !owner) {
+        owner = logic.route.assignTo[0];
+        db.prepare("UPDATE submissions SET owner = ? WHERE id = ?").run(owner, id);
       }
     } catch (e) { console.error("[ingest] routing preview", e); }
   }
   enqueueJob("submission.process", { submissionId: id });
+  if (isEphemeralMode()) {
+    // No background worker on Vercel — process inline (best-effort).
+    try {
+      const { registerHandlers } = await import("../worker");
+      const { drainJobs } = await import("../jobs");
+      registerHandlers();
+      await drainJobs(10);
+    } catch (e) { console.error("[ingest] inline drain", e); }
+  }
   const redirect = redirectField && /^https?:\/\//.test(redirectField) ? redirectField : s.redirectUrl || null;
-  return { id, isSpam, spamScore: spam.score, form, redirect, bookingUrl };
+  let nativeBooking = false;
+  if (owner) {
+    try {
+      nativeBooking = !!db.prepare("SELECT 1 FROM oauth_connections WHERE workspace_id = ? AND lower(account_email) = lower(?)").get(form.workspaceId, owner);
+    } catch { /* table may not exist in very old DBs */ }
+  }
+  return { id, isSpam, spamScore: spam.score, form, redirect, bookingUrl, owner, nativeBooking };
 }
 
 export function wantsJson(req: Request): boolean {
@@ -202,7 +220,7 @@ export async function handleSubmissionRequest(req: Request, formId: string, base
   const json = wantsJson(req);
   try {
     const r = await ingest(formId, req);
-    if (json) return Response.json({ ok: true, status: "success", id: r.id, spam: r.isSpam, ...(r.bookingUrl ? { booking_url: r.bookingUrl } : {}) }, { status: 200, headers: cors });
+    if (json) return Response.json({ ok: true, status: "success", id: r.id, spam: r.isSpam, ...(r.owner ? { owner: r.owner } : {}), ...(r.bookingUrl ? { booking_url: r.bookingUrl } : {}), ...(r.nativeBooking ? { native_booking: true } : {}) }, { status: 200, headers: cors });
     const target = r.redirect ?? `${baseUrl}/thanks?form=${encodeURIComponent(formId)}${req.headers.get("referer") ? `&back=${encodeURIComponent(req.headers.get("referer")!)}` : ""}${r.bookingUrl ? `&book=${encodeURIComponent(r.bookingUrl)}` : ""}`;
     return new Response(null, { status: 303, headers: { ...cors, Location: target } });
   } catch (e) {

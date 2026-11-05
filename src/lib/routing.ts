@@ -222,9 +222,26 @@ export function previewRouting(ws: string, s: SubmissionRecord) {
 }
 
 /** Evaluate + persist (round-robin index, hit counts). Returns decision; caller stores on submission. */
-export function routeSubmission(ws: string, s: SubmissionRecord): { decision: RoutingDecision; matched: RoutingRule[] } {
+
+/** True when this email has a connected calendar (used to zero-weight unavailable reps). */
+function getConnectionHint(ws: string, email: string): boolean {
+  const r = getDb().prepare("SELECT 1 FROM oauth_connections WHERE workspace_id = ? AND lower(account_email) = lower(?) LIMIT 1").get(ws, email);
+  return !!r;
+}
+
+export function routeSubmission(ws: string, s: SubmissionRecord, opts: { availableOwners?: Set<string> } = {}): { decision: RoutingDecision; matched: RoutingRule[] } {
   const db = getDb();
-  const rules = listRules(ws, s.formId);
+  let rules = listRules(ws, s.formId);
+  if (opts.availableOwners && opts.availableOwners.size) {
+    rules = rules.map((r) => {
+      if (!r.actions.assignTo.length) return r;
+      const weights = { ...r.actions.weights };
+      for (const o of r.actions.assignTo) {
+        if (!opts.availableOwners!.has(o) && getConnectionHint(ws, o)) weights[o] = 0;
+      }
+      return { ...r, actions: { ...r.actions, weights } };
+    });
+  }
   const ctx = leadContext(s);
   const notes = new Map<string, string>();
   const res = evaluateRules(rules, ctx, ownerPicker(ws, s, ctx, true, notes));
