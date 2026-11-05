@@ -75,7 +75,7 @@ export function SubmissionsTable({ rows, dataColumns, total, page, totalPages, l
         cell: ({ row: { original: r } }) => (
           <div className="flex min-w-0 items-center gap-2">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            {r.domain ? <img src={`https://www.google.com/s2/favicons?domain=${r.domain}&sz=32`} alt="" width={16} height={16} className="h-4 w-4 shrink-0 rounded-sm" loading="lazy" /> : <span className="flex h-4 w-4 shrink-0 items-center justify-center rounded-sm bg-muted text-[9px] font-semibold text-fg-subtle">{r.name.slice(0, 1).toUpperCase()}</span>}
+            <span aria-hidden="true" className={cn("flex h-4 w-4 shrink-0 items-center justify-center rounded-sm text-[9px] font-semibold", r.domain ? "text-white" : "bg-muted text-fg-subtle")} style={r.domain ? { background: `hsl(${[...r.domain].reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) % 360, 0)} 55% 34%)` } : undefined}>{r.name.slice(0, 1).toUpperCase()}</span>
             <div className="min-w-0"><div className={cn("truncate font-medium text-fg", r.status === "new" && "font-semibold")}>{r.name}</div>{r.email && r.email !== r.name && <div className="truncate text-[11.5px] text-fg-subtle">{r.email}</div>}</div>
           </div>
         ) },

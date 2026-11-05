@@ -23,8 +23,8 @@ export function DeliveryRow({ d }: { d: DeliveryView }) {
       </button>
       {open && (
         <div className="grid gap-3 bg-subtle/60 px-4 py-3 lg:grid-cols-2">
-          <div><p className="mb-1 text-[11.5px] font-medium uppercase tracking-wide text-fg-subtle">Request payload</p><pre className="scrollbar-thin max-h-64 overflow-auto rounded-md border border-line bg-panel p-2 font-mono text-[11.5px] text-fg-muted">{pretty(d.payload)}</pre></div>
-          <div><p className="mb-1 text-[11.5px] font-medium uppercase tracking-wide text-fg-subtle">Response {d.error && <span className="normal-case text-red-600">· {d.error}</span>}</p><pre className="scrollbar-thin max-h-64 overflow-auto rounded-md border border-line bg-panel p-2 font-mono text-[11.5px] text-fg-muted">{pretty(d.response_body) || "(empty)"}</pre>
+          <div><p className="mb-1 text-[11.5px] font-medium uppercase tracking-wide text-fg-subtle">Request payload</p><pre tabIndex={0} className="scrollbar-thin max-h-64 overflow-auto rounded-md border border-line bg-panel p-2 font-mono text-[11.5px] text-fg-muted">{pretty(d.payload)}</pre></div>
+          <div><p className="mb-1 text-[11.5px] font-medium uppercase tracking-wide text-fg-subtle">Response {d.error && <span className="normal-case text-red-600">· {d.error}</span>}</p><pre tabIndex={0} className="scrollbar-thin max-h-64 overflow-auto rounded-md border border-line bg-panel p-2 font-mono text-[11.5px] text-fg-muted">{pretty(d.response_body) || "(empty)"}</pre>
             {d.next_attempt_at && d.status === "retrying" && <p className="mt-1 text-[12px] text-amber-600">Next retry {new Date(d.next_attempt_at).toLocaleTimeString("en-GB", { timeZone: "Europe/London" })} UK</p>}
             <div className="mt-2"><ActionButton size="sm" action={redeliverAction.bind(null, d.id)}><RotateCw size={13} />Redeliver</ActionButton></div>
           </div>

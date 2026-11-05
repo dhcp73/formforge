@@ -34,10 +34,11 @@ export function loadDoc(slug: string) {
       table(token) {
         const head = token.header.map((c) => `<th>${this.parser.parseInline(c.tokens)}</th>`).join("");
         const body = token.rows.map((r) => `<tr>${r.map((c) => `<td>${this.parser.parseInline(c.tokens)}</td>`).join("")}</tr>`).join("");
-        return `<div class="table-wrap"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
+        return `<div class="table-wrap" tabindex="0"><table><thead><tr>${head}</tr></thead><tbody>${body}</tbody></table></div>`;
       },
     },
   });
-  const html = marked.parse(md.replace(/^#\s+.+$/m, ""), { async: false }) as string;
+  // scrollable code blocks must be keyboard-focusable (WCAG scrollable-region-focusable)
+  const html = (marked.parse(md.replace(/^#\s+.+$/m, ""), { async: false }) as string).replaceAll("<pre>", '<pre tabindex="0">');
   return { title, html, toc, file: path.relative(process.cwd(), file) };
 }

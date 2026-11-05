@@ -33,8 +33,9 @@ function SidebarContent({ collapsed, workspace, workspaces, onNavigate, onCollap
       <div className={cn("flex h-12 items-center gap-1 border-b border-line px-2", collapsed && "justify-center")}>
         <Menu>
           <MenuTrigger asChild>
-            <button type="button" className={cn("flex min-w-0 flex-1 items-center gap-2 rounded-md px-1.5 py-1.5 text-left hover:bg-muted", collapsed && "flex-none")} aria-label="Switch workspace">
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-accent text-[11px] font-semibold text-white">{initials(workspace.name)}</span>
+            <button type="button" className={cn("flex min-w-0 flex-1 items-center gap-2 rounded-md px-1.5 py-1.5 text-left hover:bg-muted", collapsed && "flex-none")}>
+              <span aria-hidden="true" className="flex h-6 w-6 shrink-0 items-center justify-center rounded-md bg-accent text-[11px] font-semibold text-white">{initials(workspace.name)}</span>
+              {collapsed && <span className="sr-only">{workspace.name}</span>}<span className="sr-only">, switch workspace</span>
               {!collapsed && <><span className="min-w-0 flex-1 truncate text-[13px] font-semibold text-fg">{workspace.name}</span><ChevronsUpDown size={14} className="text-fg-subtle" /></>}
             </button>
           </MenuTrigger>
@@ -186,12 +187,12 @@ export function AppShell({ user, workspace, workspaces, forms, children }: Shell
           <div className="flex-1 sm:hidden" />
           <button type="button" onClick={() => setPalette(true)} data-testid="search-trigger"
             className="flex h-8 items-center gap-2 rounded-md border border-line bg-panel px-2.5 text-[12.5px] text-fg-subtle hover:border-line-strong sm:w-64">
-            <Search size={14} /><span className="hidden flex-1 text-left sm:inline">Search or jump to…</span><span className="hidden sm:inline"><Kbd>⌘K</Kbd></span>
+            <Search size={14} aria-hidden="true" /><span className="sr-only sm:hidden">Search or jump to…</span><span className="hidden flex-1 text-left sm:inline">Search or jump to…</span><span className="hidden sm:inline"><Kbd>⌘K</Kbd></span>
           </button>
           <ThemeToggle />
           <Menu>
             <MenuTrigger asChild>
-              <button type="button" aria-label="User menu" className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-800 text-[11px] font-semibold text-white dark:bg-zinc-200 dark:text-zinc-900">{initials(user.name)}</button>
+              <button type="button" className="flex h-8 w-8 items-center justify-center rounded-full bg-zinc-800 text-[11px] font-semibold text-white dark:bg-zinc-200 dark:text-zinc-900"><span aria-hidden="true">{initials(user.name)}</span><span className="sr-only">User menu ({user.name})</span></button>
             </MenuTrigger>
             <MenuContent className="w-60">
               <div className="px-2 py-1.5"><div className="truncate text-[13px] font-medium text-fg">{user.name}</div><div className="truncate text-[12px] text-fg-subtle">{user.email}</div></div>

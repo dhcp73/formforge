@@ -7,15 +7,19 @@ const html = `<!doctype html>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>API reference · FormForge</title>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+<script>
+  // follow the site theme (next-themes stores it in localStorage "theme"; default light)
+  (function () { try { var t = localStorage.getItem("theme"); window.__ffDark = t === "dark"; if (window.__ffDark) document.documentElement.classList.add("dark"); } catch (e) { window.__ffDark = false; } })();
+</script>
 <style>
-  :root { color-scheme: light dark; }
+  :root { color-scheme: light; } html.dark { color-scheme: dark; }
   body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
   .ff-bar { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; gap: 16px; height: 48px; padding: 0 16px; border-bottom: 1px solid #e4e4e7; background: #fff; font-size: 13px; }
   .ff-bar a { color: #3f3f46; text-decoration: none; } .ff-bar a:hover { color: #18181b; }
   .ff-bar a:focus-visible { outline: 2px solid #4f46e5; outline-offset: 2px; border-radius: 4px; }
   .ff-brand { display: flex; align-items: center; gap: 8px; font-weight: 600; color: #18181b !important; }
   .ff-spacer { flex: 1; }
-  @media (prefers-color-scheme: dark) { .ff-bar { background: #0b0b0e; border-color: #27272a; } .ff-bar a { color: #a1a1aa; } .ff-brand, .ff-bar a:hover { color: #fafafa !important; } }
+  html.dark .ff-bar { background: #0b0b0e; border-color: #27272a; } html.dark .ff-bar a { color: #a1a1aa; } html.dark .ff-brand, html.dark .ff-bar a:hover { color: #fafafa !important; }
   @media (max-width: 520px) { .ff-hide-sm { display: none; } }
 </style>
 </head>
@@ -35,6 +39,9 @@ const html = `<!doctype html>
   Scalar.createApiReference('#app', {
     url: '/api/v1/openapi.json',
     withDefaultFonts: false,
+    darkMode: !!window.__ffDark,
+    forceDarkModeState: window.__ffDark ? 'dark' : 'light',
+    hideDarkModeToggle: true,
     hideClientButton: false,
     defaultHttpClient: { targetKey: 'shell', clientKey: 'curl' },
     authentication: { preferredSecurityScheme: 'bearerAuth' },

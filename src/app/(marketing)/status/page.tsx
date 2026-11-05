@@ -10,7 +10,7 @@ export default function StatusPage() {
   return (
     <div className="mx-auto max-w-4xl px-4 py-14 sm:px-6">
       <h1 className="text-[30px] font-semibold tracking-tight text-fg">System status</h1>
-      <p className="mt-2 text-[14px] text-fg-muted">Live results from FormForge&apos;s continuous health monitor. Machine-readable: <a className="text-accent underline-offset-2 hover:underline" href="/api/health/ready">/api/health/ready</a></p>
+      <p className="mt-2 text-[14px] text-fg-muted">Live results from FormForge&apos;s continuous health monitor. Machine-readable: <a className="font-mono text-accent underline underline-offset-2" href="/api/health/ready">/api/health/ready</a></p>
       <div className="mt-8"><StatusBoard summary={summary} /></div>
     </div>
   );

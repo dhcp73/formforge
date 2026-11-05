@@ -111,7 +111,7 @@ export const companyEnricher: Enricher = {
   isEnabled: (ctx) => !!ctx.domain,
   async run(ctx) {
     const domain = ctx.domain!;
-    const fields: Record<string, unknown> = { "company.domain": domain, "company.website": `https://${domain}`, "company.logo": `https://www.google.com/s2/favicons?domain=${domain}&sz=64` };
+    const fields: Record<string, unknown> = { "company.domain": domain, "company.website": `https://${domain}` };
     if (ctx.companyName) fields["company.name"] = ctx.companyName;
     const c = OFFLINE_COMPANIES[domain];
     if (c) Object.assign(fields, {

@@ -19,7 +19,7 @@ export function CodeBlock({ code, lang, className }: { code: string; lang?: stri
     <div className={cn("group relative overflow-hidden rounded-lg border border-zinc-800 bg-[#0f0f14]", className)}>
       {lang && <div className="flex items-center justify-between border-b border-zinc-800 px-3 py-1.5 text-[11px] font-medium uppercase tracking-wide text-zinc-400">{lang}</div>}
       <CopyButton value={code} className="absolute right-1.5 top-1 text-zinc-400 hover:bg-zinc-800 hover:text-white" />
-      <pre className="scrollbar-thin overflow-x-auto p-3 text-[12.5px] leading-relaxed text-zinc-100"><code>{code}</code></pre>
+      <pre tabIndex={0} className="scrollbar-thin overflow-x-auto p-3 text-[12.5px] leading-relaxed text-zinc-100"><code>{code}</code></pre>
     </div>
   );
 }

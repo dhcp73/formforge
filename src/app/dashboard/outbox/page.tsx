@@ -23,7 +23,7 @@ export default async function Outbox() {
                     <Badge tone={e.status === "sent" ? "green" : e.status === "failed" ? "red" : "gray"}>{e.status}</Badge><Badge>{e.kind}</Badge>
                     <span className="min-w-0 flex-1 truncate font-medium text-fg">{e.subject}</span><span className="text-fg-subtle">to {e.to_addr}</span><span className="w-16 text-right text-fg-subtle">{timeAgo(e.created_at)}</span>
                   </summary>
-                  <pre className="mx-4 mb-3 max-h-72 overflow-auto whitespace-pre-wrap rounded-md border border-line bg-subtle p-3 font-sans text-[12.5px] text-fg-muted">{e.text_body}{e.error ? `\n\nError: ${e.error}` : ""}</pre>
+                  <pre tabIndex={0} className="mx-4 mb-3 max-h-72 overflow-auto whitespace-pre-wrap rounded-md border border-line bg-subtle p-3 font-sans text-[12.5px] text-fg-muted">{e.text_body}{e.error ? `\n\nError: ${e.error}` : ""}</pre>
                 </details>
               </li>
             ))}

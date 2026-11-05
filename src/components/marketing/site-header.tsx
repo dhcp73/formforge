@@ -26,20 +26,20 @@ export function SiteHeader({ signedIn }: { signedIn: boolean }) {
       <div className="mx-auto flex h-14 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
         <div className="flex items-center gap-8">
           <Logo />
-          <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
+          <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
             {NAV.map((n) => (
               <Link key={n.href} href={n.href} className={cn("rounded-md px-2.5 py-1.5 text-[13.5px] text-fg-muted hover:bg-muted hover:text-fg", path?.startsWith(n.href) && "text-fg")}>{n.label}</Link>
             ))}
           </nav>
         </div>
-        <div className="hidden items-center gap-2 md:flex">
+        <div className="hidden items-center gap-2 lg:flex">
           <ThemeToggle />
           {signedIn ? <ButtonLink href="/dashboard" variant="primary">Open dashboard</ButtonLink> : <>
             <ButtonLink href="/login" variant="ghost">Log in</ButtonLink>
             <ButtonLink href="/signup" variant="primary">Start free</ButtonLink>
           </>}
         </div>
-        <div className="flex items-center gap-1 md:hidden">
+        <div className="flex items-center gap-1 lg:hidden">
           <ThemeToggle />
           <button type="button" aria-label={open ? "Close menu" : "Open menu"} aria-expanded={open} onClick={() => setOpen(!open)} className="rounded-md p-2 text-fg-muted hover:bg-muted">
             {open ? <X size={18} /> : <MenuIcon size={18} />}
@@ -47,7 +47,7 @@ export function SiteHeader({ signedIn }: { signedIn: boolean }) {
         </div>
       </div>
       {open && (
-        <div className="border-t border-line bg-panel px-4 pb-4 pt-2 md:hidden">
+        <div className="border-t border-line bg-panel px-4 pb-4 pt-2 lg:hidden">
           <nav aria-label="Mobile" className="flex flex-col">
             {NAV.map((n) => <Link key={n.href} href={n.href} className="rounded-md px-2 py-2.5 text-[14px] text-fg hover:bg-muted">{n.label}</Link>)}
           </nav>

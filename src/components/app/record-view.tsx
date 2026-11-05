@@ -11,6 +11,9 @@ import { listDeliveries } from "@/lib/webhooks";
 export const SOURCE_TONE: Record<string, Tone> = { apollo: "indigo", clay: "amber", valyu: "violet", offline: "gray", ipgeo: "blue", ai: "green", email: "gray", useragent: "gray" };
 export const SOURCE_LABEL: Record<string, string> = { apollo: "Apollo", clay: "Clay", valyu: "Valyu", offline: "Offline", ipgeo: "IP geo", ai: "AI", email: "Email check", useragent: "User-agent" };
 
+/** Deterministic avatar hue from a string (no third-party logo requests, so lead domains never leak). */
+const hue = (s: string) => { let h = 0; for (const ch of s) h = (h * 31 + ch.charCodeAt(0)) % 360; return h; };
+
 export function SourceBadge({ source }: { source?: string }) {
   if (!source) return null;
   return <Badge tone={SOURCE_TONE[source] ?? "gray"}>{SOURCE_LABEL[source] ?? source}</Badge>;
@@ -38,7 +41,7 @@ export function CompanyCard({ e }: { e: Enrichment }) {
     <Card className="p-4">
       <div className="flex items-start gap-3">
         {/* eslint-disable-next-line @next/next/no-img-element */}
-        {c.domain ? <img src={`https://www.google.com/s2/favicons?domain=${c.domain}&sz=64`} alt="" width={36} height={36} className="h-9 w-9 rounded-md border border-line bg-white p-1" /> : <Building2 size={36} className="text-fg-subtle" />}
+        {c.domain || c.name ? <span aria-hidden="true" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md text-[14px] font-semibold text-white" style={{ background: `hsl(${hue(String(c.domain ?? c.name))} 55% 34%)` }}>{String(c.name ?? c.domain).slice(0, 1).toUpperCase()}</span> : <Building2 size={36} className="text-fg-subtle" />}
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2"><span className="text-[14px] font-semibold text-fg">{c.name ?? c.domain}</span><Attr e={e} path="company.name" /></div>
           {c.domain && <a href={`https://${c.domain}`} target="_blank" rel="noreferrer" className="text-[12.5px] text-accent hover:underline">{c.domain}</a>}

@@ -78,3 +78,14 @@ body { font-feature-settings: "cv11", "ss01"; -webkit-font-smoothing: antialiase
 .prose-docs .table-wrap table { margin: 0; }
 .prose-docs pre code { color: #e4e4e7; }
 .prose-docs h2, .prose-docs h3 { scroll-margin-top: 5rem; }
+
+/* Dark-mode text contrast (WCAG AA): accent + status text colours are lightened on dark surfaces. */
+.dark .text-accent, .dark .hover\:text-accent:hover { color: #a5b4fc; }
+.dark .text-red-600, .dark .text-red-700 { color: #f87171; }
+.dark .text-emerald-600, .dark .text-emerald-700, .dark .text-green-600 { color: #34d399; }
+.dark .text-amber-600, .dark .text-amber-700 { color: #fbbf24; }
+.dark .text-indigo-600, .dark .text-indigo-700 { color: #a5b4fc; }
+
+/* Grid/flex children may shrink below their content (prevents code blocks and long URLs from forcing horizontal page overflow). */
+.grid > * { min-width: 0; }
+.prose-docs :not(pre) > code { overflow-wrap: anywhere; }
