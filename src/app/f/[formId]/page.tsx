@@ -32,7 +32,7 @@ export default async function HostedFormPage({ params, searchParams }: { params:
         <h1 className="text-[20px] font-semibold tracking-tight text-fg">{form.name}</h1>
         {form.description && <p className="mt-1 text-[13.5px] text-fg-muted">{form.description}</p>}
         <div className="mt-6">
-          {a.open ? <HostedForm formId={form.id} fields={fields} honeypot={form.settings.honeypotField} /> : <p role="status" className="rounded-md border border-line bg-subtle p-4 text-[13.5px] text-fg-muted">{form.settings.closedMessage}</p>}
+          {a.open ? <HostedForm formId={form.id} fields={fields} honeypot={form.settings.honeypotField} steps={form.settings.steps} logic={form.settings.logic} nativeBooking /> : <p role="status" className="rounded-md border border-line bg-subtle p-4 text-[13.5px] text-fg-muted">{form.settings.closedMessage}</p>}
         </div>
       </div>
       {!embed && <p className="mt-6 flex items-center justify-center gap-1.5 text-[12px] text-fg-subtle"><LogoMark size={14} />Powered by <Link href="/" className="font-medium text-fg-muted hover:text-fg">FormForge</Link></p>}

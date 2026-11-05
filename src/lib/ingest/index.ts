@@ -5,7 +5,7 @@ import { newId, sha256 } from "../ids";
 import { formAvailability, getFormPublic } from "../forms";
 import type { FormRecord, StoredFile, SubmissionMeta } from "../types";
 import { applyMapping, coerce, fieldTypesFor, validate } from "./schema";
-import { hiddenFields } from "./logic";
+import { applyLogicToData } from "./logic";
 import { scoreSpam } from "./spam";
 import { rateLimit } from "./ratelimit";
 import { contextFor, runInlineEnrichment } from "../enrich/pipeline";
@@ -116,6 +116,13 @@ export async function ingest(formId: string, req: Request): Promise<IngestResult
   for (const [k, v] of Object.entries(rawData)) if (k !== s.honeypotField && !RESERVED.has(k) && !k.startsWith("$")) data[k] = v;
   if (!Object.keys(data).length && !files.length) throw new IngestError(422, "Submission is empty", { _form: "Send at least one field" }, "empty");
 
+  // Apply branching logic (show/hide/skip/set_value) before validation so hidden fields aren't required
+  const applied = applyLogicToData(s.fields, data, { rules: s.logic, steps: s.steps });
+  const logic = applied.logic;
+  for (const k of Object.keys(data)) delete data[k];
+  Object.assign(data, applied.data);
+  if (logic.ended && Object.keys(data).length === 0) throw new IngestError(422, "Form ended before any answers", { _form: "Nothing to submit" }, "ended");
+
   const fileFields = files.map((f) => (f as File & { __field: string }).__field);
   const errors = validate(data, fileFields, s);
   let total = 0;
@@ -125,8 +132,6 @@ export async function ingest(formId: string, req: Request): Promise<IngestResult
   }
   if (total > MAX_TOTAL_BYTES) errors._files = "Total upload size exceeds 25 MB";
   if (Object.keys(errors).length) throw new IngestError(422, "Validation failed", errors, "validation_failed");
-  // branching: values for fields hidden by showIf logic are dropped so stale answers never get stored
-  for (const name of hiddenFields(s.fields, data)) delete data[name];
 
   const mapped = applyMapping(data, s);
   const fieldTypes = fieldTypesFor(mapped, s);
@@ -174,6 +179,10 @@ export async function ingest(formId: string, req: Request): Promise<IngestResult
       const pv = rec ? previewRouting(form.workspaceId, rec) : null;
       if (pv?.owner) db.prepare("UPDATE submissions SET owner = ? WHERE id = ?").run(pv.owner, id);
       bookingUrl = pv?.bookingUrl ?? null;
+      if (!bookingUrl && logic.route?.bookingUrl && /^https?:\/\//i.test(logic.route.bookingUrl)) bookingUrl = logic.route.bookingUrl;
+      if (logic.route?.assignTo?.length && !pv?.owner) {
+        db.prepare("UPDATE submissions SET owner = ? WHERE id = ?").run(logic.route.assignTo[0], id);
+      }
     } catch (e) { console.error("[ingest] routing preview", e); }
   }
   enqueueJob("submission.process", { submissionId: id });

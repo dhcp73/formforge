@@ -16,7 +16,7 @@ export function NewWebhook({ action }: { action: A }) {
         <FormMessage />
         <Field name="url" label="Endpoint URL"><Input placeholder="https://example.com/hooks/formforge" autoFocus /></Field>
         <fieldset className="space-y-1.5"><legend className="text-[12.5px] font-medium text-fg">Events</legend>
-          {[["submission.created", "Submission created"], ["submission.enriched", "Enrichment completed"], ["submission.routed", "Lead routed"]].map(([v, l], i) => (
+          {[["submission.created", "Submission created"], ["submission.enriched", "Enrichment completed"], ["submission.routed", "Lead routed"], ["enrichment.completed", "Enrichment completed (alias)"], ["routing.assigned", "Routing assigned (alias)"]].map(([v, l], i) => (
             <label key={v} className="flex items-center gap-2 text-[13px] text-fg"><input type="checkbox" name="events" value={v} defaultChecked={i === 0} className="h-3.5 w-3.5 accent-[var(--accent)]" />{l} <code className="text-[11.5px] text-fg-subtle">{v}</code></label>
           ))}
         </fieldset>

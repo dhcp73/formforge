@@ -98,7 +98,15 @@ export async function processSubmission(submissionId: string) {
   if (!fresh.isSpam) await applyRouting(fresh);
   const routed = getSubmissionById(s.id)!;
   fireWebhooks(routed, "submission.created");
-  if (!routed.isSpam) fireWebhooks(routed, "submission.enriched");
+  if (!routed.isSpam) {
+    fireWebhooks(routed, "submission.enriched");
+    // Also emit aliases some docs/clients expect
+    fireWebhooks(routed, "enrichment.completed");
+    if (routed.owner || (routed.routing && "owner" in routed.routing && (routed.routing as { owner?: string | null }).owner)) {
+      fireWebhooks(routed, "submission.routed");
+      fireWebhooks(routed, "routing.assigned");
+    }
+  }
   await sendNotifications(routed);
 }
 
@@ -120,6 +128,13 @@ export async function mergeIntoSubmission(submissionId: string, source: Provider
   saveEnrichment(s.id, e, "complete");
   addActivity(s.id, { type: "enrichment", message: `${opts.message ?? `${source} data merged`} (${written.length} fields)` });
   if (opts.rerunRouting !== false) await applyRouting(getSubmissionById(s.id)!);
+  const fresh = getSubmissionById(s.id)!;
+  fireWebhooks(fresh, "submission.enriched");
+  fireWebhooks(fresh, "enrichment.completed");
+  if (fresh.owner) {
+    fireWebhooks(fresh, "submission.routed");
+    fireWebhooks(fresh, "routing.assigned");
+  }
   return written;
 }
 

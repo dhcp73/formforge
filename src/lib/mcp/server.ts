@@ -28,7 +28,7 @@ export function createMcpServer(backend: FormForgeBackend) {
   }, wrap(async (a: { query: string; form_id?: string; limit?: number }) => backend.searchSubmissions(a.query, a.form_id, a.limit ?? 20)));
   server.registerTool("create_webhook", {
     title: "Create webhook", description: "Register an HMAC-signed webhook for a form. Returns the signing secret.",
-    inputSchema: { form_id: z.string(), url: z.string().url(), events: z.array(z.enum(["submission.created", "submission.enriched", "submission.routed"])).optional(), include_spam: z.boolean().optional() },
+    inputSchema: { form_id: z.string(), url: z.string().url(), events: z.array(z.enum(["submission.created", "submission.enriched", "submission.routed", "enrichment.completed", "routing.assigned"])).optional(), include_spam: z.boolean().optional() },
   }, wrap(async (a: { form_id: string; url: string; events?: string[]; include_spam?: boolean }) => backend.createWebhook(a.form_id, { url: a.url, events: a.events, include_spam: a.include_spam })));
   server.registerTool("enrich_submission", { title: "Re-enrich submission", description: "Re-run the enrichment waterfall (offline → Apollo → Valyu → AI) and routing for a submission.", inputSchema: { submission_id: z.string() } }, wrap(async (a: { submission_id: string }) => backend.enrichSubmission(a.submission_id)));
   server.registerTool("research_company", {

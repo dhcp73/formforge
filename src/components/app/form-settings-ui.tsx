@@ -50,7 +50,12 @@ export function DeepResearchMode({ defaultMode, credits }: { defaultMode: string
 }
 
 type Row = FieldDef & { _k: string };
-const SHOW_IF_LABELS: Record<ShowIfOp, string> = { eq: "equals", neq: "does not equal", in: "is one of (a,b)", not_in: "is not one of", contains: "contains", gt: "greater than", lt: "less than", filled: "is filled", empty: "is empty" };
+const SHOW_IF_LABELS: Record<ShowIfOp, string> = {
+  eq: "equals", neq: "does not equal", contains: "contains", not_contains: "does not contain",
+  gt: "greater than", gte: "≥", lt: "less than", lte: "≤",
+  in: "is one of (a,b)", not_in: "is not one of", filled: "is filled", empty: "is empty",
+  matches: "matches regex", domain_is: "email domain is", domain_matches: "email domain matches",
+};
 
 export function FieldsEditor({ initial }: { initial: FieldDef[] }) {
   const [rows, setRows] = React.useState<Row[]>(() => initial.map((f, i) => ({ ...f, _k: `${i}-${f.name}` })));
@@ -94,14 +99,40 @@ export function FieldsEditor({ initial }: { initial: FieldDef[] }) {
             </div>
             <label className="block space-y-1 text-[12.5px] font-medium text-fg">Regex pattern<Input value={cur.pattern ?? ""} onChange={(e) => update(adv, { pattern: e.target.value || undefined })} placeholder="^[A-Z]{2}\d{4}$" className="font-mono" /></label>
             <label className="block space-y-1 text-[12.5px] font-medium text-fg">Pattern error message<Input value={cur.patternMessage ?? ""} onChange={(e) => update(adv, { patternMessage: e.target.value || undefined })} placeholder="Use the format AB1234" /></label>
-            {cur.type === "select" && (
+            {["select", "radio", "button", "checkbox", "multiselect"].includes(cur.type) && (
               <label className="block space-y-1 text-[12.5px] font-medium text-fg">Options (one per line)
                 <Textarea rows={3} value={(cur.options ?? []).join("\n")} onChange={(e) => update(adv, { options: e.target.value.split("\n").map((o) => o.trim()).filter(Boolean) })} placeholder={"Sales\nSupport\nPartnership"} />
               </label>
             )}
+            {cur.type === "rating" && (
+              <label className="block space-y-1 text-[12.5px] font-medium text-fg">Max rating
+                <Input type="number" min={1} max={10} value={cur.maxRating ?? 5} onChange={(e) => update(adv, { maxRating: Math.min(10, Math.max(1, Number(e.target.value) || 5)) })} />
+              </label>
+            )}
+            {["button", "radio", "select"].includes(cur.type) && (cur.options?.length ?? 0) > 0 && (
+              <fieldset className="space-y-2 rounded-md border border-line p-3">
+                <legend className="px-1 text-[12px] font-semibold text-fg">Choice → step jumps</legend>
+                <p className="text-[12px] text-fg-subtle">When the lead picks an option, jump to a step id (or <code>__end</code>).</p>
+                <div className="space-y-1.5">
+                  {(cur.options ?? []).map((o) => (
+                    <div key={o} className="grid grid-cols-[1fr_1fr] gap-2 items-center">
+                      <span className="truncate text-[12.5px] text-fg">{o}</span>
+                      <Input aria-label={`Goto for ${o}`} placeholder="step id" value={cur.goto?.[o] ?? ""} onChange={(e) => {
+                        const goto = { ...(cur.goto ?? {}) };
+                        if (e.target.value) goto[o] = e.target.value; else delete goto[o];
+                        update(adv, { goto: Object.keys(goto).length ? goto : undefined });
+                      }} className="font-mono" />
+                    </div>
+                  ))}
+                </div>
+                <label className="block space-y-1 text-[12.5px] font-medium text-fg">Default goto step
+                  <Input value={cur.gotoStep ?? ""} onChange={(e) => update(adv, { gotoStep: e.target.value || undefined })} placeholder="step-2" className="font-mono" />
+                </label>
+              </fieldset>
+            )}
             <fieldset className="space-y-2 rounded-md border border-line p-3">
               <legend className="px-1 text-[12px] font-semibold text-fg">Branching logic</legend>
-              <p className="text-[12px] text-fg-subtle">Only show, validate and store this field when another field matches.</p>
+              <p className="text-[12px] text-fg-subtle">Only show, validate and store this field when another field matches. Works with every field type (text, email, number, select, radio, checkbox, date, rating, buttons, hidden).</p>
               <div className="grid grid-cols-3 gap-2">
                 <Select aria-label="Show if field" value={cur.showIf?.field ?? ""} onChange={(e) => update(adv, { showIf: e.target.value ? { field: e.target.value, op: cur.showIf?.op ?? "eq", value: cur.showIf?.value } : undefined })}>
                   <option value="">Always show</option>
@@ -112,6 +143,10 @@ export function FieldsEditor({ initial }: { initial: FieldDef[] }) {
                 </Select>
                 <Input aria-label="Show if value" disabled={!cur.showIf || cur.showIf.op === "filled" || cur.showIf.op === "empty"} value={cur.showIf?.value == null ? "" : String(cur.showIf.value)} onChange={(e) => cur.showIf && update(adv, { showIf: { ...cur.showIf, value: e.target.value } })} placeholder="Sales" />
               </div>
+              <label className="flex items-center gap-2 text-[12.5px] text-fg">
+                <input type="checkbox" checked={!!cur.hidden} onChange={(e) => update(adv, { hidden: e.target.checked || undefined })} />
+                Start hidden (only appear via a form-level show_field rule)
+              </label>
             </fieldset>
             <label className="block space-y-1 text-[12.5px] font-medium text-fg">Store as (rename)<Input value={cur.renameTo ?? ""} onChange={(e) => update(adv, { renameTo: e.target.value || undefined })} placeholder="work_email" className="font-mono" /></label>
             <div className="flex justify-end"><Button variant="primary" onClick={() => setAdv(null)}>Done</Button></div>

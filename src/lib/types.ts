@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { SHOW_IF_OPS } from "./ingest/logic";
 
-export const FIELD_TYPES = ["text", "email", "number", "url", "phone", "date", "boolean", "file", "longtext", "select"] as const;
+export const FIELD_TYPES = ["text", "email", "number", "url", "phone", "date", "boolean", "file", "longtext", "select", "radio", "checkbox", "multiselect", "rating", "button", "hidden"] as const;
 export type FieldType = (typeof FIELD_TYPES)[number];
 
 export const fieldDefSchema = z.object({
@@ -14,10 +14,18 @@ export const fieldDefSchema = z.object({
   minLength: z.number().int().nonnegative().optional(),
   maxLength: z.number().int().positive().optional(),
   renameTo: z.string().max(100).optional(),
-  /** Choices for `select` fields. */
+  /** Choices for select / radio / multiselect / button fields. */
   options: z.array(z.string().min(1).max(200)).max(100).optional(),
   /** Branching logic: only show/validate/store this field when the condition on another field holds. */
   showIf: z.object({ field: z.string().min(1), op: z.enum(SHOW_IF_OPS), value: z.union([z.string(), z.number(), z.boolean(), z.array(z.string())]).optional() }).optional(),
+  /** Choice-button / radio option value → step id to jump to. */
+  goto: z.record(z.string(), z.string()).optional(),
+  /** Jump to this step when the field is answered (any value). */
+  gotoStep: z.string().max(100).optional(),
+  /** Start hidden; only appear when a logic rule shows it. */
+  hidden: z.boolean().optional(),
+  /** Max rating value (rating fields). Default 5. */
+  maxRating: z.number().int().min(1).max(10).optional(),
 });
 export type FieldDef = z.infer<typeof fieldDefSchema>;
 
@@ -59,6 +67,25 @@ export const formSettingsSchema = z.object({
       deepResearchMode: z.enum(["fast", "standard", "heavy", "max"]).default("fast"),
     })
     .default({ email: true, geo: true, userAgent: true, company: true, apollo: true, clay: true, valyu: true, ai: true, deepResearch: false, deepResearchMode: "fast" }),
+  /** Multi-step form definition. Empty = single-page. */
+  steps: z.array(z.object({
+    id: z.string().min(1).max(100),
+    title: z.string().max(200).optional(),
+    fields: z.array(z.string()).optional(),
+  })).default([]),
+  /** Form-level logic rules (goto, show/hide, set_value, end, route). */
+  logic: z.array(z.object({
+    id: z.string().optional(),
+    when: z.object({ field: z.string().min(1), op: z.enum(SHOW_IF_OPS), value: z.union([z.string(), z.number(), z.boolean(), z.array(z.string())]).optional() }),
+    step: z.string().optional(),
+    actions: z.array(z.object({
+      type: z.enum(["goto_step", "show_field", "hide_field", "skip_field", "end", "set_value", "route"]),
+      target: z.string().optional(),
+      value: z.union([z.string(), z.number(), z.boolean(), z.array(z.string())]).optional(),
+      assignTo: z.array(z.string()).optional(),
+      bookingUrl: z.string().optional(),
+    })).min(1),
+  })).default([]),
 });
 export type FormSettings = z.infer<typeof formSettingsSchema>;
 

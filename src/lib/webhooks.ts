@@ -5,7 +5,7 @@ import { hmacHex, safeEqual } from "./secrets";
 
 export const webhookInputSchema = z.object({
   url: z.string().url().refine((u) => /^https?:\/\//.test(u), "URL must be http(s)"),
-  events: z.array(z.enum(["submission.created", "submission.enriched", "submission.routed"])).default(["submission.created"]),
+  events: z.array(z.enum(["submission.created", "submission.enriched", "submission.routed", "enrichment.completed", "routing.assigned"])).default(["submission.created"]),
   includeSpam: z.boolean().default(false),
   active: z.boolean().default(true),
 });

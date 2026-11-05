@@ -24,8 +24,13 @@ export function detectType(name: string, value: unknown): FieldType {
 
 /** Coerce string values of known types (numbers, booleans). */
 export function coerce(type: FieldType, value: unknown): unknown {
+  if (type === "multiselect" || type === "checkbox") {
+    if (Array.isArray(value)) return value.map(String);
+    if (typeof value === "string") return value.split(",").map((x) => x.trim()).filter(Boolean);
+    return value;
+  }
   if (typeof value !== "string") return value;
-  if (type === "number" && value.trim() !== "" && !Number.isNaN(Number(value))) return Number(value);
+  if ((type === "number" || type === "rating") && value.trim() !== "" && !Number.isNaN(Number(value))) return Number(value);
   if (type === "boolean") return /^(true|on|yes|1)$/i.test(value.trim());
   return value;
 }
@@ -50,7 +55,28 @@ function validateOne(f: FieldDef, raw: unknown): string | null {
     case "url": if (!URL_RE.test(v)) return `${label} must be a valid URL (https://…)`; break;
     case "phone": if (!PHONE_RE.test(v)) return `${label} must be a valid phone number`; break;
     case "date": if (Number.isNaN(Date.parse(v))) return `${label} must be a valid date`; break;
-    case "select": if (f.options?.length && !f.options.some((o) => o.toLowerCase() === v.toLowerCase())) return `${label} must be one of: ${f.options.join(", ")}`; break;
+    case "select":
+    case "radio":
+    case "button":
+      if (f.options?.length && !f.options.some((o) => o.toLowerCase() === v.toLowerCase())) return `${label} must be one of: ${f.options.join(", ")}`;
+      break;
+    case "multiselect":
+    case "checkbox": {
+      const vals = Array.isArray(raw) ? raw.map(String) : v.split(",").map((x) => x.trim()).filter(Boolean);
+      if (f.required && !vals.length) return `${label} is required`;
+      if (f.options?.length) {
+        const allowed = new Set(f.options.map((o) => o.toLowerCase()));
+        for (const x of vals) if (!allowed.has(x.toLowerCase())) return `${label} contains an invalid choice`;
+      }
+      break;
+    }
+    case "rating": {
+      const max = f.maxRating ?? 5;
+      const n = Number(v);
+      if (!Number.isFinite(n) || n < 1 || n > max) return `${label} must be a rating from 1 to ${max}`;
+      break;
+    }
+    case "hidden": break;
     case "boolean": if (!/^(true|false|on|off|yes|no|1|0)$/i.test(v)) return `${label} must be true or false`; break;
   }
   if (f.minLength && v.length < f.minLength) return `${label} must be at least ${f.minLength} characters`;
