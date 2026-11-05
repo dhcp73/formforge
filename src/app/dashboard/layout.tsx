@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { requireSession, applyDemoSnapCookie } from "@/lib/session";
 import { listForms } from "@/lib/forms";
 import { AppShell } from "@/components/app/shell";
@@ -20,7 +21,9 @@ export default async function DashboardLayout({ children }: { children: React.Re
   return (
     <>
       <DemoBanner label={label} />
-      <DemoPersistence enabled={isEphemeralMode()} />
+      <Suspense fallback={null}>
+        <DemoPersistence enabled={isEphemeralMode()} />
+      </Suspense>
       <AppShell user={{ name: s.user.name, email: s.user.email }} workspace={{ id: s.workspace.id, name: s.workspace.name }} workspaces={s.workspaces.map((w) => ({ id: w.id, name: w.name }))} forms={forms}>
         {children}
       </AppShell>

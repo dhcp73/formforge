@@ -141,7 +141,11 @@ export function exportDemoSnapshot(): Record<string, unknown> {
   return out;
 }
 
-/** Restore a snapshot into the current (ephemeral) DB. Destructive for listed tables. */
+/**
+ * Merge a snapshot into the current (ephemeral) DB.
+ * Upserts rows without wiping — so a stale localStorage snap cannot delete forms
+ * just created on this instance (critical on Vercel multi-instance demos).
+ */
 export function importDemoSnapshot(snap: { tables?: Record<string, Array<Record<string, unknown>>> }) {
   if (!isEphemeralMode()) throw new Error("Restore is only allowed in browser/memory mode");
   const db = getDb();
@@ -151,14 +155,24 @@ export function importDemoSnapshot(snap: { tables?: Record<string, Array<Record<
     "webhooks", "routing_rules", "integrations", "schedules", "oauth_app_config", "oauth_connections", "kv",
   ];
   db.transaction(() => {
-    for (const t of [...order].reverse()) {
-      try { db.exec(`DELETE FROM ${t}`); } catch { /* ignore */ }
-    }
     for (const t of order) {
       const rows = tables[t] ?? [];
       for (const row of rows) {
         const keys = Object.keys(row);
         if (!keys.length) continue;
+        // Prefer the newer updated_at/created_at when both exist
+        if (row.id != null) {
+          try {
+            const cur = db.prepare(`SELECT updated_at, created_at FROM ${t} WHERE id = ?`).get(row.id) as
+              | { updated_at?: string; created_at?: string }
+              | undefined;
+            if (cur) {
+              const curTs = String(cur.updated_at || cur.created_at || "");
+              const incTs = String(row.updated_at ?? row.created_at ?? "");
+              if (curTs && incTs && curTs > incTs) continue;
+            }
+          } catch { /* table may lack those columns */ }
+        }
         const placeholders = keys.map(() => "?").join(",");
         try {
           db.prepare(`INSERT OR REPLACE INTO ${t} (${keys.join(",")}) VALUES (${placeholders})`).run(...keys.map((k) => row[k]));

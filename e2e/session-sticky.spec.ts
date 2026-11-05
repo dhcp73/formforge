@@ -47,11 +47,12 @@ test("login cookie sticks across hard reloads, form pages, and new contexts", as
   const createdId = page.url().match(/\/dashboard\/forms\/([^/?#]+)/)?.[1];
   expect(createdId).toBeTruthy();
 
-  // Give demo persistence a moment to snapshot
-  await page.waitForTimeout(1500);
+  // Snapshot save on ?created=1 (skips stale restore), then list must show the form
+  await page.waitForTimeout(2000);
   await page.goto("/dashboard/forms");
+  await expect(page.getByText(formName).first()).toBeVisible({ timeout: 45_000 });
   await page.reload();
-  await expect(page.getByText(formName).first()).toBeVisible({ timeout: 20_000 });
+  await expect(page.getByText(formName).first()).toBeVisible({ timeout: 45_000 });
 
   const formId = createdId!;
   const paths = [...DASH_PAGES, ...FORM_SUB(formId), ...FORM_SUB("ffDemoSale")];

@@ -1,24 +1,19 @@
 "use client";
 import * as React from "react";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 
 const KEY = "formforge.demo.snapshot.v1";
 
 /** In browser storage mode: restore localStorage snapshot on load, save periodically. */
 export function DemoPersistence({ enabled }: { enabled: boolean }) {
   const router = useRouter();
+  const sp = useSearchParams();
   React.useEffect(() => {
     if (!enabled) return;
     let cancelled = false;
     let interval = 0;
+    const skipRestore = sp.get("created") === "1";
     (async () => {
-      try {
-        const raw = localStorage.getItem(KEY);
-        if (raw) {
-          const r = await fetch("/api/demo/restore", { method: "POST", headers: { "Content-Type": "application/json" }, body: raw });
-          if (r.ok && !cancelled) router.refresh();
-        }
-      } catch { /* ignore */ }
       const save = async () => {
         if (cancelled) return;
         try {
@@ -28,6 +23,15 @@ export function DemoPersistence({ enabled }: { enabled: boolean }) {
           localStorage.setItem(KEY, JSON.stringify(j));
         } catch { /* ignore */ }
       };
+      try {
+        if (!skipRestore) {
+          const raw = localStorage.getItem(KEY);
+          if (raw) {
+            const r = await fetch("/api/demo/restore", { method: "POST", headers: { "Content-Type": "application/json" }, body: raw });
+            if (r.ok && !cancelled) router.refresh();
+          }
+        }
+      } catch { /* ignore */ }
       await save();
       interval = window.setInterval(save, 15_000);
       const onHide = () => { void save(); };
@@ -40,7 +44,7 @@ export function DemoPersistence({ enabled }: { enabled: boolean }) {
       };
     })();
     return () => { cancelled = true; if (interval) window.clearInterval(interval); };
-  }, [enabled, router]);
+  }, [enabled, router, sp]);
   return null;
 }
 
