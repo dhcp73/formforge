@@ -28,7 +28,13 @@ export function SiteFooter() {
       <div className="border-t border-line">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-2 px-4 py-4 text-[12px] text-fg-subtle sm:px-6">
           <span>© {new Date().getFullYear()} FormForge. All rights reserved.</span>
-          <span>Made for developers, RevOps and AI agents.</span>
+          <span className="flex flex-wrap items-center gap-x-2 gap-y-1">
+            <span>Made for developers, RevOps and AI agents.</span>
+            <span aria-hidden>·</span>
+            <a href="https://github.com/rahulpatel84" target="_blank" rel="noopener noreferrer" className="text-fg-muted hover:text-fg underline-offset-2 hover:underline">
+              Built by Rahul Patel
+            </a>
+          </span>
         </div>
       </div>
     </footer>
