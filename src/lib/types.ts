@@ -1,6 +1,7 @@
 import { z } from "zod";
+import { SHOW_IF_OPS } from "./ingest/logic";
 
-export const FIELD_TYPES = ["text", "email", "number", "url", "phone", "date", "boolean", "file", "longtext"] as const;
+export const FIELD_TYPES = ["text", "email", "number", "url", "phone", "date", "boolean", "file", "longtext", "select"] as const;
 export type FieldType = (typeof FIELD_TYPES)[number];
 
 export const fieldDefSchema = z.object({
@@ -13,6 +14,10 @@ export const fieldDefSchema = z.object({
   minLength: z.number().int().nonnegative().optional(),
   maxLength: z.number().int().positive().optional(),
   renameTo: z.string().max(100).optional(),
+  /** Choices for `select` fields. */
+  options: z.array(z.string().min(1).max(200)).max(100).optional(),
+  /** Branching logic: only show/validate/store this field when the condition on another field holds. */
+  showIf: z.object({ field: z.string().min(1), op: z.enum(SHOW_IF_OPS), value: z.union([z.string(), z.number(), z.boolean(), z.array(z.string())]).optional() }).optional(),
 });
 export type FieldDef = z.infer<typeof fieldDefSchema>;
 

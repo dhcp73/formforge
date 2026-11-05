@@ -1,3 +1,4 @@
+import { hiddenFields } from "./logic";
 import type { FieldDef, FieldType, FormSettings } from "../types";
 import { EMAIL_RE } from "../enrich/local";
 
@@ -49,6 +50,7 @@ function validateOne(f: FieldDef, raw: unknown): string | null {
     case "url": if (!URL_RE.test(v)) return `${label} must be a valid URL (https://…)`; break;
     case "phone": if (!PHONE_RE.test(v)) return `${label} must be a valid phone number`; break;
     case "date": if (Number.isNaN(Date.parse(v))) return `${label} must be a valid date`; break;
+    case "select": if (f.options?.length && !f.options.some((o) => o.toLowerCase() === v.toLowerCase())) return `${label} must be one of: ${f.options.join(", ")}`; break;
     case "boolean": if (!/^(true|false|on|off|yes|no|1|0)$/i.test(v)) return `${label} must be true or false`; break;
   }
   if (f.minLength && v.length < f.minLength) return `${label} must be at least ${f.minLength} characters`;
@@ -65,7 +67,9 @@ function validateOne(f: FieldDef, raw: unknown): string | null {
 export function validate(data: Record<string, unknown>, files: string[], settings: FormSettings): Record<string, string> {
   if (settings.schemaMode === "off") return {};
   const errors: Record<string, string> = {};
+  const hidden = new Set(hiddenFields(settings.fields, data));
   for (const f of settings.fields) {
+    if (hidden.has(f.name)) continue; // branching: hidden fields are never required
     const value = f.type === "file" ? (files.includes(f.name) ? "file" : undefined) : data[f.name];
     const err = validateOne(f, value);
     if (err) errors[f.name] = err;

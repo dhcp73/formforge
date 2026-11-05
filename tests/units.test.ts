@@ -172,3 +172,17 @@ describe("scheduling helpers", () => {
     expect(formAvailability({ ...base, settings: normalizeSettings({}) }, 5, at)).toEqual({ open: true });
   });
 });
+
+import { evalShowIf, isFieldVisible } from "@/lib/ingest/logic";
+describe("showIf evaluator", () => {
+  it.each([
+    [{ field: "a", op: "eq", value: "Yes" }, { a: "yes" }, true], [{ field: "a", op: "neq", value: "x" }, { a: "x" }, false],
+    [{ field: "a", op: "in", value: ["x", "y"] }, { a: "y" }, true], [{ field: "a", op: "not_in", value: "x,y" }, { a: "z" }, true],
+    [{ field: "a", op: "contains", value: "pricing" }, { a: "Pricing please" }, true], [{ field: "a", op: "gt", value: 5 }, { a: "6" }, true],
+    [{ field: "a", op: "lt", value: 5 }, { a: "" }, false], [{ field: "a", op: "filled" }, { a: " " }, false], [{ field: "a", op: "empty" }, {}, true],
+  ])("%j on %j → %s", (cond, data, expected) => { expect(evalShowIf(cond as never, data)).toBe(expected); });
+  it("guards against cycles", () => {
+    const fields = [{ name: "a", showIf: { field: "b", op: "filled" as const } }, { name: "b", showIf: { field: "a", op: "filled" as const } }];
+    expect(() => isFieldVisible("a", fields, {})).not.toThrow();
+  });
+});

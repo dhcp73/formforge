@@ -41,7 +41,9 @@ const beta = createForm(ws, {
     { name: "email", label: "Work email", type: "email", required: true },
     { name: "name", label: "Full name", type: "text", required: true },
     { name: "company", label: "Company", type: "text", required: false },
-    { name: "team_size", label: "Team size", type: "number", required: false },
+    { name: "role", label: "Your role", type: "select", required: false, options: ["Engineering", "Product", "Growth", "Other"] },
+    { name: "role_other", label: "Which role?", type: "text", required: true, showIf: { field: "role", op: "eq", value: "Other" } },
+    { name: "team_size", label: "Team size", type: "number", required: false, showIf: { field: "role", op: "in", value: ["Engineering", "Product"] } },
     { name: "use_case", label: "What would you use it for?", type: "longtext", required: false },
   ] } as never,
 });

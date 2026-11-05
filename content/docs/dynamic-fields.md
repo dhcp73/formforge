@@ -48,3 +48,29 @@ your-name => name
 ```
 
 A field can also set `renameTo` to store it under another key.
+
+## Branching logic
+
+Any field can carry a `showIf` condition that refers to another field. When the condition is false the field is **hidden** on the hosted form, it is **not required** (even if `required: true`), and any value sent for it is **dropped** before storage, so stale answers from a previous branch never reach your webhooks or CRM. Conditions can chain: a field whose controlling field is hidden is hidden too. Cycles are guarded.
+
+```json
+{
+  "schemaMode": "validate",
+  "fields": [
+    { "name": "topic", "type": "select", "required": true, "options": ["Sales", "Support"] },
+    { "name": "seats", "type": "number", "required": true, "showIf": { "field": "topic", "op": "eq", "value": "Sales" } },
+    { "name": "budget", "type": "text", "required": true, "showIf": { "field": "seats", "op": "gt", "value": 100 } },
+    { "name": "order_id", "type": "text", "required": true, "showIf": { "field": "topic", "op": "eq", "value": "Support" } }
+  ]
+}
+```
+
+| `op` | Meaning |
+| --- | --- |
+| `eq` / `neq` | Case-insensitive equality |
+| `in` / `not_in` | Value is (not) one of an array or comma-separated list |
+| `contains` | Substring match |
+| `gt` / `lt` | Numeric comparison |
+| `filled` / `empty` | Any value / no value |
+
+Edit conditions in **Form → Settings → Fields → Rules → Branching logic**. The `select` field type validates that the answer is one of `options`. The seeded **Beta waitlist** form shows a working example ("Your role" → "Which role?" when *Other*).

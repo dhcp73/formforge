@@ -176,3 +176,36 @@ describe("dynamic schema", () => {
     expect(s.data).toMatchObject({ email: "m@x.example", name: "Mapped Person" });
   });
 });
+
+describe("branching logic (showIf)", () => {
+  const fields = [
+    { name: "email", type: "email" as const, required: true },
+    { name: "topic", type: "select" as const, required: true, options: ["Sales", "Support"] },
+    { name: "seats", type: "number" as const, required: true, showIf: { field: "topic", op: "eq" as const, value: "Sales" } },
+    { name: "budget", type: "text" as const, required: true, showIf: { field: "seats", op: "gt" as const, value: 100 } },
+    { name: "order_id", type: "text" as const, required: true, showIf: { field: "topic", op: "eq" as const, value: "Support" } },
+  ];
+  it("requires only visible fields and drops hidden answers", async () => {
+    const f = form(ws, { schemaMode: "validate", fields });
+    const sales = await submit(f.id, { email: "a@b.example", topic: "Sales" });
+    expect(sales.status).toBe(422);
+    expect(Object.keys(sales.json.errors as object)).toEqual(["seats"]);
+    const ok = await submit(f.id, { email: "a@b.example", topic: "Sales", seats: "20", order_id: "stale-value" });
+    expect(ok.status).toBe(200);
+    const s = getSubmission(ws, ok.json.id as string)!;
+    expect(s.data).toEqual({ email: "a@b.example", topic: "Sales", seats: 20 });
+  });
+  it("chains conditions (budget depends on seats which depends on topic)", async () => {
+    const f = form(ws, { schemaMode: "validate", fields });
+    const big = await submit(f.id, { email: "a@b.example", topic: "Sales", seats: "500" });
+    expect(Object.keys(big.json.errors as object)).toEqual(["budget"]);
+    const support = await submit(f.id, { email: "a@b.example", topic: "Support", seats: "500", order_id: "A-1" });
+    expect(support.status).toBe(200);
+    expect(getSubmission(ws, support.json.id as string)!.data).toEqual({ email: "a@b.example", topic: "Support", order_id: "A-1" });
+  });
+  it("select fields validate options", async () => {
+    const f = form(ws, { schemaMode: "validate", fields });
+    const r = await submit(f.id, { email: "a@b.example", topic: "Gardening" });
+    expect((r.json.errors as Record<string, string>).topic).toMatch(/one of/);
+  });
+});

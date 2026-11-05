@@ -74,7 +74,8 @@ export function deleteRule(ws: string, id: string) {
 
 /** Lead context = answers + merged enrichment + scores. */
 export function leadContext(s: Pick<SubmissionRecord, "data" | "enrichment" | "spamScore" | "fitScore">): Record<string, unknown> {
-  return { ...s.enrichment, data: s.data, ...s.data, fitScore: s.fitScore ?? (s.enrichment as { fitScore?: number }).fitScore ?? null, spamScore: s.spamScore };
+  // raw answers first so enrichment namespaces (email.*, company.*) win; raw values stay reachable as data.<field>
+  return { ...s.data, ...s.enrichment, data: s.data, fitScore: s.fitScore ?? (s.enrichment as { fitScore?: number }).fitScore ?? null, spamScore: s.spamScore };
 }
 
 export function evalCondition(ctx: Record<string, unknown>, c: Condition): { ok: boolean; detail: string } {

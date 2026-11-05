@@ -109,6 +109,25 @@ describe("processing pipeline", () => {
   });
 });
 
+describe("round-robin routing", () => {
+  it("rotates owners across matching leads and counts hits", async () => {
+    const f = form(ws);
+    const rule = createRule(ws, { name: "RR", formId: f.id, conditions: [{ field: "email.freeProvider", op: "eq", value: false }], actions: { assignTo: ["a@acme.example", "b@acme.example", "c@acme.example"] } });
+    const owners: (string | null)[] = [];
+    for (let i = 0; i < 4; i++) {
+      const r = await submit(f.id, { email: `rr${i}@company${i}.example` });
+      await drainAll();
+      owners.push(getSubmission(ws, r.json.id as string)!.owner);
+    }
+    expect(owners).toEqual(["a@acme.example", "b@acme.example", "c@acme.example", "a@acme.example"]);
+    const row = getDb().prepare("SELECT hit_count FROM routing_rules WHERE id = ?").get(rule.id) as { hit_count: number };
+    expect(row.hit_count).toBe(4);
+    const free = await submit(f.id, { email: "someone@gmail.com" });
+    await drainAll();
+    expect(getSubmission(ws, free.json.id as string)!.owner).toBeNull();
+  });
+});
+
 describe("schedules", () => {
   it("digest emails recipients via outbox", async () => {
     const f = form(ws);
