@@ -16,8 +16,8 @@ export function SubmissionsChart({ data }: { data: { date: string; submissions: 
           <XAxis dataKey="label" tick={{ fontSize: 11, fill: "var(--fg-subtle)" }} tickLine={false} axisLine={false} interval="preserveStartEnd" minTickGap={16} />
           <YAxis allowDecimals={false} tick={{ fontSize: 11, fill: "var(--fg-subtle)" }} tickLine={false} axisLine={false} />
           <Tooltip {...tip} />
-          <Area type="monotone" dataKey="submissions" name="Submissions" stroke="#4f46e5" strokeWidth={2} fill="url(#g1)" />
-          <Area type="monotone" dataKey="spam" name="Spam" stroke="#f59e0b" strokeWidth={1.5} fill="transparent" strokeDasharray="4 3" />
+          <Area isAnimationActive={false} type="monotone" dataKey="submissions" name="Submissions" stroke="#4f46e5" strokeWidth={2} fill="url(#g1)" />
+          <Area isAnimationActive={false} type="monotone" dataKey="spam" name="Spam" stroke="#f59e0b" strokeWidth={1.5} fill="transparent" strokeDasharray="4 3" />
         </AreaChart>
       </ResponsiveContainer>
     </div>
@@ -33,7 +33,7 @@ export function HBarChart({ data, valueLabel = "Count", unit = "" }: { data: { n
           <XAxis type="number" hide domain={[0, unit === "%" ? 100 : "auto"]} />
           <YAxis type="category" dataKey="name" width={120} tick={{ fontSize: 12, fill: "var(--fg-muted)" }} tickLine={false} axisLine={false} />
           <Tooltip {...tip} formatter={(v) => [`${v}${unit}`, valueLabel]} cursor={{ fill: "var(--muted)" }} />
-          <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={16} label={{ position: "right", fontSize: 11, fill: "var(--fg-subtle)", formatter: (v: unknown) => `${v}${unit}` }}>
+          <Bar isAnimationActive={false} dataKey="value" radius={[0, 4, 4, 0]} barSize={16} label={{ position: "right", fontSize: 11, fill: "var(--fg-subtle)", formatter: (v: unknown) => `${v}${unit}` }}>
             {data.map((_, i) => <Cell key={i} fill={COLORS[i % COLORS.length]} />)}
           </Bar>
         </BarChart>
