@@ -69,6 +69,15 @@ export function getDb(): DB {
   migrate(db);
   g.__ffdb = db;
   g.__ffdbPath = p;
+  if (isEphemeralMode()) {
+    try {
+      // eslint-disable-next-line @typescript-eslint/no-require-imports
+      const { ensureDemoSeed } = require("./storage/demo-seed") as typeof import("./storage/demo-seed");
+      ensureDemoSeed();
+    } catch (e) {
+      console.error("[db] demo seed", e);
+    }
+  }
   return db;
 }
 
@@ -81,6 +90,9 @@ export function resetDb() {
   g.__ffdb = undefined;
   g.__ffdbPath = undefined;
   g.__ffSeeded = false;
+  try {
+    (globalThis as unknown as { __ffDemoSeeded?: boolean }).__ffDemoSeeded = false;
+  } catch { /* ignore */ }
 }
 
 export function now(): string {

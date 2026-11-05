@@ -17,17 +17,18 @@ export function sanitizeScopes(scopes: unknown): Scope[] {
   return Array.from(new Set(valid));
 }
 
-/** Creates a key; the plaintext is returned exactly once. */
-export function createApiKey(workspaceId: string, name: string, scopes: Scope[], createdBy?: string, expiresAt?: string | null) {
+/** Creates a key; the plaintext is returned exactly once. Pass `secret` only for deterministic demo seeds. */
+export function createApiKey(workspaceId: string, name: string, scopes: Scope[], createdBy?: string, expiresAt?: string | null, secret?: string) {
   const clean = sanitizeScopes(scopes);
   if (!clean.length) throw new Error("Select at least one scope.");
-  const secret = `ff_live_${randomString(32)}`;
+  const resolved = secret && secret.startsWith("ff_live_") && secret.length >= 20 ? secret : `ff_live_${randomString(32)}`;
+  const secretFinal = resolved;
   const id = newId("key");
-  const prefix = secret.slice(0, 14);
+  const prefix = secretFinal.slice(0, 14);
   getDb()
     .prepare("INSERT INTO api_keys (id, workspace_id, name, prefix, key_hash, scopes, created_by, expires_at, created_at) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)")
-    .run(id, workspaceId, name.trim() || "Untitled key", prefix, sha256(secret), JSON.stringify(clean), createdBy ?? null, expiresAt ?? null, now());
-  return { key: secret, record: getApiKey(workspaceId, id)! };
+    .run(id, workspaceId, name.trim() || "Untitled key", prefix, sha256(secretFinal), JSON.stringify(clean), createdBy ?? null, expiresAt ?? null, now());
+  return { key: secretFinal, record: getApiKey(workspaceId, id)! };
 }
 
 export function getApiKey(workspaceId: string, id: string): ApiKeyRecord | null {

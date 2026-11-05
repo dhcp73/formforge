@@ -1,11 +1,16 @@
-import { getDb } from "../db";
+import { getDb, now } from "../db";
 import { isEphemeralMode } from "./mode";
 import { createUser } from "../auth";
 import { createForm } from "../forms";
 import { createApiKey } from "../apikeys";
+import { createRule } from "../routing";
 import { SCOPES } from "../types";
+import { newId } from "../ids";
 
 const g = globalThis as unknown as { __ffDemoSeeded?: boolean };
+
+/** Fixed browser/demo API key so Vercel instances and e2e can authenticate without a one-time plaintext. */
+export const DEMO_API_KEY = "ff_live_FormForgeDemoBrowserKey000000001";
 
 /** Idempotent demo seed for ephemeral (browser/memory) mode. */
 export function ensureDemoSeed() {
@@ -16,12 +21,101 @@ export function ensureDemoSeed() {
     return;
   }
   process.env.FORMFORGE_DNS ??= "off";
-  const { workspaceId: ws } = createUser({
+  const { workspaceId: ws, userId } = createUser({
     email: "demo@formforge.dev", name: "Demo User", password: "demo1234", workspaceName: "Acme Growth",
   });
-  createForm(ws, { name: "Contact sales", description: "Demo-request form" });
+  const sales = createForm(ws, {
+    name: "Contact sales",
+    description: "Demo-request form",
+    settings: {
+      notifyEmails: ["sales@acme.io"],
+      autoresponder: {
+        enabled: true,
+        subject: "Thanks {{name}} — we'll be in touch",
+        body: "Hi {{name}},\n\nThanks for reaching out to Acme. A specialist will reply within one business day.\n\n— The Acme team",
+      },
+    } as never,
+  });
   createForm(ws, { name: "Newsletter signup", description: "Footer signup" });
-  createApiKey(ws, "Demo key", [...SCOPES]);
+  createForm(ws, {
+    name: "Beta waitlist",
+    description: "Private beta for the new analytics product",
+    settings: {
+      schemaMode: "validate",
+      maxSubmissions: 500,
+      fields: [
+        { name: "email", label: "Work email", type: "email", required: true },
+        { name: "name", label: "Full name", type: "text", required: true },
+        { name: "company", label: "Company", type: "text", required: false },
+        { name: "role", label: "Your role", type: "select", required: false, options: ["Engineering", "Product", "Growth", "Other"] },
+        { name: "role_other", label: "Which role?", type: "text", required: true, showIf: { field: "role", op: "eq", value: "Other" } },
+        { name: "team_size", label: "Team size", type: "number", required: false, showIf: { field: "role", op: "in", value: ["Engineering", "Product"] } },
+        { name: "use_case", label: "What would you use it for?", type: "longtext", required: false },
+      ],
+    } as never,
+  });
+
+  createRule(ws, {
+    name: "Enterprise (200+ employees) → AE team",
+    priority: 10,
+    match: "all",
+    conditions: [{ field: "company.employees", op: "gte", value: 200 }],
+    actions: {
+      assignTo: ["ava@acme.io", "sam@acme.io"],
+      weights: { "ava@acme.io": 2, "sam@acme.io": 1 },
+      sticky: true,
+      tags: ["enterprise"],
+      bookingUrl: "https://cal.com/{{owner_name}}/intro?email={{email}}",
+      ownerBookingUrls: { "ava@acme.io": "https://cal.com/ava-acme/enterprise-demo" },
+    },
+    stopOnMatch: true,
+  });
+  createRule(ws, {
+    name: "Strategic accounts (named domains) → Ava",
+    priority: 8,
+    match: "any",
+    conditions: [
+      { field: "company.domain", op: "in", value: ["stripe.com", "openai.com", "shopify.com"] },
+      { field: "email.domain", op: "ends_with", value: ".gov" },
+    ],
+    actions: {
+      assignTo: ["ava@acme.io"],
+      sticky: true,
+      tags: ["strategic"],
+      bookingUrl: "https://cal.com/ava-acme/enterprise-demo",
+    },
+    stopOnMatch: true,
+  });
+  createRule(ws, {
+    name: "Startups → self-serve",
+    priority: 30,
+    match: "any",
+    conditions: [
+      { field: "company.employees", op: "lt", value: 50 },
+      { field: "email.freeProvider", op: "eq", value: true },
+    ],
+    actions: { assignTo: ["growth@acme.io"], tags: ["self-serve"] },
+    stopOnMatch: true,
+  });
+
+  createApiKey(ws, "Demo key", [...SCOPES], userId, null, DEMO_API_KEY);
+
+  // One sample submission so dashboard / e2e ids resolve without a prior POST.
+  const subId = newId("sub");
+  const t = now();
+  db.prepare(
+    `INSERT INTO submissions (id, form_id, workspace_id, data, field_types, files, meta, enrichment, spam_score, is_spam, spam_reasons, status, content_hash, search_text, activity, enrichment_status, created_at)
+     VALUES (?, ?, ?, ?, '{}', '[]', '{}', '{}', 0, 0, '[]', 'new', ?, ?, '[]', 'done', ?)`,
+  ).run(
+    subId,
+    sales.id,
+    ws,
+    JSON.stringify({ name: "Demo Lead", email: "demo.lead@stripe.com", message: "Seeded sample" }),
+    `seed-${subId}`,
+    "Demo Lead demo.lead@stripe.com Seeded sample",
+    t,
+  );
+
   g.__ffDemoSeeded = true;
 }
 
@@ -32,7 +126,12 @@ export function exportDemoSnapshot(): Record<string, unknown> {
     "users", "workspaces", "memberships", "forms", "submissions", "api_keys",
     "webhooks", "routing_rules", "integrations", "schedules", "oauth_connections", "oauth_app_config", "kv",
   ];
-  const out: Record<string, unknown> = { v: 1, exportedAt: new Date().toISOString(), tables: {} as Record<string, unknown[]> };
+  const out: Record<string, unknown> = {
+    v: 1,
+    exportedAt: new Date().toISOString(),
+    demoApiKey: isEphemeralMode() ? DEMO_API_KEY : undefined,
+    tables: {} as Record<string, unknown[]>,
+  };
   for (const t of tables) {
     try { (out.tables as Record<string, unknown[]>)[t] = db.prepare(`SELECT * FROM ${t}`).all() as unknown[]; }
     catch { (out.tables as Record<string, unknown[]>)[t] = []; }
