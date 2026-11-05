@@ -4,12 +4,12 @@ import { useRouter } from "next/navigation";
 import { Plus, Trash2, Pencil } from "lucide-react";
 import { Modal } from "@/components/ui/overlay";
 import { Button } from "@/components/ui/button";
-import { Input, Select, Label } from "@/components/ui/primitives";
+import { Input, Select, Label, Textarea } from "@/components/ui/primitives";
 import { saveRuleAction } from "@/app/dashboard/actions";
 
 const OPS: [string, string][] = [["eq", "equals"], ["neq", "does not equal"], ["contains", "contains"], ["not_contains", "does not contain"], ["gt", ">"], ["gte", "≥"], ["lt", "<"], ["lte", "≤"], ["in", "is one of"], ["not_in", "is not one of"], ["exists", "is known"], ["not_exists", "is unknown"], ["ends_with", "ends with"], ["matches", "matches regex"]];
 type Cond = { field: string; op: string; value?: unknown };
-export type RuleDraft = { id?: string; name: string; formId: string | null; priority: number; match: "all" | "any"; conditions: Cond[]; actions: { assignTo: string[]; tags: string[]; notifyEmails: string[]; webhookUrl: string; markSpam: boolean }; stopOnMatch: boolean; active: boolean };
+export type RuleDraft = { id?: string; name: string; formId: string | null; priority: number; match: "all" | "any"; conditions: Cond[]; actions: { assignTo: string[]; tags: string[]; notifyEmails: string[]; webhookUrl: string; markSpam: boolean; weights?: Record<string, number>; sticky?: boolean; bookingUrl?: string; ownerBookingUrls?: Record<string, string> }; stopOnMatch: boolean; active: boolean };
 
 const blank: RuleDraft = { name: "", formId: null, priority: 100, match: "all", conditions: [{ field: "company.employees", op: "gte", value: 200 }], actions: { assignTo: [], tags: [], notifyEmails: [], webhookUrl: "", markSpam: false }, stopOnMatch: true, active: true };
 const show = (v: unknown) => (Array.isArray(v) ? v.join(", ") : v == null ? "" : String(v));
@@ -22,16 +22,40 @@ function coerce(op: string, raw: string): unknown {
   return raw;
 }
 const split = (s: string) => s.split(",").map((x) => x.trim()).filter(Boolean);
+/** "ava@acme.com*3, sam@acme.com" ⇄ assignTo + weights */
+const showOwners = (a: RuleDraft["actions"]) => a.assignTo.map((o) => (a.weights?.[o] !== undefined && a.weights[o] !== 1 ? `${o}*${a.weights[o]}` : o)).join(", ");
+function parseOwners(s: string): { assignTo: string[]; weights: Record<string, number> } | string {
+  const assignTo: string[] = [], weights: Record<string, number> = {};
+  for (const part of split(s)) {
+    const m = /^(.+?)\s*\*\s*(\d+)$/.exec(part);
+    const owner = (m ? m[1] : part).trim();
+    if (m) { const w = Number(m[2]); if (w > 100) return `Weight for ${owner} must be 0–100.`; weights[owner] = w; }
+    assignTo.push(owner);
+  }
+  return { assignTo, weights };
+}
+const showLinks = (r?: Record<string, string>) => Object.entries(r ?? {}).map(([k, v]) => `${k} = ${v}`).join("\n");
+function parseLinks(s: string): Record<string, string> | string {
+  const out: Record<string, string> = {};
+  for (const line of s.split("\n").map((l) => l.trim()).filter(Boolean)) {
+    const i = line.indexOf("=");
+    if (i < 1) return `Booking link line "${line}" must look like owner = https://…`;
+    const k = line.slice(0, i).trim(), v = line.slice(i + 1).trim();
+    if (!/^https?:\/\/\S+$/.test(v)) return `Booking link for ${k} must be an http(s) URL.`;
+    out[k] = v;
+  }
+  return out;
+}
 
 export function RuleBuilder({ rule, forms, fields }: { rule?: RuleDraft; forms: { id: string; name: string }[]; fields: string[] }) {
   const router = useRouter();
   const [open, setOpen] = React.useState(false);
   const [d, setD] = React.useState<RuleDraft>(rule ?? blank);
   const [raw, setRaw] = React.useState<string[]>((rule ?? blank).conditions.map((c) => show(c.value)));
-  const [text, setText] = React.useState({ assignTo: show(d.actions.assignTo), tags: show(d.actions.tags), notifyEmails: show(d.actions.notifyEmails) });
+  const [text, setText] = React.useState({ assignTo: showOwners(d.actions), tags: show(d.actions.tags), notifyEmails: show(d.actions.notifyEmails), links: showLinks(d.actions.ownerBookingUrls) });
   const [err, setErr] = React.useState<string | null>(null);
   const [pending, start] = React.useTransition();
-  const reset = () => { const r = rule ?? blank; setD(r); setRaw(r.conditions.map((c) => show(c.value))); setText({ assignTo: show(r.actions.assignTo), tags: show(r.actions.tags), notifyEmails: show(r.actions.notifyEmails) }); setErr(null); };
+  const reset = () => { const r = rule ?? blank; setD(r); setRaw(r.conditions.map((c) => show(c.value))); setText({ assignTo: showOwners(r.actions), tags: show(r.actions.tags), notifyEmails: show(r.actions.notifyEmails), links: showLinks(r.actions.ownerBookingUrls) }); setErr(null); };
   const setCond = (i: number, p: Partial<Cond>) => setD((x) => ({ ...x, conditions: x.conditions.map((c, j) => (j === i ? { ...c, ...p } : c)) }));
   const save = () => {
     if (!d.name.trim()) return setErr("Give the rule a name.");
@@ -46,7 +70,12 @@ export function RuleBuilder({ rule, forms, fields }: { rule?: RuleDraft; forms: 
     const bad = emails.find((e) => !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e));
     if (bad) return setErr(`"${bad}" is not a valid email.`);
     if (d.actions.webhookUrl && !/^https?:\/\/.+/.test(d.actions.webhookUrl)) return setErr("Webhook URL must start with http(s)://");
-    const payload = { ...d, id: undefined, conditions: d.conditions.map((c, i) => ({ field: c.field.trim(), op: c.op, value: coerce(c.op, raw[i] ?? "") })), actions: { ...d.actions, assignTo: split(text.assignTo), tags: split(text.tags), notifyEmails: emails } };
+    const owners = parseOwners(text.assignTo);
+    if (typeof owners === "string") return setErr(owners);
+    const links = parseLinks(text.links);
+    if (typeof links === "string") return setErr(links);
+    if (d.actions.bookingUrl && !/^https?:\/\/.+/.test(d.actions.bookingUrl)) return setErr("Booking link must start with http(s)://");
+    const payload = { ...d, id: undefined, conditions: d.conditions.map((c, i) => ({ field: c.field.trim(), op: c.op, value: coerce(c.op, raw[i] ?? "") })), actions: { ...d.actions, ...owners, tags: split(text.tags), notifyEmails: emails, ownerBookingUrls: links, bookingUrl: d.actions.bookingUrl ?? "", sticky: !!d.actions.sticky } };
     start(async () => {
       const r = await saveRuleAction(rule?.id ?? null, payload);
       if (r?.error) setErr(r.error); else { setOpen(false); router.refresh(); }
@@ -78,12 +107,15 @@ export function RuleBuilder({ rule, forms, fields }: { rule?: RuleDraft; forms: 
           <Button size="sm" variant="ghost" className="mt-2" onClick={() => { setD({ ...d, conditions: [...d.conditions, { field: "", op: "eq" }] }); setRaw((r) => [...r, ""]); }}><Plus size={13} />Add condition</Button>
         </div>
         <div className="grid gap-3 sm:grid-cols-2">
-          <div className="space-y-1.5"><Label htmlFor="rule-assign">Assign to (round-robin)</Label><Input id="rule-assign" value={text.assignTo} onChange={(e) => setText({ ...text, assignTo: e.target.value })} placeholder="ava@acme.com, sam@acme.com" /></div>
+          <div className="space-y-1.5"><Label htmlFor="rule-assign">Assign to (weighted round-robin)</Label><Input id="rule-assign" value={text.assignTo} onChange={(e) => setText({ ...text, assignTo: e.target.value })} placeholder="ava@acme.com*2, sam@acme.com" aria-describedby="rule-assign-hint" /><p id="rule-assign-hint" className="text-[11.5px] text-fg-subtle">Add <code>*2</code> to give an owner twice the share; <code>*0</code> pauses them.</p></div>
           <div className="space-y-1.5"><Label htmlFor="rule-tags">Add tags</Label><Input id="rule-tags" value={text.tags} onChange={(e) => setText({ ...text, tags: e.target.value })} placeholder="enterprise, priority" /></div>
           <div className="space-y-1.5"><Label htmlFor="rule-notify">Notify</Label><Input id="rule-notify" value={text.notifyEmails} onChange={(e) => setText({ ...text, notifyEmails: e.target.value })} placeholder="ae-team@acme.com" /></div>
           <div className="space-y-1.5"><Label htmlFor="rule-webhook">Call webhook</Label><Input id="rule-webhook" value={d.actions.webhookUrl} onChange={(e) => setD({ ...d, actions: { ...d.actions, webhookUrl: e.target.value } })} placeholder="https://hooks.slack.com/…" /></div>
+          <div className="space-y-1.5"><Label htmlFor="rule-booking">Booking link (shown after submit)</Label><Input id="rule-booking" value={d.actions.bookingUrl ?? ""} onChange={(e) => setD({ ...d, actions: { ...d.actions, bookingUrl: e.target.value } })} placeholder="https://cal.com/{{owner_name}}/intro" /></div>
+          <div className="space-y-1.5"><Label htmlFor="rule-links">Per-owner booking links</Label><Textarea id="rule-links" rows={2} value={text.links} onChange={(e) => setText({ ...text, links: e.target.value })} placeholder={"ava@acme.com = https://cal.com/ava/30min"} className="font-mono text-[12px]" /></div>
         </div>
         <div className="flex flex-wrap gap-4 text-[13px] text-fg">
+          <label className="flex items-center gap-2"><input type="checkbox" checked={!!d.actions.sticky} onChange={(e) => setD({ ...d, actions: { ...d.actions, sticky: e.target.checked } })} className="h-3.5 w-3.5 accent-[var(--accent)]" />Keep existing account owner (same company domain)</label>
           <label className="flex items-center gap-2"><input type="checkbox" checked={d.stopOnMatch} onChange={(e) => setD({ ...d, stopOnMatch: e.target.checked })} className="h-3.5 w-3.5 accent-[var(--accent)]" />Stop after this rule matches</label>
           <label className="flex items-center gap-2"><input type="checkbox" checked={d.actions.markSpam} onChange={(e) => setD({ ...d, actions: { ...d.actions, markSpam: e.target.checked } })} className="h-3.5 w-3.5 accent-[var(--accent)]" />Mark as spam</label>
         </div>

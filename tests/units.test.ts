@@ -118,7 +118,7 @@ describe("secrets", () => {
   });
 });
 
-const rule = (over: Partial<RoutingRule>): RoutingRule => ({ id: "r" + Math.random(), workspaceId: "w", formId: null, name: "R", priority: 100, match: "all", conditions: [], actions: { assignTo: [], tags: [], notifyEmails: [], webhookUrl: "", markSpam: false }, stopOnMatch: true, active: true, hitCount: 0, rrIndex: 0, createdAt: "", ...over });
+const rule = (over: Partial<RoutingRule>): RoutingRule => ({ id: "r" + Math.random(), workspaceId: "w", formId: null, name: "R", priority: 100, match: "all", conditions: [], actions: { assignTo: [], tags: [], notifyEmails: [], webhookUrl: "", markSpam: false, weights: {}, sticky: false, bookingUrl: "", ownerBookingUrls: {} }, stopOnMatch: true, active: true, hitCount: 0, rrIndex: 0, createdAt: "", ...over });
 
 describe("routing engine", () => {
   const lead = { company: { employees: 300, country: "GB", industry: "Fintech", domain: "monzo.com" }, person: { title: "VP Engineering" }, email: { freeProvider: false }, fitScore: 82, data: { message: "pricing please" } };
@@ -130,9 +130,9 @@ describe("routing engine", () => {
     expect(evalCondition(lead, { field, op: op as never, value }).ok).toBe(expected);
   });
   it("evaluates by priority, stops on match and explains steps", () => {
-    const r1 = rule({ name: "Small", priority: 1, conditions: [{ field: "company.employees", op: "lt", value: 50 }], actions: { assignTo: ["a"], tags: ["smb"], notifyEmails: [], webhookUrl: "", markSpam: false } });
-    const r2 = rule({ name: "Ent", priority: 2, conditions: [{ field: "company.employees", op: "gte", value: 200 }, { field: "company.country", op: "eq", value: "GB" }], actions: { assignTo: ["ae@x"], tags: ["enterprise"], notifyEmails: [], webhookUrl: "", markSpam: false } });
-    const r3 = rule({ name: "Never", priority: 3, conditions: [{ field: "company.employees", op: "exists" }], actions: { assignTo: ["z"], tags: ["z"], notifyEmails: [], webhookUrl: "", markSpam: false } });
+    const r1 = rule({ name: "Small", priority: 1, conditions: [{ field: "company.employees", op: "lt", value: 50 }], actions: { assignTo: ["a"], tags: ["smb"], notifyEmails: [], webhookUrl: "", markSpam: false, weights: {}, sticky: false, bookingUrl: "", ownerBookingUrls: {} } });
+    const r2 = rule({ name: "Ent", priority: 2, conditions: [{ field: "company.employees", op: "gte", value: 200 }, { field: "company.country", op: "eq", value: "GB" }], actions: { assignTo: ["ae@x"], tags: ["enterprise"], notifyEmails: [], webhookUrl: "", markSpam: false, weights: {}, sticky: false, bookingUrl: "", ownerBookingUrls: {} } });
+    const r3 = rule({ name: "Never", priority: 3, conditions: [{ field: "company.employees", op: "exists" }], actions: { assignTo: ["z"], tags: ["z"], notifyEmails: [], webhookUrl: "", markSpam: false, weights: {}, sticky: false, bookingUrl: "", ownerBookingUrls: {} } });
     const decision = evaluateRules([r3, r2, r1], lead);
     const matched = decision.matched;
     expect(decision.owner).toBe("ae@x");
@@ -141,7 +141,7 @@ describe("routing engine", () => {
     expect(decision.steps.map((s) => [s.name, s.matched])).toEqual([["Small", false], ["Ent", true]]);
   });
   it("match=any and inactive rules", () => {
-    const r = rule({ match: "any", conditions: [{ field: "company.employees", op: "lt", value: 10 }, { field: "company.country", op: "eq", value: "GB" }], actions: { assignTo: ["x"], tags: [], notifyEmails: [], webhookUrl: "", markSpam: false } });
+    const r = rule({ match: "any", conditions: [{ field: "company.employees", op: "lt", value: 10 }, { field: "company.country", op: "eq", value: "GB" }], actions: { assignTo: ["x"], tags: [], notifyEmails: [], webhookUrl: "", markSpam: false, weights: {}, sticky: false, bookingUrl: "", ownerBookingUrls: {} } });
     expect(evaluateRules([r], lead).owner).toBe("x");
     expect(evaluateRules([{ ...r, active: false }], lead).owner).toBeNull();
   });
@@ -184,5 +184,35 @@ describe("showIf evaluator", () => {
   it("guards against cycles", () => {
     const fields = [{ name: "a", showIf: { field: "b", op: "filled" as const } }, { name: "b", showIf: { field: "a", op: "filled" as const } }];
     expect(() => isFieldVisible("a", fields, {})).not.toThrow();
+  });
+});
+
+describe("weighted round-robin, stickiness and booking links", async () => {
+  const { weightedSequence, pickWeighted, bookingLink, accountDomain } = await import("@/lib/routing");
+  it("smooth weighted sequence interleaves by weight", () => {
+    expect(weightedSequence(["a", "b"], { a: 2 })).toEqual(["a", "b", "a"]);
+    const seq = weightedSequence(["a", "b", "c"], { a: 5, b: 1, c: 1 });
+    expect(seq).toHaveLength(7);
+    expect(seq.filter((x) => x === "a")).toHaveLength(5);
+    expect(seq[0]).toBe("a");
+    expect(weightedSequence(["a", "b"], { a: 0 })).toEqual(["b"]);
+    expect(weightedSequence(["a"], { a: 0 })).toEqual([]);
+  });
+  it("pickWeighted cycles deterministically", () => {
+    const rule = { actions: { assignTo: ["a", "b"], weights: { a: 3 } } } as never;
+    const picks = Array.from({ length: 8 }, (_, i) => pickWeighted(rule, i));
+    expect(picks.filter((p) => p === "a")).toHaveLength(6);
+    expect(picks.filter((p) => p === "b")).toHaveLength(2);
+  });
+  it("account domain ignores free email providers", () => {
+    expect(accountDomain({ company: { domain: "Stripe.com" } })).toBe("stripe.com");
+    expect(accountDomain({ email: { domain: "acme.io", freeProvider: false } })).toBe("acme.io");
+    expect(accountDomain({ email: { domain: "gmail.com", freeProvider: true } })).toBeNull();
+  });
+  it("booking links prefer the owner's link and fill templates safely", () => {
+    const rule = { actions: { bookingUrl: "https://cal.com/{{owner_name}}/intro?e={{email}}", ownerBookingUrls: { "ava@x.io": "https://cal.com/ava/demo" } } } as never;
+    expect(bookingLink(rule, "ava@x.io", {})).toBe("https://cal.com/ava/demo");
+    expect(bookingLink(rule, "sam@x.io", { email: { address: "a+b@c.com" } })).toBe("https://cal.com/sam/intro?e=a%2Bb%40c.com");
+    expect(bookingLink({ actions: { bookingUrl: "javascript:alert(1)", ownerBookingUrls: {} } } as never, null, {})).toBeNull();
   });
 });

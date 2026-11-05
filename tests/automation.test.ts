@@ -128,6 +128,48 @@ describe("round-robin routing", () => {
   });
 });
 
+describe("weighted round-robin, account stickiness and booking links", () => {
+  it("splits leads by weight and returns the owner's booking link at submit time", async () => {
+    const f = form(ws);
+    createRule(ws, { name: "WRR", formId: f.id, conditions: [{ field: "email.freeProvider", op: "eq", value: false }], actions: { assignTo: ["a@acme.example", "b@acme.example"], weights: { "a@acme.example": 3 }, bookingUrl: "https://cal.example/{{owner_name}}", ownerBookingUrls: { "b@acme.example": "https://cal.example/b-special" } } });
+    const owners: (string | null)[] = [];
+    const links: unknown[] = [];
+    for (let i = 0; i < 8; i++) {
+      const r = await submit(f.id, { email: `w${i}@wco${i}.example` });
+      links.push(r.json.booking_url);
+      await drainAll();
+      owners.push(getSubmission(ws, r.json.id as string)!.owner);
+    }
+    expect(owners.filter((o) => o === "a@acme.example")).toHaveLength(6);
+    expect(owners.filter((o) => o === "b@acme.example")).toHaveLength(2);
+    // the link promised at submit matches the owner the worker kept
+    owners.forEach((o, i) => expect(links[i]).toBe(o === "a@acme.example" ? "https://cal.example/a" : "https://cal.example/b-special"));
+  });
+  it("keeps the existing account owner for the same company domain", async () => {
+    const f = form(ws);
+    createRule(ws, { name: "Sticky", formId: f.id, conditions: [{ field: "email.freeProvider", op: "eq", value: false }], actions: { assignTo: ["x@acme.example", "y@acme.example"], sticky: true } });
+    const first = await submit(f.id, { email: "one@sticky-co.example" });
+    await drainAll();
+    const owner1 = getSubmission(ws, first.json.id as string)!.owner;
+    const other = await submit(f.id, { email: "one@another-co.example" });
+    await drainAll();
+    expect(getSubmission(ws, other.json.id as string)!.owner).not.toBe(owner1);
+    const second = await submit(f.id, { email: "two@sticky-co.example" });
+    await drainAll();
+    const s2 = getSubmission(ws, second.json.id as string)!;
+    expect(s2.owner).toBe(owner1);
+    expect(JSON.stringify(s2.routing)).toMatch(/sticky: sticky-co\.example is owned by/);
+  });
+  it("does not promise an owner or booking link to spam", async () => {
+    const f = form(ws);
+    createRule(ws, { name: "Book", formId: f.id, conditions: [{ field: "data.email", op: "exists" }], actions: { assignTo: ["z@acme.example"], bookingUrl: "https://cal.example/z" } });
+    const ok = await submit(f.id, { email: "fine@book-co.example" });
+    expect(ok.json.booking_url).toBe("https://cal.example/z");
+    const spam = await submit(f.id, { email: "bot@book-co.example", _gotcha: "x" });
+    expect(spam.json.booking_url).toBeUndefined();
+  });
+});
+
 describe("schedules", () => {
   it("digest emails recipients via outbox", async () => {
     const f = form(ws);

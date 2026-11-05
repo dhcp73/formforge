@@ -1,6 +1,6 @@
 "use client";
 import * as React from "react";
-import { CheckCircle2, Loader2 } from "lucide-react";
+import { CheckCircle2, Loader2, CalendarDays } from "lucide-react";
 import { Input, Textarea, Label, Select } from "@/components/ui/primitives";
 import { Button } from "@/components/ui/button";
 import type { FieldDef } from "@/lib/types";
@@ -8,6 +8,7 @@ import { isFieldVisible } from "@/lib/ingest/logic";
 
 export function HostedForm({ formId, fields, honeypot }: { formId: string; fields: FieldDef[]; honeypot: string }) {
   const [state, setState] = React.useState<"idle" | "sending" | "done">("idle");
+  const [booking, setBooking] = React.useState<string | null>(null);
   const [errors, setErrors] = React.useState<Record<string, string>>({});
   const [msg, setMsg] = React.useState<string | null>(null);
   const [values, setValues] = React.useState<Record<string, string>>({});
@@ -38,11 +39,11 @@ export function HostedForm({ formId, fields, honeypot }: { formId: string; field
     try {
       const r = await fetch(`/api/f/${formId}`, { method: "POST", body: fd, headers: { Accept: "application/json" } });
       const j = await r.json().catch(() => ({}));
-      if (r.ok) setState("done");
+      if (r.ok) { setBooking(typeof j.booking_url === "string" && /^https?:\/\//.test(j.booking_url) ? j.booking_url : null); setState("done"); }
       else { setState("idle"); setMsg(j.message ?? "Something went wrong."); if (j.errors && typeof j.errors === "object") setErrors(j.errors); }
     } catch { setState("idle"); setMsg("Network error — please try again."); }
   };
-  if (state === "done") return <div className="flex flex-col items-center py-10 text-center" role="status"><CheckCircle2 size={36} className="text-emerald-500" /><p className="mt-3 text-[16px] font-semibold text-fg">Thanks — we got it!</p><p className="mt-1 text-[13px] text-fg-subtle">Your submission was received.</p></div>;
+  if (state === "done") return <div className="flex flex-col items-center py-10 text-center" role="status"><CheckCircle2 size={36} className="text-emerald-500" /><p className="mt-3 text-[16px] font-semibold text-fg">Thanks — we got it!</p><p className="mt-1 text-[13px] text-fg-subtle">Your submission was received.</p>{booking && <a href={booking} target="_blank" rel="noopener noreferrer" data-testid="booking-link" className="mt-5 inline-flex h-9 items-center gap-2 rounded-md bg-accent px-4 text-[13px] font-medium text-white hover:opacity-90"><CalendarDays size={15} aria-hidden />Book a meeting now</a>}</div>;
   return (
     <form action={`/api/f/${formId}`} method="POST" encType="multipart/form-data" onSubmit={onSubmit} onChange={onChange} noValidate className="space-y-4">
       {msg && <p role="alert" className="rounded-md border border-red-200 bg-red-50 px-3 py-2 text-[13px] text-red-700 dark:border-red-900 dark:bg-red-950/40 dark:text-red-300">{msg}</p>}

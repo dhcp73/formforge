@@ -10,6 +10,8 @@ import { scoreSpam } from "./spam";
 import { rateLimit } from "./ratelimit";
 import { contextFor, runInlineEnrichment } from "../enrich/pipeline";
 import { enqueueJob } from "../jobs";
+import { getSubmissionById } from "../submissions";
+import { previewRouting } from "../routing";
 
 export const MAX_FILE_BYTES = 10 * 1024 * 1024;
 export const MAX_TOTAL_BYTES = 25 * 1024 * 1024;
@@ -88,7 +90,7 @@ export class IngestError extends Error {
 export interface IngestResult { id: string; isSpam: boolean; spamScore: number; form: FormRecord }
 
 /** Core ingest pipeline (framework-agnostic). */
-export async function ingest(formId: string, req: Request): Promise<IngestResult & { redirect: string | null }> {
+export async function ingest(formId: string, req: Request): Promise<IngestResult & { redirect: string | null; bookingUrl: string | null }> {
   const form = getFormPublic(formId);
   if (!form) throw new IngestError(404, "Form not found", undefined, "form_not_found");
   const s = form.settings;
@@ -164,9 +166,19 @@ export async function ingest(formId: string, req: Request): Promise<IngestResult
      VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'new', ?, ?, ?, 'pending', ?)`,
   ).run(id, form.id, form.workspaceId, JSON.stringify(mapped), JSON.stringify(fieldTypes), JSON.stringify(stored), JSON.stringify(meta), JSON.stringify(enrichment), spam.score, isSpam ? 1 : 0, JSON.stringify(spam.reasons), contentHash, searchText, JSON.stringify(activity), now());
 
+  // instant routing preview: promise an owner + booking link now (enrichment may refine routing in the worker)
+  let bookingUrl: string | null = null;
+  if (!isSpam) {
+    try {
+      const rec = getSubmissionById(id);
+      const pv = rec ? previewRouting(form.workspaceId, rec) : null;
+      if (pv?.owner) db.prepare("UPDATE submissions SET owner = ? WHERE id = ?").run(pv.owner, id);
+      bookingUrl = pv?.bookingUrl ?? null;
+    } catch (e) { console.error("[ingest] routing preview", e); }
+  }
   enqueueJob("submission.process", { submissionId: id });
   const redirect = redirectField && /^https?:\/\//.test(redirectField) ? redirectField : s.redirectUrl || null;
-  return { id, isSpam, spamScore: spam.score, form, redirect };
+  return { id, isSpam, spamScore: spam.score, form, redirect, bookingUrl };
 }
 
 export function wantsJson(req: Request): boolean {
@@ -181,8 +193,8 @@ export async function handleSubmissionRequest(req: Request, formId: string, base
   const json = wantsJson(req);
   try {
     const r = await ingest(formId, req);
-    if (json) return Response.json({ ok: true, status: "success", id: r.id, spam: r.isSpam }, { status: 200, headers: cors });
-    const target = r.redirect ?? `${baseUrl}/thanks?form=${encodeURIComponent(formId)}${req.headers.get("referer") ? `&back=${encodeURIComponent(req.headers.get("referer")!)}` : ""}`;
+    if (json) return Response.json({ ok: true, status: "success", id: r.id, spam: r.isSpam, ...(r.bookingUrl ? { booking_url: r.bookingUrl } : {}) }, { status: 200, headers: cors });
+    const target = r.redirect ?? `${baseUrl}/thanks?form=${encodeURIComponent(formId)}${req.headers.get("referer") ? `&back=${encodeURIComponent(req.headers.get("referer")!)}` : ""}${r.bookingUrl ? `&book=${encodeURIComponent(r.bookingUrl)}` : ""}`;
     return new Response(null, { status: 303, headers: { ...cors, Location: target } });
   } catch (e) {
     const err = e instanceof IngestError ? e : new IngestError(500, "Unexpected error");

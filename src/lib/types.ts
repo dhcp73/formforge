@@ -135,6 +135,8 @@ export interface RoutingStep {
 
 export interface RoutingDecision {
   evaluatedAt: string;
+  /** Booking link to show the lead (from the owner-assigning rule). */
+  bookingUrl?: string | null;
   steps: RoutingStep[];
   owner: string | null;
   tags: string[];

@@ -14,6 +14,14 @@ export const actionsSchema = z.object({
   notifyEmails: z.array(z.string().email()).default([]),
   webhookUrl: z.string().url().or(z.literal("")).default(""),
   markSpam: z.boolean().default(false),
+  /** Weighted round-robin: owner → weight (default 1; 0 = paused). */
+  weights: z.record(z.string(), z.number().int().min(0).max(100)).default({}),
+  /** Account-owner stickiness: reuse the owner of earlier leads from the same company domain. */
+  sticky: z.boolean().default(false),
+  /** Shown to the lead after submit. Supports {{owner}}, {{owner_name}}, {{email}}, {{name}}, {{company}}. */
+  bookingUrl: z.string().max(500).default(""),
+  /** Per-owner booking links (owner → URL); wins over bookingUrl. */
+  ownerBookingUrls: z.record(z.string(), z.string().url()).default({}),
 });
 export const ruleInputSchema = z.object({
   name: z.string().min(1).max(120),
@@ -105,11 +113,64 @@ export function evalCondition(ctx: Record<string, unknown>, c: Condition): { ok:
   return { ok, detail: `${c.field} ${c.op} ${c.value === undefined ? "" : JSON.stringify(c.value)} → actual ${shown} ${ok ? "✓" : "✗"}` };
 }
 
+/** Smooth weighted round-robin (nginx-style): deterministic sequence of owners for a cycle. */
+export function weightedSequence(owners: string[], weights: Record<string, number> = {}): string[] {
+  const w = owners.map((o) => ({ o, w: Math.max(0, weights[o] ?? 1), cur: 0 }));
+  const total = w.reduce((a, x) => a + x.w, 0);
+  if (!total) return [];
+  const seq: string[] = [];
+  for (let i = 0; i < total; i++) {
+    for (const x of w) x.cur += x.w;
+    const best = w.reduce((a, b) => (b.cur > a.cur ? b : a));
+    best.cur -= total;
+    seq.push(best.o);
+  }
+  return seq;
+}
+
+/** Pick the owner for the n-th lead routed by a rule. */
+export function pickWeighted(rule: Pick<RoutingRule, "actions">, n: number): string | null {
+  const seq = weightedSequence(rule.actions.assignTo, rule.actions.weights);
+  return seq.length ? seq[n % seq.length] : null;
+}
+
+/** Company domain used for account stickiness: enriched company domain, else a non-free email domain. */
+export function accountDomain(ctx: Record<string, unknown>): string | null {
+  const c = getPath(ctx, "company.domain");
+  if (typeof c === "string" && c) return c.toLowerCase();
+  const free = getPath(ctx, "email.freeProvider"), d = getPath(ctx, "email.domain");
+  return !free && typeof d === "string" && d ? d.toLowerCase() : null;
+}
+
+/** Owner of the most recent earlier lead from the same account (same workspace). */
+export function findAccountOwner(ws: string, domain: string, excludeId?: string): string | null {
+  const r = getDb().prepare(
+    `SELECT owner FROM submissions WHERE workspace_id = ? AND owner IS NOT NULL AND owner != '' AND id != ? AND is_spam = 0
+       AND (lower(json_extract(enrichment, '$.company.domain')) = ? OR (lower(json_extract(enrichment, '$.email.domain')) = ? AND COALESCE(json_extract(enrichment, '$.email.freeProvider'), 0) = 0))
+     ORDER BY created_at DESC LIMIT 1`,
+  ).get(ws, excludeId ?? "", domain, domain) as { owner: string } | undefined;
+  return r?.owner ?? null;
+}
+
+/** Booking link for the chosen owner (per-owner link, else the rule template). */
+export function bookingLink(rule: RoutingRule, owner: string | null, ctx: Record<string, unknown>): string | null {
+  const tpl = (owner && rule.actions.ownerBookingUrls[owner]) || rule.actions.bookingUrl;
+  if (!tpl) return null;
+  const vals: Record<string, string> = {
+    owner: owner ?? "", owner_name: (owner ?? "").split("@")[0],
+    email: String(getPath(ctx, "email.address") ?? getPath(ctx, "data.email") ?? ""),
+    name: String(getPath(ctx, "data.name") ?? ""), company: String(getPath(ctx, "company.name") ?? getPath(ctx, "data.company") ?? ""),
+  };
+  const url = tpl.replace(/\{\{\s*(\w+)\s*\}\}/g, (_, k: string) => encodeURIComponent(vals[k] ?? ""));
+  return /^https?:\/\//i.test(url) ? url : null;
+}
+
 /** Pure evaluation (no side effects). `pickOwner` chooses from assignTo (round-robin in DB mode). */
 export function evaluateRules(rules: RoutingRule[], ctx: Record<string, unknown>, pickOwner: (rule: RoutingRule) => string | null = (r) => r.actions.assignTo[0] ?? null) {
   const steps: RoutingStep[] = [];
   const matched: RoutingRule[] = [];
   let owner: string | null = null;
+  let ownerRule: RoutingRule | null = null;
   const tags = new Set<string>();
   for (const rule of [...rules].filter((r) => r.active).sort((a, b) => a.priority - b.priority)) {
     const results = rule.conditions.map((c) => evalCondition(ctx, c));
@@ -117,26 +178,59 @@ export function evaluateRules(rules: RoutingRule[], ctx: Record<string, unknown>
     steps.push({ ruleId: rule.id, name: rule.name, matched: ok, details: results.map((r) => r.detail) });
     if (!ok) continue;
     matched.push(rule);
-    if (!owner && rule.actions.assignTo.length) owner = pickOwner(rule);
+    if (!owner && (rule.actions.assignTo.length || rule.actions.sticky)) { owner = pickOwner(rule); if (owner) ownerRule = rule; }
     rule.actions.tags.forEach((t) => tags.add(t));
     if (rule.stopOnMatch) break;
   }
-  return { steps, matched, owner, tags: Array.from(tags) };
+  const bookingRule = ownerRule ?? matched.find((r) => r.actions.bookingUrl) ?? null;
+  return { steps, matched, owner, ownerRule, tags: Array.from(tags), bookingUrl: bookingRule ? bookingLink(bookingRule, owner, ctx) : null };
+}
+
+/**
+ * Owner picker with stickiness + weighted round-robin.
+ * `commit` advances the rule's round-robin counter; preview mode (at submit time) only peeks.
+ */
+function ownerPicker(ws: string, s: Pick<SubmissionRecord, "id" | "owner">, ctx: Record<string, unknown>, commit: boolean, notes: Map<string, string>) {
+  const db = getDb();
+  return (rule: RoutingRule): string | null => {
+    if (rule.actions.sticky) {
+      const domain = accountDomain(ctx);
+      const acct = domain ? findAccountOwner(ws, domain, s.id) : null;
+      if (acct) { notes.set(rule.id, `sticky: ${domain} is owned by ${acct}`); return acct; }
+    }
+    if (!rule.actions.assignTo.length) return null;
+    // keep the owner promised at submit time (preview) if this rule can assign them
+    if (s.owner && rule.actions.assignTo.includes(s.owner) && (rule.actions.weights[s.owner] ?? 1) > 0) {
+      if (commit) db.prepare("UPDATE routing_rules SET rr_index = rr_index + 1 WHERE id = ?").run(rule.id);
+      notes.set(rule.id, `round-robin: kept ${s.owner}`);
+      return s.owner;
+    }
+    const pick = pickWeighted(rule, rule.rrIndex);
+    if (commit && pick) db.prepare("UPDATE routing_rules SET rr_index = rr_index + 1 WHERE id = ?").run(rule.id);
+    if (pick) notes.set(rule.id, `${Object.keys(rule.actions.weights).length ? "weighted " : ""}round-robin → ${pick}`);
+    return pick;
+  };
+}
+
+/** Side-effect-free routing preview used at submit time (owner + booking link for the thank-you step). */
+export function previewRouting(ws: string, s: SubmissionRecord) {
+  const ctx = leadContext(s);
+  const notes = new Map<string, string>();
+  const res = evaluateRules(listRules(ws, s.formId), ctx, ownerPicker(ws, { id: s.id, owner: null }, ctx, false, notes));
+  return { owner: res.owner, bookingUrl: res.bookingUrl, tags: res.tags };
 }
 
 /** Evaluate + persist (round-robin index, hit counts). Returns decision; caller stores on submission. */
 export function routeSubmission(ws: string, s: SubmissionRecord): { decision: RoutingDecision; matched: RoutingRule[] } {
   const db = getDb();
   const rules = listRules(ws, s.formId);
-  const res = evaluateRules(rules, leadContext(s), (rule) => {
-    const list = rule.actions.assignTo;
-    const pick = list[rule.rrIndex % list.length];
-    db.prepare("UPDATE routing_rules SET rr_index = rr_index + 1 WHERE id = ?").run(rule.id);
-    return pick;
-  });
+  const ctx = leadContext(s);
+  const notes = new Map<string, string>();
+  const res = evaluateRules(rules, ctx, ownerPicker(ws, s, ctx, true, notes));
   for (const r of res.matched) db.prepare("UPDATE routing_rules SET hit_count = hit_count + 1 WHERE id = ?").run(r.id);
+  const steps = res.steps.map((st) => (notes.has(st.ruleId) ? { ...st, details: [...st.details, notes.get(st.ruleId)!] } : st));
   return {
-    decision: { evaluatedAt: now(), steps: res.steps, owner: res.owner, tags: res.tags, matchedRules: res.matched.map((r) => r.id) },
+    decision: { evaluatedAt: now(), steps, owner: res.owner, tags: res.tags, matchedRules: res.matched.map((r) => r.id), bookingUrl: res.bookingUrl },
     matched: res.matched,
   };
 }

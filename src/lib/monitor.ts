@@ -167,7 +167,7 @@ export async function runProbes(opts: { http?: boolean } = {}): Promise<ProbeRes
     return { message: r.status === "sent" ? "SMTP delivery OK" : "Outbox transport OK (set SMTP_URL for SMTP)" };
   }));
   probes.push(timed("routing", async () => {
-    const rule = { id: "probe", workspaceId: SYSTEM_WS, formId: null, name: "Probe", priority: 1, match: "all", conditions: [{ field: "company.employees", op: "gte", value: 100 }, { field: "geo.country", op: "in", value: "GB,US" }], actions: { assignTo: ["probe-rep"], tags: ["probe"], notifyEmails: [], webhookUrl: "", markSpam: false }, stopOnMatch: true, active: true, hitCount: 0, rrIndex: 0, createdAt: now() } as RoutingRule;
+    const rule = { id: "probe", workspaceId: SYSTEM_WS, formId: null, name: "Probe", priority: 1, match: "all", conditions: [{ field: "company.employees", op: "gte", value: 100 }, { field: "geo.country", op: "in", value: "GB,US" }], actions: { assignTo: ["probe-rep"], tags: ["probe"], notifyEmails: [], webhookUrl: "", markSpam: false, weights: {}, sticky: false, bookingUrl: "", ownerBookingUrls: {} }, stopOnMatch: true, active: true, hitCount: 0, rrIndex: 0, createdAt: now() } as RoutingRule;
     const r = evaluateRules([rule], { company: { employees: 250 }, geo: { country: "GB" } });
     if (r.owner !== "probe-rep") throw new Error("Synthetic lead was not routed correctly");
     return { message: "Synthetic lead routed correctly" };
