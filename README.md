@@ -50,7 +50,10 @@ curl -X POST http://localhost:3100/api/f/FORM_ID -H 'Accept: application/json' -
 - **Spam:** honeypot (accepted but stored as spam), per-IP rate limit, explainable 0–100 spam score (links, keywords, disposable email, bot UA, too-fast submit, duplicates), allowed domains, flag or reject.
 - **Dynamic fields:** schema off / validate / strict, type detection and coercion, regex, length rules, renames, `select` options and **branching logic** (`showIf`, chained; hidden fields aren't required and their values are dropped).
 - **Enrichment waterfall:** offline (email syntax/MX/disposable/free/role, IP geo, UA, company dataset) → **Apollo** → **Valyu Search** → **AI** (OpenAI SDK or Vercel AI SDK; OpenRouter fallback) → **Clay** push with a signed callback → optional **Valyu DeepResearch** (async, structured output, webhook or polling, credit estimate shown). Includes per-field source attribution, timeouts, a per-workspace domain cache and cost/credit logs.
-- **Routing:** rules on merged data (14 operators, all/any, priority, stop-on-match), **round-robin** owners, tags, notify emails, rule webhooks, mark spam. Routing re-runs when Clay or Valyu data arrives.
+- **Routing:** rules on merged data (size, location, domain, title, AI intent and more; 14 operators, all/any, priority, stop-on-match).
+  - **Weighted round-robin**, **account-owner stickiness** (same company domain) and **instant routing**: the owner is promised at submit time, and a **booking link** is returned (`booking_url`) and shown on the thank-you step.
+  - Also tags, notify emails, rule webhooks and mark spam.
+  - Routing re-runs when Clay or Valyu data arrives and keeps the promised owner.
 - **Scheduling:** open/close windows, submission caps (410 responses), cron digests, scheduled webhook exports and CSV exports on a durable job queue.
 - **Webhooks:** HMAC-SHA256 signatures, 5 attempts with backoff, delivery logs and redeliver.
 - **Email:** SMTP (`SMTP_URL`), or an outbox log as fallback; notifications and autoresponder.
@@ -101,6 +104,7 @@ stdio (Claude Desktop / Cursor):
 | `npm run test:e2e` | Playwright functional journeys (signup → form → test submission → drawer → API key → REST; hosted form branching; docs; status; palette) |
 | `npm run test:ui` | UI audit: every route × 375/768/1280/1440 × light/dark. Checks console errors, failed requests, HTTP ≥ 400, overflow, overlap, `#` hrefs, dead links and axe serious/critical, plus keyboard checks (Tab focus, ⌘K, Esc). Screenshots go to `screenshots/qa/` |
 | `npm run agent:ui` | Autonomous crawler report → `reports/ui-agent/index.html` |
+| `npm run screenshots` | Curated product screenshots → `screenshots/*.png` |
 | `npm run lint` / `npm run typecheck` / `npm run build` | Quality gates |
 | `npm run check` | lint + typecheck + test |
 
