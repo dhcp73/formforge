@@ -64,9 +64,26 @@ export async function createFormAction(_: ActionState, fd: FormData): Promise<Ac
   const bad = emails.find((e) => !EMAIL.test(e));
   if (bad) return { error: `"${bad}" is not a valid email`, fieldErrors: { notifyEmails: `"${bad}" is not a valid email` } };
   let id: string;
-  try { id = createForm(ws, { name, description: str(fd, "description"), settings: { redirectUrl, notifyEmails: emails } }).id; } catch (e) { return fail(e); }
+  let form;
+  try { form = createForm(ws, { name, description: str(fd, "description"), settings: { redirectUrl, notifyEmails: emails } }); } catch (e) { return fail(e); }
+  const id = form.id;
   if (isEphemeralMode()) await persistDemoSnapCookie();
   revalidatePath("/dashboard", "layout");
+  // Browser/demo mode: return form so the client merges into localStorage before navigate
+  // (avoids losing the row when the next request hits another serverless instance).
+  if (isEphemeralMode()) {
+    return {
+      ok: true,
+      message: "Form created.",
+      data: {
+        id,
+        form: {
+          id: form.id, workspace_id: form.workspaceId, name: form.name, description: form.description,
+          status: form.status, settings: JSON.stringify(form.settings), created_at: form.createdAt, updated_at: form.updatedAt,
+        },
+      },
+    };
+  }
   redirect(`/dashboard/forms/${id}/setup?created=1`);
 }
 

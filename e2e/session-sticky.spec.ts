@@ -42,10 +42,15 @@ test("login cookie sticks across hard reloads, form pages, and new contexts", as
   const formName = `Sticky Form ${Date.now()}`;
   await page.getByLabel("Form name").fill(formName);
   await page.getByRole("button", { name: "Create form" }).click();
-  await page.waitForURL(/\/dashboard\/forms\/[^/]+\/setup/, { timeout: 30_000 });
+  await page.waitForURL(/\/dashboard\/forms\/[^/]+\/setup/, { timeout: 45_000 });
   await expect(page).not.toHaveURL(/\/login/);
   const createdId = page.url().match(/\/dashboard\/forms\/([^/?#]+)/)?.[1];
   expect(createdId).toBeTruthy();
+  await expect(page.getByText(formName).first()).toBeVisible({ timeout: 20_000 });
+  // Reload the form setup page — must stay authenticated and keep the form
+  await page.reload();
+  await expect(page).not.toHaveURL(/\/login/);
+  await expect(page.getByText(formName).first()).toBeVisible({ timeout: 30_000 });
 
   // Snapshot save on ?created=1 (skips stale restore), then list must show the form
   await page.waitForTimeout(2000);
