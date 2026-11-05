@@ -84,6 +84,7 @@ export function getDb(): DB {
 
 /** Close and forget the cached connection (used by tests). */
 export function resetDb() {
+  const p = g.__ffdbPath;
   if (g.__ffdb) {
     try { g.__ffdb.close(); } catch { /* ignore */ }
   }
@@ -93,6 +94,12 @@ export function resetDb() {
   try {
     (globalThis as unknown as { __ffDemoSeeded?: boolean }).__ffDemoSeeded = false;
   } catch { /* ignore */ }
+  // Remove on-disk DB so the next getDb() is a true cold start (tests / ephemeral sims).
+  if (p && p !== ":memory:") {
+    for (const f of [p, `${p}-wal`, `${p}-shm`]) {
+      try { fs.rmSync(f, { force: true }); } catch { /* ignore */ }
+    }
+  }
 }
 
 export function now(): string {

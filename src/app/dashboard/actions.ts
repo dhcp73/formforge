@@ -16,7 +16,8 @@ import { testIntegration } from "@/lib/enrich/pipeline";
 import { INTEGRATIONS, type IntegrationId } from "@/lib/integrations/registry";
 import { runMonitorOnce } from "@/lib/monitor";
 import { enqueueJob } from "@/lib/jobs";
-import { getDb, now } from "@/lib/db";
+import { getDb, now, isEphemeralMode } from "@/lib/db";
+import { persistDemoSnapCookie } from "@/lib/demo-cookie";
 import { newId } from "@/lib/ids";
 import type { ActionState } from "@/components/ui/action-form";
 import { fieldDefSchema } from "@/lib/types";
@@ -38,7 +39,8 @@ function fail(e: unknown): ActionState {
 // ---------- workspace ----------
 export async function switchWorkspaceAction(id: string) {
   const { s } = await ctx();
-  switchWorkspace(s.sessionId, s.user.id, id);
+  const { setSessionCookie } = await import("@/lib/session");
+  await setSessionCookie(switchWorkspace(s.user.id, id));
   redirect("/dashboard");
 }
 export async function createWorkspaceAction(fd: FormData) {
@@ -46,7 +48,8 @@ export async function createWorkspaceAction(fd: FormData) {
   const name = str(fd, "name");
   if (name.length < 2) return;
   const id = createWorkspace(s.user.id, name);
-  switchWorkspace(s.sessionId, s.user.id, id);
+  const { setSessionCookie } = await import("@/lib/session");
+  await setSessionCookie(switchWorkspace(s.user.id, id));
   redirect("/dashboard");
 }
 
@@ -62,6 +65,7 @@ export async function createFormAction(_: ActionState, fd: FormData): Promise<Ac
   if (bad) return { error: `"${bad}" is not a valid email`, fieldErrors: { notifyEmails: `"${bad}" is not a valid email` } };
   let id: string;
   try { id = createForm(ws, { name, description: str(fd, "description"), settings: { redirectUrl, notifyEmails: emails } }).id; } catch (e) { return fail(e); }
+  if (isEphemeralMode()) await persistDemoSnapCookie();
   revalidatePath("/dashboard", "layout");
   redirect(`/dashboard/forms/${id}/setup?created=1`);
 }

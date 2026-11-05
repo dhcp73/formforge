@@ -22,6 +22,7 @@ export function ensureDemoSeed() {
   process.env.FORMFORGE_DNS ??= "off";
   const { workspaceId: ws, userId } = createUser({
     email: "demo@formforge.dev", name: "Demo User", password: "demo1234", workspaceName: "Acme Growth",
+    userId: "usr_ffDemoUser01", workspaceId: "ws_ffDemoWs01",
   });
   const sales = createForm(ws, {
     id: "ffDemoSale",

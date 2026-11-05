@@ -2,7 +2,7 @@
 import { redirect } from "next/navigation";
 import { cookies } from "next/headers";
 import { authenticate, createSession, createUser, AuthError, deleteSession } from "@/lib/auth";
-import { setSessionCookie, SESSION_COOKIE } from "@/lib/session";
+import { setSessionCookie, SESSION_COOKIE, clearSessionCookie } from "@/lib/session";
 import type { ActionState } from "@/components/ui/action-form";
 
 export async function loginAction(_: ActionState, fd: FormData): Promise<ActionState> {
@@ -48,6 +48,6 @@ export async function logoutAction() {
   const jar = await cookies();
   const t = jar.get(SESSION_COOKIE)?.value;
   if (t) deleteSession(t);
-  jar.delete(SESSION_COOKIE);
+  await clearSessionCookie();
   redirect("/login");
 }

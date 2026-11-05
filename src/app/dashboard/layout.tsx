@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { requireSession } from "@/lib/session";
+import { requireSession, applyDemoSnapCookie } from "@/lib/session";
 import { listForms } from "@/lib/forms";
 import { AppShell } from "@/components/app/shell";
 import { DemoBanner, DemoPersistence } from "@/components/app/demo-persistence";
@@ -10,7 +10,10 @@ export const dynamic = "force-dynamic";
 
 export default async function DashboardLayout({ children }: { children: React.ReactNode }) {
   getDb();
-  if (isEphemeralMode()) ensureDemoSeed();
+  if (isEphemeralMode()) {
+    ensureDemoSeed();
+    await applyDemoSnapCookie();
+  }
   const s = await requireSession();
   const forms = listForms(s.workspace.id).map((f) => ({ id: f.id, name: f.name }));
   const label = demoModeLabel();

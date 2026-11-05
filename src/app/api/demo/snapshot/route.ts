@@ -1,9 +1,11 @@
-import { exportDemoSnapshot } from "@/lib/storage/demo-seed";
+import { exportDemoSnapshot, ensureDemoSeed } from "@/lib/storage/demo-seed";
 import { isEphemeralMode, demoModeLabel } from "@/lib/db";
-import { ensureDemoSeed } from "@/lib/storage/demo-seed";
+import { persistDemoSnapCookie } from "@/lib/demo-cookie";
 
-export function GET() {
+export async function GET() {
   if (!isEphemeralMode()) return Response.json({ error: "Snapshot only available in STORAGE_MODE=browser|memory" }, { status: 400 });
   ensureDemoSeed();
-  return Response.json({ ...exportDemoSnapshot(), label: demoModeLabel() });
+  const snap = { ...exportDemoSnapshot(), label: demoModeLabel() };
+  await persistDemoSnapCookie(snap);
+  return Response.json(snap);
 }
