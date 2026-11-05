@@ -5,7 +5,6 @@ import { createForm } from "../forms";
 import { createApiKey } from "../apikeys";
 import { createRule } from "../routing";
 import { SCOPES } from "../types";
-import { newId } from "../ids";
 
 const g = globalThis as unknown as { __ffDemoSeeded?: boolean };
 
@@ -25,6 +24,7 @@ export function ensureDemoSeed() {
     email: "demo@formforge.dev", name: "Demo User", password: "demo1234", workspaceName: "Acme Growth",
   });
   const sales = createForm(ws, {
+    id: "ffDemoSale",
     name: "Contact sales",
     description: "Demo-request form",
     settings: {
@@ -36,8 +36,9 @@ export function ensureDemoSeed() {
       },
     } as never,
   });
-  createForm(ws, { name: "Newsletter signup", description: "Footer signup" });
+  createForm(ws, { id: "ffDemoNews", name: "Newsletter signup", description: "Footer signup" });
   createForm(ws, {
+    id: "ffDemoBeta",
     name: "Beta waitlist",
     description: "Private beta for the new analytics product",
     settings: {
@@ -101,7 +102,7 @@ export function ensureDemoSeed() {
   createApiKey(ws, "Demo key", [...SCOPES], userId, null, DEMO_API_KEY);
 
   // One sample submission so dashboard / e2e ids resolve without a prior POST.
-  const subId = newId("sub");
+  const subId = "sub_ffDemoSample01";
   const t = now();
   db.prepare(
     `INSERT INTO submissions (id, form_id, workspace_id, data, field_types, files, meta, enrichment, spam_score, is_spam, spam_reasons, status, content_hash, search_text, activity, enrichment_status, created_at)

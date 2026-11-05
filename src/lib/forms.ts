@@ -10,11 +10,11 @@ export const mapForm = (r: Row): FormRecord => ({
   createdAt: r.created_at, updatedAt: r.updated_at,
 });
 
-export function createForm(workspaceId: string, input: { name: string; description?: string; settings?: Partial<FormSettings> }): FormRecord {
+export function createForm(workspaceId: string, input: { name: string; description?: string; settings?: Partial<FormSettings>; id?: string }): FormRecord {
   const name = input.name?.trim();
   if (!name) throw new Error("Form name is required.");
   const settings = formSettingsSchema.parse({ ...defaultSettings(), ...(input.settings ?? {}) });
-  const id = newFormId();
+  const id = (input.id && /^[A-Za-z0-9_-]{6,32}$/.test(input.id) ? input.id : newFormId());
   const ts = now();
   getDb()
     .prepare("INSERT INTO forms (id, workspace_id, name, description, status, settings, created_at, updated_at) VALUES (?, ?, ?, ?, 'active', ?, ?, ?)")
