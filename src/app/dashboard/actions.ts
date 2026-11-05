@@ -63,7 +63,6 @@ export async function createFormAction(_: ActionState, fd: FormData): Promise<Ac
   const emails = list(str(fd, "notifyEmails"));
   const bad = emails.find((e) => !EMAIL.test(e));
   if (bad) return { error: `"${bad}" is not a valid email`, fieldErrors: { notifyEmails: `"${bad}" is not a valid email` } };
-  let id: string;
   let form;
   try { form = createForm(ws, { name, description: str(fd, "description"), settings: { redirectUrl, notifyEmails: emails } }); } catch (e) { return fail(e); }
   const id = form.id;
