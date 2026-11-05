@@ -3,25 +3,16 @@ import { cookies } from "next/headers";
 import { isEphemeralMode } from "./storage/mode";
 import { exportDemoSnapshot } from "./storage/demo-seed";
 import { DEMO_SNAP_COOKIE } from "./cookie-names";
+import { encodeDemoSnap } from "./demo-snap-codec";
 
-const MAX = 3500; // stay under typical 4KB cookie limits
+export { encodeDemoSnap, decodeDemoSnap } from "./demo-snap-codec";
 
 /** Persist a compact snapshot cookie so SSR on another instance can rehydrate. */
 export async function persistDemoSnapCookie(snap?: Record<string, unknown>) {
   if (!isEphemeralMode()) return false;
   const data = snap ?? exportDemoSnapshot();
-  const tables = { ...(data.tables as Record<string, unknown[]> | undefined) };
-  if (tables) {
-    for (const k of ["webhook_deliveries", "enrichment_logs", "emails", "exports", "research_tasks", "bookings"]) {
-      delete tables[k];
-    }
-    if (Array.isArray(tables.submissions) && tables.submissions.length > 40) {
-      tables.submissions = tables.submissions.slice(-40);
-    }
-  }
-  const slim = { ...data, tables };
-  const encoded = Buffer.from(JSON.stringify(slim), "utf8").toString("base64url");
-  if (encoded.length > MAX) return false;
+  const encoded = encodeDemoSnap(data as Record<string, unknown>);
+  if (!encoded) return false;
   const jar = await cookies();
   const https = (process.env.PUBLIC_URL ?? "").startsWith("https") || process.env.VERCEL === "1";
   jar.set(DEMO_SNAP_COOKIE, encoded, {

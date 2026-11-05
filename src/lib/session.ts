@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import { getSessionByToken, type SessionInfo } from "./auth";
 import { isEphemeralMode } from "./storage/mode";
 import { importDemoSnapshot, ensureDemoSeed } from "./storage/demo-seed";
+import { decodeDemoSnap } from "./demo-snap-codec";
 import { SESSION_COOKIE, DEMO_SNAP_COOKIE } from "./cookie-names";
 
 export { SESSION_COOKIE, DEMO_SNAP_COOKIE };
@@ -14,14 +15,8 @@ export async function applyDemoSnapCookie() {
   const jar = await cookies();
   const raw = jar.get(DEMO_SNAP_COOKIE)?.value;
   if (!raw) return;
-  try {
-    const json = JSON.parse(Buffer.from(raw, "base64url").toString("utf8")) as {
-      tables?: Record<string, Array<Record<string, unknown>>>;
-    };
-    if (json?.tables) importDemoSnapshot(json);
-  } catch {
-    /* ignore corrupt cookie */
-  }
+  const json = decodeDemoSnap(raw);
+  if (json?.tables) importDemoSnapshot(json);
 }
 
 export async function getSession(): Promise<SessionInfo | null> {
