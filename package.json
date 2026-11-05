@@ -21,7 +21,8 @@
     "lint": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit -p .",
     "check": "npm run typecheck && npm run lint && npm test",
-    "postinstall": "node scripts/copy-vendor.mjs"
+    "postinstall": "node scripts/copy-vendor.mjs",
+    "screenshots": "node --import tsx scripts/screenshots.ts"
   },
   "dependencies": {
     "@ai-sdk/openai": "^4.0.108",
