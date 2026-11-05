@@ -42,6 +42,8 @@ const html = `<!doctype html>
     darkMode: !!window.__ffDark,
     forceDarkModeState: window.__ffDark ? 'dark' : 'light',
     hideDarkModeToggle: true,
+    showDeveloperTools: 'never',
+    agent: { disabled: true },
     hideClientButton: false,
     defaultHttpClient: { targetKey: 'shell', clientKey: 'curl' },
     authentication: { preferredSecurityScheme: 'bearerAuth' },

@@ -128,7 +128,7 @@ export default function Home() {
       <section className="border-y border-line bg-panel">
         <div className="mx-auto max-w-4xl px-4 py-20 sm:px-6">
           <h2 className="text-center text-[28px] font-semibold tracking-tight text-fg">FormForge vs. a classic form backend</h2>
-          <div className="mt-8 overflow-x-auto rounded-xl border border-line">
+          <div tabIndex={0} className="mt-8 overflow-x-auto rounded-xl border border-line">
             <table className="w-full min-w-[520px] text-[13.5px]">
               <thead className="bg-subtle text-left text-[12px] uppercase tracking-wide text-fg-subtle">
                 <tr><th className="px-4 py-3 font-medium">Capability</th><th className="px-4 py-3 text-center font-medium">FormForge</th><th className="px-4 py-3 text-center font-medium">Typical backend</th></tr>

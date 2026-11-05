@@ -63,7 +63,7 @@ export function FieldsEditor({ initial }: { initial: FieldDef[] }) {
     <div>
       <input type="hidden" name="fields" value={serial} />
       {rows.length === 0 ? <p className="rounded-md border border-dashed border-line p-4 text-center text-[12.5px] text-fg-subtle">No schema — every field is accepted as-is and types are detected automatically.</p> : (
-        <div className="overflow-x-auto rounded-md border border-line">
+        <div tabIndex={0} className="overflow-x-auto rounded-md border border-line">
           <table className="w-full min-w-[620px] text-[12.5px]">
             <thead className="bg-subtle text-left text-[11px] uppercase tracking-wide text-fg-subtle"><tr><th className="w-8" /><th className="px-2 py-1.5 font-medium">Name</th><th className="px-2 py-1.5 font-medium">Label</th><th className="px-2 py-1.5 font-medium">Type</th><th className="px-2 py-1.5 font-medium">Required</th><th className="px-2 py-1.5" /></tr></thead>
             <tbody>

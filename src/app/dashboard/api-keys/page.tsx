@@ -21,7 +21,7 @@ export default async function ApiKeys() {
       <PageHeader title="API keys" description="Scoped, hashed keys for the REST API and MCP server. Only the prefix is stored in readable form." actions={<><ButtonLink href="/docs/api">API reference</ButtonLink><CreateKey scopes={SCOPES.map((sc) => [sc, SCOPE_DESCRIPTIONS[sc]])} /></>} />
       <Card className="overflow-hidden">
         {keys.length === 0 ? <EmptyState icon={<KeyRound size={16} />} title="No API keys" description="Create a key to use the REST API, MCP server or SDKs." /> : (
-          <div className="overflow-x-auto">
+          <div tabIndex={0} className="overflow-x-auto">
             <table className="w-full min-w-[820px] text-[13px]">
               <thead className="bg-subtle text-left text-[11.5px] uppercase tracking-wide text-fg-subtle"><tr><th className="px-4 py-2 font-medium">Name</th><th className="px-4 py-2 font-medium">Key</th><th className="px-4 py-2 font-medium">Scopes</th><th className="px-4 py-2 font-medium">Last used</th><th className="px-4 py-2 font-medium">Created</th><th className="px-4 py-2 font-medium">Status</th><th className="px-4 py-2" /></tr></thead>
               <tbody>

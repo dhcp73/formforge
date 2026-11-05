@@ -40,7 +40,7 @@ export function CompanyCard({ e }: { e: Enrichment }) {
   return (
     <Card className="p-4">
       <div className="flex items-start gap-3">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
+        { }
         {c.domain || c.name ? <span aria-hidden="true" className="flex h-9 w-9 shrink-0 items-center justify-center rounded-md text-[14px] font-semibold text-white" style={{ background: `hsl(${hue(String(c.domain ?? c.name))} 55% 34%)` }}>{String(c.name ?? c.domain).slice(0, 1).toUpperCase()}</span> : <Building2 size={36} className="text-fg-subtle" />}
         <div className="min-w-0 flex-1">
           <div className="flex flex-wrap items-center gap-2"><span className="text-[14px] font-semibold text-fg">{c.name ?? c.domain}</span><Attr e={e} path="company.name" /></div>
@@ -136,7 +136,7 @@ export function RecordView({ s, formName, afterDelete }: { s: SubmissionRecord; 
         <div className="flex flex-wrap gap-1.5">{Object.entries(e.providers ?? {}).map(([k, v]) => <Badge key={k} tone={OUTCOME[v?.status ?? ""] ?? "gray"}>{SOURCE_LABEL[k] ?? k}: {v?.status}{v?.ms ? ` · ${v.ms}ms` : ""}</Badge>)}</div>
         {Object.entries(e.providers ?? {}).filter(([, v]) => v?.message && v.status !== "success").map(([k, v]) => <p key={k} className="mt-1 text-[11.5px] text-fg-subtle">{SOURCE_LABEL[k] ?? k}: {v?.message}</p>)}
       </div>
-      <div className="overflow-x-auto rounded-md border border-line">
+      <div tabIndex={0} className="overflow-x-auto rounded-md border border-line">
         <table className="w-full text-[12.5px]">
           <thead className="bg-subtle text-left text-[11px] uppercase tracking-wide text-fg-subtle"><tr><th className="px-3 py-1.5 font-medium">Field</th><th className="px-3 py-1.5 font-medium">Value</th><th className="px-3 py-1.5 font-medium">Source</th></tr></thead>
           <tbody>{fields.map(([k, v]) => <tr key={k} className="border-t border-line"><td className="px-3 py-1.5 font-mono text-[11.5px] text-fg-muted">{k}</td><td className="max-w-[260px] truncate px-3 py-1.5 text-fg" title={fmtValue(v)}>{fmtValue(v)}</td><td className="px-3 py-1.5"><SourceBadge source={e.attribution?.[k]} /></td></tr>)}</tbody>

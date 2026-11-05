@@ -19,7 +19,7 @@ export function ProductMock() {
         <Badge tone="indigo">Fit ≥ 60</Badge><Badge>Country in GB, US</Badge><Badge>Spam: hidden</Badge>
         <span className="ml-auto hidden text-fg-subtle sm:inline">1,284 records</span>
       </div>
-      <div className="overflow-x-auto">
+      <div tabIndex={0} className="overflow-x-auto">
         <table className="w-full min-w-[640px] text-left text-[12.5px]">
           <thead className="bg-subtle text-[11.5px] uppercase tracking-wide text-fg-subtle">
             <tr>{["Name", "Company", "Size", "Country", "Fit", "Owner", "Source"].map((h) => <th key={h} className="px-3 py-2 font-medium">{h}</th>)}</tr>

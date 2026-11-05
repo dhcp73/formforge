@@ -31,7 +31,7 @@ export default async function Enrichment() {
       <div className="mt-4 grid gap-4 xl:grid-cols-3">
         <Card className="xl:col-span-2">
           <CardHeader title="Providers" />
-          <div className="overflow-x-auto">
+          <div tabIndex={0} className="overflow-x-auto">
             <table className="w-full min-w-[620px] text-[13px]">
               <thead className="bg-subtle text-left text-[11.5px] uppercase tracking-wide text-fg-subtle"><tr><th className="px-4 py-2 font-medium">Provider</th><th className="px-4 py-2 text-right font-medium">Calls</th><th className="px-4 py-2 text-right font-medium">Hit rate</th><th className="px-4 py-2 text-right font-medium">Cache hits</th><th className="px-4 py-2 text-right font-medium">Errors</th><th className="px-4 py-2 text-right font-medium">Avg latency</th></tr></thead>
               <tbody>{per.length ? per.map((p) => <tr key={p.provider} className="border-t border-line"><td className="px-4 py-2 font-medium text-fg">{p.provider}</td><td className="px-4 py-2 text-right tabular-nums">{p.total}</td><td className="px-4 py-2 text-right tabular-nums">{Math.round((p.hits / p.total) * 100)}%</td><td className="px-4 py-2 text-right tabular-nums text-fg-subtle">{p.cached}</td><td className="px-4 py-2 text-right tabular-nums text-fg-subtle">{p.errors}</td><td className="px-4 py-2 text-right tabular-nums text-fg-subtle">{p.avg_ms != null ? `${p.avg_ms} ms` : "—"}</td></tr>) : <tr><td colSpan={6}><EmptyState icon={<Sparkles size={16} />} title="No enrichment yet" description="Submit a form to see provider calls here." /></td></tr>}</tbody>

@@ -11,10 +11,11 @@ export type ActionState = { ok?: boolean; message?: string; error?: string; fiel
 type Action = (prev: ActionState, fd: FormData) => Promise<ActionState>;
 
 const Ctx = React.createContext<ActionState>(null);
+const PendingCtx = React.createContext(false);
 export const useActionResult = () => React.useContext(Ctx);
 
 export function ActionForm({ action, children, className, onDone, resetOnSuccess, id }: { action: Action; children: React.ReactNode; className?: string; onDone?: (s: ActionState) => void; resetOnSuccess?: boolean; id?: string }) {
-  const [state, formAction] = useActionState(action, null);
+  const [state, formAction, isPending] = useActionState(action, null);
   const ref = React.useRef<HTMLFormElement>(null);
   React.useEffect(() => {
     if (!state) return;
@@ -24,7 +25,11 @@ export function ActionForm({ action, children, className, onDone, resetOnSuccess
   }, [state]);
   return (
     <Ctx.Provider value={state}>
-      <form ref={ref} action={formAction} className={className} noValidate id={id}>{children}</form>
+      <PendingCtx.Provider value={isPending}>
+        {/* Dispatch manually instead of <form action>: React resets uncontrolled inputs after a form action,
+            which would wipe what the user typed when the server returns validation errors. */}
+        <form ref={ref} onSubmit={(e) => { e.preventDefault(); const fd = new FormData(e.currentTarget); React.startTransition(() => formAction(fd)); }} className={className} noValidate id={id}>{children}</form>
+      </PendingCtx.Provider>
     </Ctx.Provider>
   );
 }
@@ -60,7 +65,8 @@ export function Field({ name, label, hint, children, className }: { name: string
 }
 
 export function SubmitButton({ children, pendingText, ...p }: ButtonProps & { pendingText?: string }) {
-  const { pending } = useFormStatus();
+  const { pending: formPending } = useFormStatus();
+  const pending = React.useContext(PendingCtx) || formPending;
   return (
     <Button type="submit" variant="primary" disabled={pending || p.disabled} {...p}>
       {pending && <Loader2 size={14} className="animate-spin" />}

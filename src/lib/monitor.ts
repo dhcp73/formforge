@@ -32,6 +32,7 @@ export const COMPONENTS: { id: string; label: string; group: string }[] = [
   { id: "email", label: "Email transport", group: "Automation" },
   { id: "routing", label: "Routing engine", group: "Automation" },
   { id: "enrichment_local", label: "Offline enrichment (email, IP geo, UA)", group: "Enrichment" },
+  { id: "ui_qa", label: "UI QA agent (latest run)", group: "Quality" },
   ...INTEGRATIONS.filter((i) => i.keyField).map((i) => ({ id: `provider_${i.id}`, label: i.label, group: "Enrichment providers" })),
 ];
 
@@ -177,6 +178,16 @@ export async function runProbes(opts: { http?: boolean } = {}): Promise<ProbeRes
     await Promise.all(LOCAL_ENRICHERS.filter((x) => x.id !== "email").map((x) => runEnricher(x, ctx, e, { log: false })));
     if (!(e.geo as { country?: string })?.country || !(e.company as { name?: string })?.name) throw new Error("Offline enrichers returned no data");
     return { message: "IP geo, UA and offline dataset OK" };
+  }));
+  probes.push(timed("ui_qa", async () => {
+    const r = db.prepare("SELECT status, summary, finished_at FROM qa_runs WHERE finished_at IS NOT NULL ORDER BY finished_at DESC LIMIT 1").get() as { status: string; summary: string; finished_at: string } | undefined;
+    if (!r) return { status: "disabled", message: "No UI agent run yet (npm run agent:ui)" };
+    let sum: { errors?: number; pages?: number; routes?: number } = {};
+    try { sum = JSON.parse(r.summary); } catch { /* ignore */ }
+    const ageH = (Date.now() - new Date(r.finished_at).getTime()) / 3600_000;
+    if (r.status !== "passed") return { status: "degraded", message: `Last run ${r.status}: ${sum.errors ?? "?"} UI errors` };
+    if (ageH > 48) return { status: "degraded", message: `Last passing run is ${Math.round(ageH)}h old` };
+    return { message: `Passed · ${sum.routes ?? "?"} routes · ${sum.pages ?? "?"} page checks · ${Math.round(ageH * 10) / 10}h ago` };
   }));
   for (const def of INTEGRATIONS.filter((i) => i.keyField)) {
     probes.push(timed(`provider_${def.id}`, async () => {

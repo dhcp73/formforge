@@ -114,6 +114,15 @@ describe("monitor", () => {
     saveProvider(w2, "apollo", { config: { apiKey: "ap" } });
     expect((await runProbes({ http: false })).find((r) => r.component === "provider_apollo")!.status).toBe("ok");
   });
+  it("ui_qa probe reflects the latest UI agent run", async () => {
+    const probe = async () => (await runProbes({ http: false })).find((r) => r.component === "ui_qa")!;
+    expect((await probe()).status).toBe("disabled");
+    getDb().prepare("INSERT INTO qa_runs (id, status, summary, started_at, finished_at) VALUES ('qa_a', 'failed', '{\"errors\":3}', ?, ?)").run(now(), now());
+    expect(await probe()).toMatchObject({ status: "degraded", message: expect.stringContaining("3 UI errors") });
+    const later = new Date(Date.now() + 1000).toISOString();
+    getDb().prepare("INSERT INTO qa_runs (id, status, summary, started_at, finished_at) VALUES ('qa_b', 'passed', '{\"routes\":50,\"pages\":100}', ?, ?)").run(later, later);
+    expect((await probe()).status).toBe("ok");
+  });
   it("queue probe goes down without a worker heartbeat", async () => {
     getDb().prepare("DELETE FROM kv WHERE key = 'worker_heartbeat'").run();
     expect((await runProbes({ http: false })).find((r) => r.component === "queue")!.status).toBe("down");

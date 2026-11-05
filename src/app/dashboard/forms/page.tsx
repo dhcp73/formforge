@@ -21,7 +21,7 @@ export default async function FormsPage() {
         {forms.length === 0 ? (
           <EmptyState icon={<FileText size={16} />} title="No forms yet" description="Create a form to get an endpoint. It takes about ten seconds." action={<CreateFormButton label="Create your first form" />} />
         ) : (
-          <div className="overflow-x-auto">
+          <div tabIndex={0} className="overflow-x-auto">
             <table className="w-full min-w-[760px] text-left text-[13px]">
               <thead className="sticky top-0 bg-subtle text-[11.5px] uppercase tracking-wide text-fg-subtle">
                 <tr><th className="px-4 py-2 font-medium">Form</th><th className="px-4 py-2 font-medium">Endpoint</th><th className="px-4 py-2 font-medium">Status</th><th className="px-4 py-2 text-right font-medium">Submissions</th><th className="px-4 py-2 text-right font-medium">Spam</th><th className="px-4 py-2 font-medium">Last activity</th><th className="w-10 px-2 py-2"><span className="sr-only">Open</span></th></tr>
