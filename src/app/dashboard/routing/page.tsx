@@ -28,8 +28,8 @@ export default async function Routing() {
             <ol className="divide-y divide-line">
               {rules.map((r) => (
                 <li key={r.id} className="px-4 py-3">
-                  <div className="flex flex-wrap items-start justify-between gap-2">
-                    <div className="min-w-0">
+                  <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+                    <div className="min-w-0 sm:flex-1">
                       <div className="flex flex-wrap items-center gap-2"><span className="rounded bg-muted px-1.5 font-mono text-[11px] text-fg-subtle">P{r.priority}</span><span className="text-[13.5px] font-medium text-fg">{r.name}</span><Badge>{r.formId ? fname.get(r.formId) ?? "Form" : "All forms"}</Badge><span className="text-[12px] text-fg-subtle">{r.hitCount} matches</span></div>
                       <div className="mt-1.5 flex flex-wrap items-center gap-1 text-[12px]">
                         <span className="text-fg-subtle">If {r.match}:</span>
@@ -39,7 +39,7 @@ export default async function Routing() {
                         Then: {r.actions.assignTo.length ? <Badge tone="indigo">assign {r.actions.assignTo.map((o) => (r.actions.weights[o] !== undefined && r.actions.weights[o] !== 1 ? `${o}×${r.actions.weights[o]}` : o)).join(" / ")}</Badge> : null}{r.actions.tags.map((t) => <Badge key={t}>#{t}</Badge>)}{r.actions.notifyEmails.length ? <Badge tone="blue">notify {r.actions.notifyEmails.length}</Badge> : null}{r.actions.webhookUrl ? <Badge tone="violet">webhook</Badge> : null}{r.actions.markSpam ? <Badge tone="red">mark spam</Badge> : null}{r.actions.sticky ? <Badge tone="green">sticky owner</Badge> : null}{r.actions.bookingUrl || Object.keys(r.actions.ownerBookingUrls).length ? <Badge tone="blue">booking link</Badge> : null}{r.stopOnMatch ? <span>· stop</span> : null}
                       </div>
                     </div>
-                    <div className="flex items-center gap-1">
+                    <div className="flex shrink-0 items-center gap-1">
                       <ActionSwitch checked={r.active} label={`Toggle rule ${r.name}`} action={toggleRuleAction.bind(null, r.id)} />
                       <RuleBuilder forms={forms} fields={ROUTABLE_FIELDS} rule={{ id: r.id, name: r.name, formId: r.formId, priority: r.priority, match: r.match, conditions: r.conditions, actions: r.actions, stopOnMatch: r.stopOnMatch, active: r.active }} />
                       <ActionButton size="icon" variant="ghost" aria-label={`Delete rule ${r.name}`} action={deleteRuleAction.bind(null, r.id)} confirm={{ title: "Delete rule?", description: "Existing assignments are kept." }} confirmText="Delete" showResult={false}><Trash2 size={13} /></ActionButton>
